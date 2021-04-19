@@ -24,3 +24,6 @@
 
 # マーケット
 カラオケで歌う曲に困る人
+
+# 画面遷移図
+https://www.figma.com/file/to07t91YJrn1MOKiBKP1Ga/song_shuffle_?node-id=0%3A1
