@@ -27,3 +27,6 @@
 
 # 画面遷移図
 https://www.figma.com/file/to07t91YJrn1MOKiBKP1Ga/song_shuffle_?node-id=0%3A1
+
+# ER図
+https://drive.google.com/file/d/1lJd80umBOoEb9o3Hq-Ja1oenmHHszBgz/view?usp=sharing
