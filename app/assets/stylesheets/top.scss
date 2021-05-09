@@ -1,11 +1,14 @@
 .top-wrapper {
   height: 100%;
   position: relative;
-
+  background-image: image-url('top.jpg');
+  background-position: center;
+  background-size:  cover;
 }
 
 .jumbotron {
   padding-top: 150px;
+  color: #FFFFFF;
 } .title {
   font-size: 80px;
 }
