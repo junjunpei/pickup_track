@@ -1,4 +1,6 @@
 class UserSessionsController < ApplicationController
+  skip_before_action :require_login, only: %i[new create]
+
   def new; end
 
   def create
@@ -7,7 +9,7 @@ class UserSessionsController < ApplicationController
     if @user
       redirect_back_or_to('#', success: 'ログインに成功しました')
     else
-      flash.now[:alert] = 'ログインに失敗しました'
+      flash.now[:alert] = 'ロ グインに失敗しました'
       render :new
     end
   end
