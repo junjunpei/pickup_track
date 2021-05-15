@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2021_05_13_075150) do
     t.string "email", null: false
     t.string "crypted_password"
     t.string "salt"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "remember_me_token"
