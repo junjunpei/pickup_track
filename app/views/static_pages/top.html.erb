@@ -1,14 +1,14 @@
 <div class="top-wrapper">
   <div class="jumbotron text-center">
-   <p class="title">Song Shuffle</p>
-   <h5>カラオケで歌う曲を決められないあなたに</h5>
+  <p class="title">Song Shuffle</p>
+  <h5>カラオケで歌う曲を決められないあなたに</h5>
   </div>
   <br>
   <br>
   <br>
   <div class="d-grid gap-2 col-6 mx-auto">
-    <%= link_to '新規登録', '#', class: 'btn btn-success btn-lg' %>
+    <%= link_to '新規登録', new_user_path, class: 'btn btn-success btn-lg' %>
     <br>
-    <%= link_to 'ログイン', '#', class: 'btn btn-primary btn-lg' %>
+    <%= link_to 'ログイン', login_path, class: 'btn btn-primary btn-lg' %>
   </div>
 </div>
