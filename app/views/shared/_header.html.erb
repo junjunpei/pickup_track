@@ -6,6 +6,9 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
       <div class="navbar-nav">
+        <%= link_to '曲を探す', tracks_search_path, class: 'nav-link' %>
+      </div>
+      <div class="navbar-nav">
         <%= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link' %>
       </div>
     </div>
