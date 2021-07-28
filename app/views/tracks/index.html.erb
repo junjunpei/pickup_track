@@ -9,13 +9,11 @@
           <% image = track.album.images[2]%>
           <%= image_tag(image["url"])%>
         <% else %>
-          <%= image_tag("default.jpg")%>
+          <%= image_tag("default.png", size: "64x64")%>
         <% end %>
         <span class="track-name"><%= track.name %></span>
         <%= track.artists[0].name %>
       </div>
     <% end %>
-  <% else %>
-    <p>該当なし</p>
   <% end %>
 </div>
