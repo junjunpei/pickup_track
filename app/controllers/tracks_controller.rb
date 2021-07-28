@@ -1,6 +1,7 @@
 class TracksController < ApplicationController
   def index
-    @q = RSpotify::Track.ransack(params[:q])
-    @tracks = @q.result
+    if params[:search].present?
+      @tracks = RSpotify::Track.search(params[:search])
+    end
   end
 end
