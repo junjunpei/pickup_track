@@ -1,0 +1,19 @@
+<div class="container">
+  <h1>曲を探す</h1>
+    <%= render 'search_form', url: tracks_search_path %>
+  <h3>検索結果</h3>
+  <% if @tracks.present? %>
+    <% @tracks.each do |track| %>
+      <div class="track">
+        <% if track.album.images.any?%>
+          <% image = track.album.images[2]%>
+          <%= image_tag(image["url"])%>
+        <% else %>
+          <%= image_tag("default.png", size: "64x64")%>
+        <% end %>
+        <span class="track-name"><%= track.name %></span>
+        <%= track.artists[0].name %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
