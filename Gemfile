@@ -36,7 +36,7 @@ gem 'rspotify'
 
 gem 'dotenv-rails'
 
-gem 'kaminari'
+gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
