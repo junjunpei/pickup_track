@@ -6,7 +6,7 @@ ja:
       to_login_page: 'ログインページへ'
     create:
       success: '登録が完了しました'
-      fali: '登録に失敗しました'
+      fail: '登録に失敗しました'
   user_sessions:
     new:
       title: 'ログイン'
