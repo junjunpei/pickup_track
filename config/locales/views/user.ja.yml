@@ -7,11 +7,4 @@ ja:
     create:
       success: '登録が完了しました'
       fail: '登録に失敗しました'
-  user_sessions:
-    new:
-      title: 'ログイン'
-      login: 'ログイン'
-      to_register_page: '登録ページへ'
-    create:
-      success: 'ログインしました'
-      fail: 'ログインに失敗しました'
+  
