@@ -2,6 +2,7 @@ ja:
   users:
     new:
       title: 'ユーザー登録'
+      register: '登録'
       to_login_page: 'ログインページへ'
     create:
       success: '登録が完了しました'
@@ -9,6 +10,7 @@ ja:
   user_sessions:
     new:
       title: 'ログイン'
+      login: 'ログイン'
       to_register_page: '登録ページへ'
     create:
       success: 'ログインしました'
