@@ -1,0 +1,7 @@
+ja:
+  tracks:
+    index:
+      title: '曲を探す'
+      search_word: '曲名、アーティスト名'
+      search: '検索'
+      search_results: '検索結果'
