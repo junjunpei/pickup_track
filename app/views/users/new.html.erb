@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6 offset-md-3">
       <div class="text-center">
-        <h1>ユーザー登録</h1>
+        <h1><%= t '.title' %></h1>
       </div>
       <%= form_with(model: @user, local: true) do |f| %>
         <%= render 'shared/error_messages', model: f.object %>
@@ -23,11 +23,11 @@
 					<%= f.password_field :password_confirmation, class: 'form-control' %>
 				</div>
 				<div class="text-center button">
-					<%= f.submit '登録', class: 'btn btn-success btn-lg' %>
+					<%= f.submit (t '.register'), class: 'btn btn-success btn-lg' %>
 				</div>
       <% end %>
 			<div class="text-center">
-				<%= link_to 'ログインページへ', login_path %>
+				<%= link_to (t '.to_login_page'), login_path %>
 			</div>
     </div>
   </div>
