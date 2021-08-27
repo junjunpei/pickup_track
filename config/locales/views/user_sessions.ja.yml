@@ -8,4 +8,5 @@ ja:
       success: 'ログインしました'
       fail: 'ログインに失敗しました'
     destroy:
+      title: 'ログアウト'
       success: 'ログアウトしました'
