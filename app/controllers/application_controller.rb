@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   private
 
   def not_authenticated
-    redirect_to login_path, alert: 'ログインしてください'
+    redirect_to login_path, warning: (t 'defaults.message.require_login')
   end
 end
