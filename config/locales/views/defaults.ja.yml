@@ -1,0 +1,8 @@
+ja:
+  defaults:
+    register: '登録'
+    sign_up: '新規登録'
+    login: 'ログイン'
+    logout: 'ログアウト'
+    message:
+      require_login: 'ログインしてください'
