@@ -6,3 +6,4 @@ ja:
     logout: 'ログアウト'
     message:
       require_login: 'ログインしてください'
+      already_logged_in: 'ログインしています'
