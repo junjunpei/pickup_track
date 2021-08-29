@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :require_login, only: %i[new create]
 
   def new
-    return redirect_to root_path, info: 'ログインしています' if logged_in?
+    return redirect_to root_path, info: (t 'defaults.message.already_logged_in') if logged_in?
     @user = User.new
   end
 
