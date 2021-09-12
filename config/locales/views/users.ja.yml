@@ -7,4 +7,8 @@ ja:
     create:
       success: '登録が完了しました'
       fail: '登録に失敗しました'
-  
+    update:
+      success: '更新しました'
+      fail: '更新に失敗しました'
+    destroy:
+      success: '退会しました'

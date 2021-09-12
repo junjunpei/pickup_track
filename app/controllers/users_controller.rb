@@ -21,6 +21,20 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to root_path, success: (t '.success')
+    else
+      flash.now[:danger] = (t '.fail')
+      render edit
+    end
+  end
+
+  def destroy
+    User.find(params[:id]).destroy
+    redirect_to new_user_path, success: (t '.destroy')
+  end
   private
 
   def user_params
