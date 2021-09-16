@@ -6,8 +6,8 @@ ja:
     create:
       success: '登録が完了しました'
       fail: '登録に失敗しました'
-    edit:
-      title: 'ユーザー情報の変更'
+    show:
+      title: 'ユーザー情報'
     update:
       success: '更新しました'
       fail: '更新に失敗しました'
