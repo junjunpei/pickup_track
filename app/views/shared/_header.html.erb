@@ -9,6 +9,9 @@
         <%= link_to (t 'tracks.index.title'), tracks_search_path, class: 'nav-link' %>
       </div>
       <div class="navbar-nav">
+        <%= link_to (t 'users.show.title'), user_path(current_user), class: 'nav-link' %>
+      </div>
+      <div class="navbar-nav">
         <%= link_to (t 'defaults.logout'), logout_path, method: :delete, class: 'nav-link' %>
       </div>
     </div>
