@@ -31,9 +31,17 @@ class UsersController < ApplicationController
     end
   end
 
+  def delete
+  end
+
   def destroy
-    User.find(params[:id]).destroy
-    redirect_to new_user_path, success: (t '.destroy')
+    if params[:check] == '1'
+      User.find(params[:id]).destroy
+      redirect_to new_user_path, success: (t '.success')
+    else
+      flash.now[:danger] = (t '.fail')
+      render :delete
+    end
   end
   private
 

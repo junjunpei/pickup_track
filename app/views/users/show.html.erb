@@ -5,6 +5,9 @@
         <h1><%= t '.title' %></h1>
       </div>
       <%= render 'form', user: @user %>
+      <div class="text-center">
+        <%= link_to (t '.to_delete_page'), user_delete_path(current_user) %>
+      </div>
     </div>
   </div>
 </div>

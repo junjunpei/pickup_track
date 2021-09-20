@@ -8,8 +8,13 @@ ja:
       fail: '登録に失敗しました'
     show:
       title: 'ユーザー情報'
+      to_delete_page: '退会はこちら'
     update:
       success: '更新しました'
       fail: '更新に失敗しました'
+    delete:
+      title: '退会画面'
+      delete: '退会する'
     destroy:
       success: '退会しました'
+      fail: '注意事項をご確認の上、チェックを入れてから「退会する」を押してください'
