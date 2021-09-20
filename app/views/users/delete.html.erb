@@ -1,0 +1,26 @@
+<main class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="starter-template py-5 px-3">
+        <div class="text-center">
+          <h1><%= (t '.title') %></h1>
+          <p class="lead">下記の注意事項をご確認のうえ、チェックを入れ「退会する」ボタンを押してください。</p>
+        </div>
+        <ol>
+          <li>退会後はユーザー情報や、登録した曲等の全てのデータは削除されます。</li>
+          <li>削除されたデータを復元することは出来ません。</li>
+          <li>もう一度ご利用いただく場合は再度ユーザー登録が必要です。</li>
+        </ol>
+        <%= form_with(url: user_path(current_user), method: :delete, local: true) do |f| %>
+          <div class="form-check">
+            <%= f.label '全ての項目を確認しましたか？', class: 'form-check-label', for: 'flexCheckIndeterminate' %>
+            <%= f.check_box :check, class: 'form-check-input', id: 'flexCheckIndeterminate' %>
+          </div>
+          <div class="text-center button">
+            <%= f.submit (t '.delete'), class: 'btn btn-danger btn-lg' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</main>

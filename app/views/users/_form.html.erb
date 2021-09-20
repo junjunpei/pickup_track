@@ -1,0 +1,22 @@
+<%= form_with(model: user, local: true) do |f| %>
+  <%= render 'shared/error_messages', model: f.object %>
+  <div class="mb-3">
+    <%= f.label :name, class: 'form-label' %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :email, class: 'form-label' %>
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :password, class: 'form-label' %>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :password_confirmation, class: 'form-label' %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </div>
+  <div class="text-center button">
+    <%= f.submit class: 'btn btn-success btn-lg' %>
+  </div>
+<% end %>
