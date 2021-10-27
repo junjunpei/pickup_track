@@ -2,23 +2,22 @@
   <v-app>
     <v-app-bar
       app
-      color="white"
-      height="100"
+      color="black"
+      height="70"
     >
       <v-avatar
         class="mr-3"
         color="grey lighten-5"
-        size="70"
+        size="30"
       >
         <v-img
           contain
           max-height="70%"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
         ></v-img>
       </v-avatar>
 
       <v-toolbar-title class="font-weight-black headline">
-        VUETIFY
+        Song Shuffle
       </v-toolbar-title>
     </v-app-bar>
 
@@ -27,7 +26,7 @@
         <v-row no-gutters>
           <v-img
             :min-height="'calc(100vh - ' + $vuetify.application.top + 'px)'"
-            src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80"
+            :src="topImage"
           >
             <v-theme-provider dark>
               <v-container fill-height>
@@ -351,11 +350,11 @@
 </template>
 
 <script>
-new Vue({
-  el: '#app',
-  vuetify: new Vuetify(),
+
+export default {
   data () {
     return {
+      topImage: require('../images/top.jpg'),
       articles: [
         {
           src: 'https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
@@ -398,5 +397,5 @@ new Vue({
       ],
     }
   }
-})
+}
 </script>
