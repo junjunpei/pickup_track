@@ -20,6 +20,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "material-design-icons-iconfont": "^6.1.0",
     "webpack-dev-server": "^3.11.2"
   }
 }
