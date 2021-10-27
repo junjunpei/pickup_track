@@ -2,6 +2,7 @@
   "name": "song_shuffle",
   "private": true,
   "dependencies": {
+    "@mdi/font": "^6.4.95",
     "@popperjs/core": "^2.9.2",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
