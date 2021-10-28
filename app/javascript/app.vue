@@ -1,15 +1,16 @@
 <template>
-  <div>
+  <v-app>
+    <TheHeader />
     <router-view />
-  </div>
+  </v-app>
 </template>
 
 <script>
+import TheHeader from 'components/TheHeader'
+
 export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
-    }
+  components: {
+    TheHeader
   }
 }
 </script>

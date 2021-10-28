@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <v-content>
       <section id="hero">
         <v-row no-gutters>
@@ -290,7 +290,7 @@
         &copy; {{ (new Date()).getFullYear() }} — Vuetify, LLC — Made with 💜 by John Leider
       </div>
     </v-footer>
-  </v-app>
+  </div>
 </template>
 
 <script>
