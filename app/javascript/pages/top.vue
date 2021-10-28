@@ -3,7 +3,7 @@
     <v-app-bar
       app
       color="black"
-      height="70"
+      height="80"
     >
       <v-avatar
         class="mr-3"
@@ -53,7 +53,7 @@
                       :class="[$vuetify.breakpoint.smAndDown ? 'display-3': 'display-4']"
                       class="font-weight-black"
                     >
-                      VUETIFY
+                      Song Shuffle
                     </span>
 
                   </v-col>
@@ -92,26 +92,18 @@
             class="mx-auto title font-weight-light mb-8"
             max-width="720"
           >
-            Vuetify is the #1 component library for Vue.js and has been in active development since 2016. The goal of the project is to provide users with everything that is needed to build rich and engaging web applications using the Material Design specification. It accomplishes that with a consistent update cycle, Long-term Support (LTS) for previous versions, responsive community engagement, a vast ecosystem of resources and a dedication to quality components.
+            ランダムで歌う曲を決めてくれることにより、カラオケで歌う曲に悩む時間を減らし、カラオケをより楽しめるようにするアプリケーション
           </v-responsive>
-
-          <v-avatar
-            class="elevation-12 mb-12"
-            size="128"
-          >
-            <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-          </v-avatar>
 
           <div></div>
 
           <v-btn
-            color="grey"
+            color="green accent-3"
             href="https://vuetifyjs.com"
-            outlined
             large
           >
-            <span class="grey--text text--darken-1 font-weight-bold">
-              Vuetify Documentation
+            <span class="white--text text--darken-1 font-weight-bold">
+              新規登録
             </span>
           </v-btn>
         </v-container>
@@ -121,7 +113,7 @@
 
       <section
         id="features"
-        class="grey lighten-3"
+        class="black"
       >
         <div class="py-12"></div>
 
@@ -146,7 +138,7 @@
             >
               <v-card
                 class="py-12 px-4"
-                color="grey lighten-5"
+                color="black"
                 flat
               >
                 <v-theme-provider dark>
@@ -181,37 +173,10 @@
         <div class="py-12"></div>
       </section>
 
-      <section id="stats">
-        <v-parallax
-          :height="$vuetify.breakpoint.smAndDown ? 700 : 500"
-          src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"
-        >
-          <v-container fill-height>
-            <v-row class="mx-auto">
-              <v-col
-                v-for="[value, title] of stats"
-                :key="title"
-                cols="12"
-                md="3"
-              >
-                <div class="text-center">
-                  <div
-                    class="display-3 font-weight-black mb-4"
-                    v-text="value"
-                  ></div>
-
-                  <div
-                    class="title font-weight-regular text-uppercase"
-                    v-text="title"
-                  ></div>
-                </div>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-parallax>
-      </section>
-
-      <section id="blog">
+      <section
+        id="blog"
+        class="green accent-2"
+      >
         <div class="py-12"></div>
 
         <v-container>
@@ -388,12 +353,6 @@ export default {
           title: 'Long-term Support',
           text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto cupiditate sint possimus quidem atque harum excepturi nemo velit tempora! Enim inventore fuga, qui ipsum eveniet facilis obcaecati corrupti asperiores nam',
         },
-      ],
-      stats: [
-        ['24k', 'Github Stars'],
-        ['330+', 'Releases'],
-        ['1m', 'Downloads/mo'],
-        ['5m', 'Total Downloads'],
       ],
     }
   }
