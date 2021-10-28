@@ -8,9 +8,11 @@
 import Vue from 'vue'
 import App from '../app.vue'
 import router from '../router'
+import vuetify from '../plugins/vuetify'
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
+    vuetify,
     router,
     render: h => h(App)
   }).$mount()

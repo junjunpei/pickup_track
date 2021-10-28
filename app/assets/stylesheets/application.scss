@@ -13,35 +13,3 @@
  *= require_tree .
  *= require_self
  */
-html, body {
-  height: 100%;
-}
-
-.navbar-brand {
-  font-family: fantasy;
-}
-
-.container {
-  margin-top: 30px;
-}
-
-.button {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.track {
-  margin-bottom: 20px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.track-name {
-  margin-right: 15px;
-}
-
-
-body {
-  padding-top: 50px;
-}
