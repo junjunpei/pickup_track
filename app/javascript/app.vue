@@ -2,22 +2,21 @@
   <v-app>
     <TheHeader />
     <router-view />
+    <TheFooter />
   </v-app>
 </template>
 
 <script>
 import TheHeader from 'components/TheHeader'
+import TheFooter from 'components/TheFooter'
 
 export default {
   components: {
-    TheHeader
+    TheHeader,
+    TheFooter
   }
 }
 </script>
 
 <style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
 </style>
