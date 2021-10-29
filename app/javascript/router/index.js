@@ -14,7 +14,7 @@ const router = new VueRouter({
       name: 'Top',
     },
     {
-      path: 'register',
+      path: '/register',
       component: Register,
       name: 'register'
     }
