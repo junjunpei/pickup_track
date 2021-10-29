@@ -10,6 +10,7 @@ import App from '../app.vue'
 import router from '../router'
 import vuetify from '../plugins/vuetify'
 import axios from '../plugins/axios'
+import '../plugins/veevalidate'
 
 Vue.prototype.$axios = axios
 
