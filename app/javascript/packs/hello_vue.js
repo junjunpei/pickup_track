@@ -9,7 +9,7 @@ import Vue from 'vue'
 import App from '../app.vue'
 import router from '../router'
 import vuetify from '../plugins/vuetify'
-import axios from '../plugins.axios'
+import axios from '../plugins/axios'
 
 Vue.prototype.$axios = axios
 
