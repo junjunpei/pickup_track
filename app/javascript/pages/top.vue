@@ -78,7 +78,7 @@
 
           <v-btn
             color="green accent-3"
-            href="https://vuetifyjs.com"
+            to="/register"
             large
           >
             <span class="white--text text--darken-1 font-weight-bold">
