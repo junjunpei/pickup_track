@@ -28,7 +28,6 @@
           v-slot="{ errors }"
           name="メールアドレス"
           rules="required|email|unique"
-          mode="eager"
         >
           <v-text-field
             v-model="user.email"
