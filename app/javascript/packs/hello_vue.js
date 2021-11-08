@@ -9,11 +9,17 @@ import Vue from 'vue'
 import App from '../app.vue'
 import router from '../router'
 import vuetify from '../plugins/vuetify'
+import axios from '../plugins/axios'
+import store from '../store'
+import '../plugins/veevalidate'
+
+Vue.prototype.$axios = axios
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     vuetify,
     router,
+    store,
     render: h => h(App)
   }).$mount()
   document.body.appendChild(app.$el)

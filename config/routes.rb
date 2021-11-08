@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   root 'static_pages#top'
+
   get '*path', to: 'static_pages#top'
+
+  namespace :api do
+    resources :users
+    post '/validate/email', to: 'users#registered?'
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # resources :users do
   #   get 'delete', to: 'users#delete'
