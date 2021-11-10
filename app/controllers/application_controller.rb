@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
   require 'rspotify'
   RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_SECRET_ID'])
 
-  private
-
   # def not_authenticated
   #   redirect_to login_path, warning: (t 'defaults.message.require_login')
   # end
