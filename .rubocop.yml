@@ -1,1 +1,53 @@
-inherit_from: .rubocop_todo.yml
+# This file overrides https://github.com/bbatsov/rubocop/blob/master/config/default.yml
+
+AllCops:
+  Exclude:
+  - 'vendor/**/*'
+  - 'db/**/*'
+  - 'bin/**/*'
+  - 'spec/**/*'
+  - 'node_modules/**/*'
+  DisplayCopNames: true
+
+# 1行あたりの文字数チェックを無効化
+Layout/LineLength:
+  Enabled: false
+
+# 1ブロックの行数の制限
+Metrics/BlockLength:
+  Exclude:
+  - 'Gemfile'
+  - 'config/**/*'
+  - 'spec/**/*_spec.rb'
+
+# クラスの行数の制限、コメントは除外
+Metrics/ClassLength:
+  CountComments: false
+
+# メソッドの行数の制限、コメントは除外
+Metrics/MethodLength:
+  CountComments: false
+
+# 日本語のコメントを許容
+Style/AsciiComments:
+  Enabled: false
+
+# class名に[::]を使用できるようにする
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# class名の上にコメントを入れなくてもよくする
+Style/Documentation:
+  Enabled: false
+
+# frozen_string_literal: trueというコメントを不要にする
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# 後置if文に直さなくてもよくする
+Style/IfUnlessModifier:
+  Enabled: false
+
+# Gemfileをアルファベット順に並べずによくする
+Bundler/OrderedGems:
+  Enabled: false
