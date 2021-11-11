@@ -4,7 +4,7 @@
     class="text-center w-90 container"
     >
     <v-content>
-      <div class="h3">
+      <div class="h3 mt-10">
         ログイン
       </div>
       <ValidationObserver
@@ -22,6 +22,7 @@
               prepend-icon="mdi-email"
               :error-messages="errors"
               label="メールアドレス"
+              class="mt-10"
             ></v-text-field>
           </ValidationProvider>
           <ValidationProvider
@@ -38,27 +39,26 @@
               :type="showPassword ? 'text' : 'password'"
               @click:append="showPassword = !showPassword"
               label="パスワード"
+              class="mt-10"
             ></v-text-field>
           </ValidationProvider>
 
           <v-btn
-            @click="register"
-            class="mt-4"
+            @click=""
+            class="mt-10"
             type="submit"
             :disabled="invalid"
             color="success"
           >
             ログイン
           </v-btn>
-          <div class="text-center">
-            <v-btn
-              text
-              class="mt-4"
+          <div class="text-center mt-7">
+            <router-link
               color="blue"
-              to="/"
+              :to="{ name: 'Register'}"
             >
-              登録済みの方はこちら
-            </v-btn>
+              登録がまだの方はこちら
+            </router-link>
           </div>
         </form>
       </ValidationObserver>
@@ -68,7 +68,7 @@
 
 <script>
 export default {
-  name: login,
+  name: "Login",
   data() {
     return {
       user: {
