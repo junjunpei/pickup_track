@@ -15,7 +15,11 @@
       ></v-img>
     </v-avatar>
 
-    <v-toolbar-title class="font-weight-black headline">
+    <v-toolbar-title
+      style="cursor: pointer"
+      @click="$router.push('/')"
+      class="font-weight-black headline"
+    >
       Song Shuffle
     </v-toolbar-title>
   </v-app-bar>
