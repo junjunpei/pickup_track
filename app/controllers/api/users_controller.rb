@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  # skip_before_action :require_login, only: %i[new create]
+  skip_before_action :require_login, only: %i[new create]
   skip_before_action :verify_authenticity_token
 
   # def new
