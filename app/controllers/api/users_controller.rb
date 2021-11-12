@@ -1,6 +1,5 @@
 class Api::UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[new create]
-  skip_before_action :verify_authenticity_token
+  skip_before_action :require_login, only: %i[create registered?]
 
   # def new
   #   return redirect_to root_path, info: (t 'defaults.message.already_logged_in') if logged_in?

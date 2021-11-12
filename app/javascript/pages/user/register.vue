@@ -152,7 +152,7 @@ export default {
         .catch(error => {
           this.$store.dispatch("flashMessages/showMessage",
             {
-              message: "登録出来ませんでした",
+              message: "登録に失敗しました",
               type: "error",
               status: true
             }

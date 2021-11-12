@@ -2,7 +2,7 @@
   <div
     id="login-form"
     class="text-center w-90 container"
-    >
+  >
     <v-content>
       <div class="h3 mt-10">
         ログイン
@@ -15,7 +15,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             name="メールアドレス"
-            rules="required|email|unique"
+            rules="required|email"
           >
             <v-text-field
               v-model="user.email"
@@ -44,7 +44,7 @@
           </ValidationProvider>
 
           <v-btn
-            @click=""
+            @click="login"
             class="mt-10"
             type="submit"
             :disabled="invalid"
@@ -67,6 +67,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: "Login",
   data() {
@@ -76,6 +78,37 @@ export default {
         password: ''
       },
       showPassword: false
+    }
+  },
+
+  methods: {
+    ...mapActions("users", [
+      "loginUser"
+    ]),
+    async login() {
+      try {
+        await this.loginUser(this.user)
+        this.$router.push({ name: 'Top' })
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "ログインしました",
+            type: "success",
+            status: true
+          }
+        )
+      } catch(error) {
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "メールアドレス、またはパスワードが間違っています",
+            type: "error",
+            status: true
+          }
+        )
+        console.log(error)
+      }
+    },
+    submit() {
+      this.$refs.observer.validate()
     }
   }
 }
