@@ -78,7 +78,7 @@
 
           <v-btn
             color="green accent-3"
-            to="/register"
+            :to="{ name: 'Register' }"
             large
           >
             <span class="white--text text--darken-1 font-weight-bold">

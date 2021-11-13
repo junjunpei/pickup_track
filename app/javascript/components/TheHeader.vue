@@ -22,10 +22,41 @@
     >
       Song Shuffle
     </v-toolbar-title>
+
+    <v-spacer />
+
+    <template v-if="authUser">
+      <v-btn text>
+        ログアウト
+      </v-btn>
+    </template>
+    <template v-else>
+      <v-btn
+        :to="{ name: 'Register' }"
+        class="mr-6"
+        text
+      >
+        新規登録
+      </v-btn>
+      <v-btn
+        :to="{ name: 'Login' }"
+        text
+      >
+        ログイン
+      </v-btn>
+    </template>
   </v-app-bar>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
+export default {
+  name: "TheHeader",
+  computed: {
+    ...mapGetters("users", ["authUser"])
+  }
+}
 </script>
 
 <style scoped>
