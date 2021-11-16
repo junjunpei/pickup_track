@@ -3,7 +3,7 @@
     id="login-form"
     class="text-center w-90 container"
   >
-    <v-content>
+    <v-container>
       <div class="h3 mt-10">
         ログイン
       </div>
@@ -62,7 +62,7 @@
           </div>
         </form>
       </ValidationObserver>
-    </v-content>
+    </v-container>
   </div>
 </template>
 

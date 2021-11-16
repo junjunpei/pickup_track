@@ -1,12 +1,15 @@
 class Api::SessionsController < ApplicationController
   skip_before_action :require_login, only: %i[create]
+  skip_before_action :verify_authenticity_token
 
   def create
-    user = login(params[:email], params[:password])
+    user = User.authenticate(params[:email], params[:password])
     if user
-      render json: user
+      token = user.create_tokens
+
+      render json: { token: token }
     else
-      render json: user.errors, status: :bad_request
+      head :unautorized
     end
   end
 

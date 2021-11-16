@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-content>
+  <div id="top">
+    <v-container>
       <section id="hero">
         <v-row no-gutters>
           <v-img
@@ -279,7 +279,7 @@
 
         <div class="py-12"></div>
       </v-sheet>
-    </v-content>
+    </v-container>
   </div>
 </template>
 

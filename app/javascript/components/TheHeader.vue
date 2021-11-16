@@ -26,7 +26,10 @@
     <v-spacer />
 
     <template v-if="authUser">
-      <v-btn text>
+      <v-btn
+        text
+        @click="handleLogout"
+      >
         ログアウト
       </v-btn>
     </template>
@@ -49,12 +52,38 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 
 export default {
   name: "TheHeader",
   computed: {
     ...mapGetters("users", ["authUser"])
+  },
+  methods: {
+    ...mapActions("users", ["logoutUser"]),
+
+    async handleLogout() {
+      try {
+        await this.logoutUser()
+        this.$router.push({ name: "Top" })
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "ログアウトしました",
+            type: "success",
+            status: true
+          }
+        )
+      } catch(error) {
+        console.log(error)
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "ログアウトに失敗しました",
+            type: "error",
+            status: true
+          }
+        )
+      }
+    }
   }
 }
 </script>

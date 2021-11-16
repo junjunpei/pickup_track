@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   get '*path', to: 'static_pages#top'
 
   namespace :api do
-    resources :users
+    resources :users do
+      collection do
+        get 'me'
+      end
+    end
     post '/validate/email', to: 'users#registered?'
     resources :sessions
   end

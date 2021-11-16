@@ -1,5 +1,7 @@
 class Api::UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[create registered?]
+  skip_before_action :require_login, only: %i[create registered? me]
+  skip_before_action :verify_authenticity_token
+  before_action :authenticate!, only: %i[me]
 
   # def new
   #   return redirect_to root_path, info: (t 'defaults.message.already_logged_in') if logged_in?
@@ -22,6 +24,10 @@ class Api::UsersController < ApplicationController
     else
       render json: false
     end
+  end
+
+  def me
+    render json: current_user
   end
 
   # def show
