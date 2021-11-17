@@ -140,7 +140,7 @@ export default {
     register() {
       this.$axios.post("users", { user: this.user })
         .then(response => {
-          this.$router.push({ name: 'Top' }),
+          this.$router.push({ name: 'Login' }),
           this.$store.dispatch("flashMessages/showMessage",
             {
               message: "登録が完了しました",
