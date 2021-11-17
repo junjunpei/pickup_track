@@ -18,12 +18,12 @@ extend('email', {
 
 extend('max', {
   ...max,
-  message: "{_field_}は{length}文字以下で入力してください"
+  message: "{_field_}は{length}文字以下でご入力ください"
 });
 
 extend('min', {
   ...min,
-  message: "{_field_}は{length}文字以上で入力してください"
+  message: "{_field_}は{length}文字以上でご入力ください"
 });
 
 extend('password_confirmed', {

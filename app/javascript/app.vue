@@ -1,8 +1,10 @@
 <template>
   <v-app>
     <TheHeader />
-    <TheFlashMessages />
-    <router-view />
+    <v-main>
+      <TheFlashMessages />
+      <router-view />
+    </v-main>
     <TheFooter />
   </v-app>
 </template>

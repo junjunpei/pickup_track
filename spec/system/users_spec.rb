@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe "Users", type: :system do
   let(:user) { create(:user) }
 
-  describe 'ユーザー新規登録' do
+  describe 'ユーザー登録' do
     context 'フォームの正常に入力されている' do
-      it '登録が成功する' do
+      it '登録に成功する' do
         visit root_path
-        click_on '新規登録'
+        click_on '新規登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -16,7 +16,7 @@ RSpec.describe "Users", type: :system do
         fill_in 'パスワード確認', with: 'pass'
         click_on '登録'
         sleep 3
-        expect(current_path).to eq root_path
+        expect(current_path).to eq '/login'
         expect(page).to have_content '登録が完了しました'
       end
     end
@@ -24,7 +24,7 @@ RSpec.describe "Users", type: :system do
     context '名前が未入力' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録'
+        click_on '新規登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: ''
@@ -39,7 +39,7 @@ RSpec.describe "Users", type: :system do
     context 'メールアドレスが未入力' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録'
+        click_on '新規登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -54,7 +54,7 @@ RSpec.describe "Users", type: :system do
     context 'パスワードが未入力' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録'
+        click_on '新規登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -69,7 +69,7 @@ RSpec.describe "Users", type: :system do
     context 'パスワード確認が未入力' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録'
+        click_on '新規登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -84,14 +84,14 @@ RSpec.describe "Users", type: :system do
     context '名前が11文字以上' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録'
+        click_on '新規登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'aaaaaaaaaaa'
         fill_in 'メールアドレス', with: 'test@example.com'
         fill_in 'パスワード', with: 'pass'
         fill_in 'パスワード確認', with: 'pass'
-        expect(page).to have_content '名前は10文字以下で入力してください'
+        expect(page).to have_content '名前は10文字以下でご入力ください'
         expect(page).to have_button '登録', disabled: true
       end
     end
@@ -99,7 +99,7 @@ RSpec.describe "Users", type: :system do
     context 'メールアドレスの形式で入力されていない' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録'
+        click_on '新規登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -113,12 +113,13 @@ RSpec.describe "Users", type: :system do
 
     context '登録済みのメールアドレスが入力されている' do
       it '登録ボタンが押せなくなっている' do
+        existed_user = create(:user)
         visit root_path
-        click_on '新規登録'
+        click_on '新規登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
-        fill_in 'メールアドレス', with: user.email
+        fill_in 'メールアドレス', with: existed_user.email
         fill_in 'パスワード', with: 'pass'
         fill_in 'パスワード確認', with: 'pass'
         expect(page).to have_content 'このメールアドレスは登録済みです'
@@ -129,15 +130,15 @@ RSpec.describe "Users", type: :system do
     context 'パスワードとパスワード確認が2文字以下' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録'
+        click_on '新規登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
         fill_in 'メールアドレス', with: 'test@example.com'
         fill_in 'パスワード', with: 'pa'
         fill_in 'パスワード確認', with: 'pa'
-        expect(page).to have_content 'パスワードは3文字以上で入力してください'
-        expect(page).to have_content 'パスワード確認は3文字以上で入力してください'
+        expect(page).to have_content 'パスワードは3文字以上でご入力ください'
+        expect(page).to have_content 'パスワード確認は3文字以上でご入力ください'
         expect(page).to have_button '登録', disabled: true
       end
     end
@@ -145,7 +146,7 @@ RSpec.describe "Users", type: :system do
     context 'パスワードとパスワード確認が一致しない' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録'
+        click_on '新規登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -157,4 +158,106 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
+
+  describe 'ログイン' do
+    context 'フォームが正常に入力されている' do
+      it 'ログインに成功する' do
+        visit root_path
+        click_on 'ログイン'
+        expect(current_path).to eq '/login'
+        expect(page).to have_content 'ログイン'
+        fill_in 'メールアドレス', with: user.email
+        fill_in 'パスワード', with: 'pass'
+        find('#login').click
+        sleep 3
+        expect(page).to have_content 'ログインしました'
+        expect(page).to have_content 'ログアウト'
+        expect(page).not_to have_content 'ログイン'
+        expect(current_path).to eq root_path
+      end
+    end
+
+    context 'メールアドレスが入力されていない' do
+      it 'ログインボタンが押せなくなっている' do
+        visit root_path
+        click_on 'ログイン'
+        expect(current_path).to eq '/login'
+        expect(page).to have_content 'ログイン'
+        fill_in 'メールアドレス', with: ''
+        fill_in 'パスワード', with: 'pass'
+        expect(page).to have_content 'メールアドレスは必須項目です'
+        expect(page).to have_button 'ログイン', disabled: true
+      end
+    end
+
+    context 'メールアドレスの形式で入力されていない' do
+      it 'ログインボタンが押せなくなっている' do
+        visit root_path
+        click_on 'ログイン'
+        expect(current_path).to eq '/login'
+        expect(page).to have_content 'ログイン'
+        fill_in 'メールアドレス', with: 'email'
+        fill_in 'パスワード', with: 'pass'
+        expect(page).to have_content 'メールアドレスの形式でご入力ください'
+        expect(page).to have_button 'ログイン', disabled: true
+      end
+    end
+
+    context 'パスワードが入力されていない' do
+      it 'ログインボタンが押せなくなっている' do
+        visit root_path
+        click_on 'ログイン'
+        expect(current_path).to eq '/login'
+        expect(page).to have_content 'ログイン'
+        fill_in 'メールアドレス', with: user.email
+        fill_in 'パスワード', with: ''
+        expect(page).to have_content 'パスワードは必須項目です'
+        expect(page).to have_button 'ログイン', disabled: true
+      end
+    end
+
+    context 'パスワードが3文字未満で入力されている' do
+      it 'ログインボタンが押せなくなっている' do
+        visit root_path
+        click_on 'ログイン'
+        expect(current_path).to eq '/login'
+        expect(page).to have_content 'ログイン'
+        fill_in 'メールアドレス', with: user.email
+        fill_in 'パスワード', with: 'pa'
+        expect(page).to have_content 'パスワードは3文字以上でご入力ください'
+        expect(page).to have_button 'ログイン', disabled: true
+      end
+    end
+
+    context 'メールアドレスが間違っている' do
+      it 'ログインに失敗する' do
+        visit root_path
+        click_on 'ログイン'
+        expect(current_path).to eq '/login'
+        expect(page).to have_content 'ログイン'
+        fill_in 'メールアドレス', with: 'foobar@example.com'
+        fill_in 'パスワード', with: 'pass'
+        find('#login').click
+        sleep 3
+        expect(page).to have_content 'メールアドレス、またはパスワードが間違っています'
+        expect(current_path).to eq '/login'
+      end
+    end
+
+    context 'パスワードが間違っている' do
+      it 'ログインに失敗する' do
+        visit root_path
+        click_on 'ログイン'
+        expect(current_path).to eq '/login'
+        expect(page).to have_content 'ログイン'
+        fill_in 'メールアドレス', with: user.email
+        fill_in 'パスワード', with: 'password'
+        find('#login').click
+        sleep 3
+        expect(page).to have_content 'メールアドレス、またはパスワードが間違っています'
+        expect(current_path).to eq '/login'
+      end
+    end
+  end
+
 end

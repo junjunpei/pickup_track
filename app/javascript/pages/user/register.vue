@@ -3,7 +3,7 @@
     id="register-form"
     class="text-center w-90 container"
     >
-    <v-content>
+    <v-container>
       <div class="h3">
         ユーザー登録
       </div>
@@ -92,19 +92,17 @@
           >
             登録
           </v-btn>
-          <div class="text-center">
-            <v-btn
-              text
-              class="mt-4"
+          <div class="text-center mt-7">
+            <router-link
               color="blue"
-              to="/"
+              :to="{ name: 'Login' }"
             >
               登録済みの方はこちら
-            </v-btn>
+            </router-link>
           </div>
         </form>
       </ValidationObserver>
-    </v-content>
+    </v-container>
   </div>
 </template>
 
@@ -142,7 +140,7 @@ export default {
     register() {
       this.$axios.post("users", { user: this.user })
         .then(response => {
-          this.$router.push({ name: 'Top' }),
+          this.$router.push({ name: 'Login' }),
           this.$store.dispatch("flashMessages/showMessage",
             {
               message: "登録が完了しました",
@@ -154,7 +152,7 @@ export default {
         .catch(error => {
           this.$store.dispatch("flashMessages/showMessage",
             {
-              message: "登録出来ませんでした",
+              message: "登録に失敗しました",
               type: "error",
               status: true
             }
