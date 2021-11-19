@@ -4,6 +4,7 @@ import store from '../store'
 import Top from '../pages/top.vue'
 import Register from '../pages/user/register.vue'
 import Login from '../pages/user/login.vue'
+import Search '../pages/tracks/search.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const router = new VueRouter({
       path: '/login',
       component: Login,
       name: 'Login'
+    },
+    {
+      path: '/search',
+      component: Search,
+      name: 'Search'
     }
   ]
 })
