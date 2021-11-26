@@ -1,9 +1,8 @@
 <template>
-  <div
+  <v-container
     id="login-form"
-    class="text-center w-90 container"
+    class="text-center form-group col-lg-6 offset-lg-3"
   >
-    <v-container>
       <div class="h3 mt-10">
         ログイン
       </div>
@@ -63,8 +62,7 @@
           </div>
         </form>
       </ValidationObserver>
-    </v-container>
-  </div>
+  </v-container>
 </template>
 
 <script>

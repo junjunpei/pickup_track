@@ -1,28 +1,28 @@
-.top-wrapper {
-  height: 100%;
-  position: relative;
-  background-image: image-url('top.jpg');
-  background-position: center;
-  background-size:  cover;
-}
-
-.jumbotron {
-  padding-top: 120px;
-  color: #FFFFFF;
-  font-family: serif;
-} .title {
-  font-size: 80px;
-  font-family: 'YuGothic';
-}
-
-@media screen and (max-width:639px) {
-.jumbotron {
-  padding-top: 100px;
-  .title {
-  font-size: 60px;
-  }
-  h5 {
-  font-size: 17px;
-  }
-}
-}
+// .top-wrapper {
+//   height: 100%;
+//   position: relative;
+//   background-image: image-url('top.jpg');
+//   background-position: center;
+//   background-size:  cover;
+// }
+//
+// .jumbotron {
+//   padding-top: 120px;
+//   color: #FFFFFF;
+//   font-family: serif;
+// } .title {
+//   font-size: 80px;
+//   font-family: 'YuGothic';
+// }
+//
+// @media screen and (max-width:639px) {
+// .jumbotron {
+//   padding-top: 100px;
+//   .title {
+//   font-size: 60px;
+//   }
+//   h5 {
+//   font-size: 17px;
+//   }
+// }
+// }
