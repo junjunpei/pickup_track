@@ -15,7 +15,7 @@
         label="Search"
         clear-icon="mdi-close-thick"
         @click:clear="clearSearch"
-        @change="searchTrack"
+        @keydown.enter="searchTrack"
       >
         <template v-slot:prepend-inner>
           <v-fade-transition leave-absolute>
@@ -44,8 +44,8 @@
         <v-list subheader>
           <v-subheader>検索結果</v-subheader>
           <v-list-item
-            v-for="track in tracks"
-            :key="track.id"
+            v-for="track in displayTracks"
+            :key="track.index"
           >
             <!-- <v-list-item-icon class="mr-4">
               <v-icon :color="chat.active ? 'deep-purple accent-4' : 'grey'">
@@ -69,6 +69,20 @@
           </v-list-item>
         </v-list>
       </v-card>
+      <div
+        class="text-center"
+        v-if="!displayTracks.length == 0"
+      >
+        <v-pagination
+          v-model="page"
+          :length="lastPage"
+          color="green accent-3"
+          circle
+          prev-icon="mdi-menu-left"
+          next-icon="mdi-menu-right"
+          @input="pageChange"
+        ></v-pagination>
+      </div>
     </v-container>
   </div>
 </template>
@@ -82,11 +96,23 @@ export default {
     return {
       search: '',
       loading: false,
+      page: 1,
+      lastPage: 1,
+      displayTracks: [],
+      pageSize: 10
     }
   },
 
   computed: {
-    ...mapGetters("tracks", ["tracks"])
+    ...mapGetters("tracks", ["tracks"]),
+
+    options () {
+      return {
+        duration: 1000,
+        offset: 0,
+        easing: "easeOutQuint",
+      }
+    }
   },
 
   methods: {
@@ -101,6 +127,9 @@ export default {
       try {
         await this.searchTracks(this.search)
         this.loading = false
+        this.displayTracks = this.tracks.slice(0, this.pageSize)
+        this.lastPage = this.tracks.length / 10
+        this.page = 1
         if (this.tracks.length == 0) {
           this.$store.dispatch("flashMessages/showMessage",
           {
@@ -113,6 +142,11 @@ export default {
       } catch(error) {
         console.log(error)
       }
+    },
+
+    pageChange() {
+      this.$vuetify.goTo(0, this.options)
+      this.displayTracks = this.tracks.slice(this.pageSize*(this.page - 1), this.pageSize*(this.page))
     }
   }
 }
