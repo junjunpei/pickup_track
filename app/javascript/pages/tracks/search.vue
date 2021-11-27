@@ -15,7 +15,7 @@
         label="Search"
         clear-icon="mdi-close-thick"
         @click:clear="clearSearch"
-        @keydown.enter="searchTrack"
+        @change="searchTrack"
       >
         <template v-slot:prepend-inner>
           <v-fade-transition leave-absolute>
@@ -108,7 +108,7 @@ export default {
 
     options () {
       return {
-        duration: 1000,
+        duration: 0,
         offset: 0,
         easing: "easeOutQuint",
       }
