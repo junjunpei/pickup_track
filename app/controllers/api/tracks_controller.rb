@@ -6,18 +6,16 @@ class Api::TracksController < ApplicationController
 
   def search
     # return unless params[:search].present?
-
     # result = RSpotify::Track.search(params[:search])
     # @tracks = Kaminari.paginate_array(result).page(params[:page]).per(10)
     uri = URI.parse(ENV['SEARCH_URL'])
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     header = { 'Authorization' => "Bearer #{@bearer_token}", 'Accept-Language' => 'ja;q=1' }
-    uri.query = URI.encode_www_form({ q: params[:search], type: 'track', limit: '50', offset: '0', market: 'JP'})
+    uri.query = URI.encode_www_form({ q: params[:search], type: 'track', limit: '50', offset: '0', market: 'JP' })
     response = http.get(uri.request_uri, header)
     response_body = JSON.parse(response.body)
-    response_tracks = response_body['tracks']
-    tracks = response_tracks['items']
+    tracks = response_body['tracks']['items']
     render json: tracks
   end
 
@@ -27,8 +25,8 @@ class Api::TracksController < ApplicationController
     uri = URI.parse(ENV['TOKEN_URL'])
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    encode = Base64.strict_encode64(ENV['SPOTIFY_CLIENT_ID'] + ':' + ENV['SPOTIFY_SECRET_ID'])
-    header = { 'Authorization' => "Basic #{encode}"}
+    encode = Base64.strict_encode64("#{ENV['SPOTIFY_CLIENT_ID']}:#{ENV['SPOTIFY_SECRET_ID']}")
+    header = { 'Authorization' => "Basic #{encode}" }
     request = Net::HTTP::Post.new(uri.request_uri, header)
     request.body = 'grant_type=client_credentials'
     response = http.request(request)
