@@ -30,7 +30,7 @@
         text
         :to="{ name: 'Search' }"
       >
-        検索
+        楽曲検索
       </v-btn>
       <v-btn
         text

@@ -5,7 +5,7 @@
   >
     <v-container>
       <div class="h2 mt-1 mb-5">
-        検索
+        楽曲検索
       </div>
       <v-text-field
         v-model="search"
@@ -40,6 +40,7 @@
       </v-text-field>
       <v-card
         class="mx-auto"
+        id="tracks-list"
       >
         <v-list subheader>
           <v-subheader>検索結果</v-subheader>
