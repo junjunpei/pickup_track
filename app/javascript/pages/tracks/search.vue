@@ -62,7 +62,7 @@
 
             <v-list-item-content>
               <v-list-item-title v-text="track.name"></v-list-item-title>
-              <v-list-item-subtitle v-text="track.artists[0].name"></v-list-item-subtitle>
+              <v-list-item-subtitle v-text="`${track.artists[0].name} - ${track.album.name}`"></v-list-item-subtitle>
             </v-list-item-content>
 
 
