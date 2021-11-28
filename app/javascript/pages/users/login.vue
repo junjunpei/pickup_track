@@ -46,7 +46,7 @@
             @click="login"
             class="mt-10"
             type="submit"
-            :disabled="invalid"
+            :disabled="invalid || loading"
             color="success"
             id="login"
           >
@@ -76,7 +76,8 @@ export default {
         email: '',
         password: ''
       },
-      showPassword: false
+      showPassword: false,
+      loading: false
     }
   },
 
@@ -85,8 +86,10 @@ export default {
       "loginUser"
     ]),
     async login() {
+      this.loading = true
       try {
         await this.loginUser(this.user)
+        this.loading = false
         this.$router.push({ name: 'Top' })
         this.$store.dispatch("flashMessages/showMessage",
           {

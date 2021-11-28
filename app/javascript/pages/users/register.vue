@@ -86,7 +86,7 @@
           @click="register"
           class="mt-4"
           type="submit"
-          :disabled="invalid"
+          :disabled="invalid || loading"
           color="success"
         >
           登録
@@ -118,6 +118,7 @@ export default {
       // checkbox: null,
       showPassword: false,
       showPasswordConfirmation: false,
+      loading: false
     }
   },
 
@@ -136,8 +137,10 @@ export default {
     },
 
     register() {
+      this.loading = true
       this.$axios.post("users", { user: this.user })
         .then(response => {
+          this.loading = false,
           this.$router.push({ name: 'Login' }),
           this.$store.dispatch("flashMessages/showMessage",
             {
