@@ -15,7 +15,7 @@
         label="Search"
         clear-icon="mdi-close-thick"
         @click:clear="clearSearch"
-        @change="searchTrack"
+        @keydown.enter="searchTrack"
       >
         <template v-slot:prepend-inner>
           <v-fade-transition leave-absolute>
