@@ -13,6 +13,11 @@ AllCops:
 Layout/LineLength:
   Enabled: false
 
+# HTTP通信を行なっているためコードが長くなっている"api/tracks_controller"のみ除外
+Metrics/AbcSize:
+  Exclude:
+  - 'app/controllers/api/tracks_controller.rb'
+
 # 1ブロックの行数の制限
 Metrics/BlockLength:
   Exclude:

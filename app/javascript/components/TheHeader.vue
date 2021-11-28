@@ -28,6 +28,12 @@
     <template v-if="authUser">
       <v-btn
         text
+        :to="{ name: 'Search' }"
+      >
+        楽曲検索
+      </v-btn>
+      <v-btn
+        text
         @click="handleLogout"
       >
         ログアウト
