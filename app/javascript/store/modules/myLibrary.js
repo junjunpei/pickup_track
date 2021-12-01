@@ -1,25 +1,25 @@
 import axios from '../../plugins/axios'
 
 const state = {
-  myTracks: []
+  myLibrary: []
 }
 
 const getters = {
-  myTracks: state => state.myTracks
+  myLibrary: state => state.myLibrary
 }
 
 const mutations = {
   setTracks: (state, tracks) => {
-    state.myTracks = tracks
+    state.myLibrary = tracks
   },
 
   addTrack: (state, track) => {
-    state.myTracks.push(track)
+    state.myLibrary.push(track)
   },
 
   deleteTrack: (state, deleteTrack) => {
-    state.myTracks = state.myTracks.filter(track => {
-      return track.id != deleteTrack.id
+    state.myLibrary = state.myLibrary.filter(myTrack => {
+      return myTrack.id != deleteTrack.id
     })
   }
 }
@@ -41,7 +41,7 @@ const actions = {
   },
 
   deleteTrack({ commit, state }, trackId) {
-    const deleteTrack = state.myTracks.filter(myTrack => {
+    const deleteTrack = state.myLibrary.filter(myTrack => {
       return myTrack.track_id.indexOf(trackId) != -1
     })
 

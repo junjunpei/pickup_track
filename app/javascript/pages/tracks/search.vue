@@ -117,7 +117,7 @@ export default {
 
   computed: {
     ...mapGetters("searchTracks", ["tracks"]),
-    ...mapGetters("myTracks", ["myTracks"]),
+    ...mapGetters("myLibrary", ["myLibrary"]),
 
     options() {
       return {
@@ -129,7 +129,7 @@ export default {
 
     added() {
       return function(trackId) {
-        return this.myTracks.some(myTrack => {
+        return this.myLibrary.some(myTrack => {
           return myTrack.track_id == trackId
         })
       }
@@ -142,7 +142,7 @@ export default {
 
   methods: {
     ...mapActions("searchTracks", ["searchTracks"]),
-    ...mapActions("myTracks", [
+    ...mapActions("myLibrary", [
       "fetchTracks",
       "createTrack",
       "deleteTrack"
