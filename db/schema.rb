@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_11_28_084331) do
 
   create_table "tracks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
-    t.integer "track_id", null: false
+    t.string "track_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

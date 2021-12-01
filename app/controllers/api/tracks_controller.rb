@@ -1,6 +1,9 @@
 class Api::TracksController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :set_bearer_token
+  before_action :set_bearer_token, only: :search
+  before_action :require_login
+  before_action :authenticate!
+  before_action :set_track, only: :destroy
   require 'net/http'
   require 'uri'
 
@@ -19,6 +22,26 @@ class Api::TracksController < ApplicationController
     render json: tracks
   end
 
+  def index
+    @my_tracks = current_user.tracks.all
+    render json: @my_tracks
+  end
+
+  def create
+    track = current_user.tracks.build(track_id: params[:track_id])
+
+    if track.save
+      render json: track
+    else
+      render json: track.errors, status: :bad_request
+    end
+  end
+
+  def destroy
+    @track.destroy!
+    render json: @track
+  end
+
   private
 
   def set_bearer_token
@@ -32,5 +55,9 @@ class Api::TracksController < ApplicationController
     response = http.request(request)
     response_body = JSON.parse(response.body)
     @bearer_token = response_body['access_token']
+  end
+
+  def set_track
+    @track = current_user.tracks.find(params[:id])
   end
 end

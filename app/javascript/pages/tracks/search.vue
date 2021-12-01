@@ -25,7 +25,7 @@
               color="info"
               indeterminate
             ></v-progress-circular>
-            <v-icon>mdi-magnify</v-icon>
+            <v-icon v-else>mdi-magnify</v-icon>
           </v-fade-transition>
         </template>
         <template v-slot:append-outer>
@@ -48,11 +48,6 @@
             v-for="track in displayTracks"
             :key="track.index"
           >
-            <!-- <v-list-item-icon class="mr-4">
-              <v-icon :color="chat.active ? 'deep-purple accent-4' : 'grey'">
-                mdi-message-outline
-              </v-icon>
-            </v-list-item-icon> -->
 
             <v-list-item-avatar class="mr-3">
               <v-img
@@ -66,6 +61,22 @@
               <v-list-item-subtitle v-text="`${track.artists[0].name} - ${track.album.name}`"></v-list-item-subtitle>
             </v-list-item-content>
 
+             <v-list-item-icon class="mr-4">
+              <v-icon
+                v-if="added(track.id)"
+                @click="handleDeleteTrack(track.id)"
+                color="white"
+              >
+                mdi-delete
+              </v-icon>
+              <v-icon
+                v-else
+                @click="handleCreateTrack(track.id)"
+                color="white"
+              >
+                mdi-plus
+              </v-icon>
+            </v-list-item-icon>
 
           </v-list-item>
         </v-list>
@@ -100,24 +111,42 @@ export default {
       page: 1,
       lastPage: 1,
       displayTracks: [],
-      pageSize: 10
+      pageSize: 10,
     }
   },
 
   computed: {
-    ...mapGetters("tracks", ["tracks"]),
+    ...mapGetters("searchTracks", ["tracks"]),
+    ...mapGetters("myTracks", ["myTracks"]),
 
-    options () {
+    options() {
       return {
         duration: 0,
         offset: 0,
         easing: "easeOutQuint",
       }
+    },
+
+    added() {
+      return function(trackId) {
+        return this.myTracks.some(myTrack => {
+          return myTrack.track_id == trackId
+        })
+      }
     }
   },
 
+  created() {
+    this.fetchTracks()
+  },
+
   methods: {
-    ...mapActions("tracks", ["searchTracks"]),
+    ...mapActions("searchTracks", ["searchTracks"]),
+    ...mapActions("myTracks", [
+      "fetchTracks",
+      "createTrack",
+      "deleteTrack"
+    ]),
 
     clearSearch() {
       this.search = ''
@@ -133,12 +162,12 @@ export default {
         this.page = 1
         if (this.tracks.length == 0) {
           this.$store.dispatch("flashMessages/showMessage",
-          {
-            message: "検索結果がありません",
-            type: "error",
-            status: true
-          }
-        )
+            {
+              message: "検索結果がありません",
+              type: "error",
+              status: true
+            }
+          )
         }
       } catch(error) {
         console.log(error)
@@ -148,6 +177,50 @@ export default {
     pageChange() {
       this.$vuetify.goTo(0, this.options)
       this.displayTracks = this.tracks.slice(this.pageSize*(this.page - 1), this.pageSize*(this.page))
+    },
+
+    async handleCreateTrack(trackId) {
+      try {
+        await this.createTrack(trackId)
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "マイライブラリに追加しました",
+            type: "blue lighten-1",
+            status: true
+          }
+        )
+      } catch(error) {
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "追加に失敗しました",
+            type: "error",
+            status: true
+          }
+        )
+        console.log(error)
+      }
+    },
+
+    async handleDeleteTrack(trackId) {
+      try {
+        await this.deleteTrack(trackId)
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "マイライブラリから削除しました",
+            type: "pink lighten-1",
+            status: true
+          }
+        )
+      } catch(error) {
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "削除に失敗しました",
+            type: "error",
+            status: true
+          }
+        )
+        console.log(error)
+      }
     }
   }
 }
