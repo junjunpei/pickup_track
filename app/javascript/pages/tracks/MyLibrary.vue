@@ -7,6 +7,19 @@
       <div class="h2 mt-1 mb-5">
         マイライブラリ
       </div>
+      <v-text-field
+        v-model="search"
+        type="text"
+        filled
+        clearable
+        label="Search"
+        clear-icon="mdi-close-thick"
+        @click:clear="clearSearch"
+      >
+        <template v-slot:prepend-inner>
+          <v-icon>mdi-magnify</v-icon>
+        </template>
+      </v-text-field>
       <v-card
         class="mx-auto"
         id="tracks-list"
@@ -19,7 +32,7 @@
           </v-subheader>
           <v-list-item
             v-else
-            v-for="(myTrack, index) in sortTracks"
+            v-for="(myTrack, index) in searchedTracks"
             :key="index"
           >
 
@@ -60,6 +73,7 @@ export default {
   data() {
     return {
       myLibraryTracks: [],
+      search: ''
     }
   },
 
@@ -68,6 +82,12 @@ export default {
 
     sortTracks() {
       return this.myLibraryTracks.sort((a,b) => a.index - b.index)
+    },
+
+    searchedTracks() {
+      return this.sortTracks.filter(track => {
+        return track.name.toLowerCase().indexOf(this.search.toLowerCase()) != -1 || track.artists[0].name.toLowerCase().indexOf(this.search.toLowerCase()) != -1 || track.album.name.toLowerCase().indexOf(this.search.toLowerCase()) != -1
+      })
     }
   },
 
@@ -126,7 +146,7 @@ export default {
 
     clearSearch() {
       this.search = ''
-    },
+    }
   }
 }
 </script>
