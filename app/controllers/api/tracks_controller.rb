@@ -23,7 +23,7 @@ class Api::TracksController < ApplicationController
   end
 
   def my_library
-    uri = URI.parse(ENV['TRACK_URL'] + "/" + params[:track_id])
+    uri = URI.parse("#{ENV['TRACK_URL']}/#{params[:track_id]}")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     header = { 'Authorization' => "Bearer #{@bearer_token}", 'Accept-Language' => 'ja;q=1' }

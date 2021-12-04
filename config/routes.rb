@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :tracks do
       collection do
         post 'search', to: 'tracks#search'
-        post "my-library", to: 'tracks#my_library'
+        post 'my-library', to: 'tracks#my_library'
       end
     end
   end
