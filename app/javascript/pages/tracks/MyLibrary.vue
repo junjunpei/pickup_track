@@ -80,6 +80,13 @@ export default {
             }
           })
           .catch(error => {
+            this.$store.dispatch("flashMessages/showMessage",
+              {
+                message: "ライブラリの読み込みに失敗しました",
+                type: "error",
+                status: true
+              }
+            )
             console.log(error)
           })
       })
