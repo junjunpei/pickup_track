@@ -61,7 +61,7 @@
               <v-list-item-subtitle v-text="`${track.artists[0].name} - ${track.album.name}`"></v-list-item-subtitle>
             </v-list-item-content>
 
-             <v-list-item-icon class="mr-4">
+            <v-list-item-icon class="mr-4">
               <v-icon
                 v-if="added(track.id)"
                 @click="handleDeleteTrack(track.id)"
@@ -83,7 +83,7 @@
       </v-card>
       <div
         class="text-center"
-        v-if="!displayTracks.length == 0"
+        v-if="displayTracks.length != 0"
       >
         <v-pagination
           v-model="page"

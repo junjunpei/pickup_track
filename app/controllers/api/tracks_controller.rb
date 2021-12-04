@@ -1,6 +1,6 @@
 class Api::TracksController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :set_bearer_token, only: :search
+  before_action :set_bearer_token, only: %i[search my_library]
   before_action :require_login
   before_action :authenticate!
   before_action :set_track, only: :destroy
@@ -22,8 +22,19 @@ class Api::TracksController < ApplicationController
     render json: tracks
   end
 
+  def my_library
+    uri = URI.parse(ENV['TRACK_URL'] + "/" + params[:track_id])
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    header = { 'Authorization' => "Bearer #{@bearer_token}", 'Accept-Language' => 'ja;q=1' }
+    uri.query = URI.encode_www_form({ market: 'JP' })
+    response = http.get(uri.request_uri, header)
+    my_track = JSON.parse(response.body)
+    render json: my_track
+  end
+
   def index
-    @my_tracks = current_user.tracks.all
+    @my_tracks = current_user.tracks.all.order(:id)
     render json: @my_tracks
   end
 
