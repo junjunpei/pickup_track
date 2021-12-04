@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Tracks", type: :system do
+RSpec.describe "SearchTracks", type: :system do
   let(:user) { create(:user) }
   before { login_as(user) }
 
@@ -41,5 +41,4 @@ RSpec.describe "Tracks", type: :system do
       end
     end
   end
-
 end
