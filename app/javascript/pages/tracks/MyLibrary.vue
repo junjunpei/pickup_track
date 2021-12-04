@@ -20,52 +20,21 @@
           <v-icon>mdi-magnify</v-icon>
         </template>
       </v-text-field>
-      <v-card
-        class="mx-auto"
-        id="tracks-list"
+      <TracksListCard
+        :tracks="searchedTracks"
+        :library="myLibrary"
+        :submitting="submitting"
+        @create-track="handleCreateTrack"
+        @delete-track="handleDeleteTrack"
       >
-        <v-list subheader>
-          <v-subheader
-            v-if="this.myLibrary.length == 0"
-          >
-            まだ追加された曲がありません
-          </v-subheader>
-          <v-list-item
-            v-else
-            v-for="(myTrack, index) in searchedTracks"
-            :key="index"
-          >
-
-            <v-list-item-avatar class="mr-3">
-              <v-img
-                alt="Track image"
-                :src="myTrack.album.images[2].url"
-              ></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title v-text="myTrack.name"></v-list-item-title>
-              <v-list-item-subtitle v-text="`${myTrack.artists[0].name} - ${myTrack.album.name}`"></v-list-item-subtitle>
-            </v-list-item-content>
-
-            <v-list-item-icon class="mr-4">
-              <v-icon
-                @click="handleDeleteTrack(myTrack.id)"
-                color="white"
-              >
-                mdi-delete
-              </v-icon>
-            </v-list-item-icon>
-
-          </v-list-item>
-        </v-list>
-      </v-card>
+      </TracksListCard>
     </v-container>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex"
+import TracksListCard from "./components/TracksListCard"
 
 export default {
   name: "MyLibrary",
@@ -73,8 +42,13 @@ export default {
   data() {
     return {
       myLibraryTracks: [],
-      search: ''
+      search: '',
+      submitting: false
     }
+  },
+
+  components: {
+    TracksListCard
   },
 
   computed: {
@@ -119,12 +93,40 @@ export default {
   methods: {
     ...mapActions("myLibrary", [
       "fetchTracks",
+      "createTrack",
       "deleteTrack",
     ]),
 
+    async handleCreateTrack(trackId) {
+      this.submitting = true
+      try {
+        await this.createTrack(trackId)
+        this.submitting = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "マイライブラリに追加しました",
+            type: "blue lighten-1",
+            status: true
+          }
+        )
+      } catch(error) {
+        this.submitting = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "追加に失敗しました",
+            type: "error",
+            status: true
+          }
+        )
+        console.log(error)
+      }
+    },
+
     async handleDeleteTrack(trackId) {
+      this.submitting = true
       try {
         await this.deleteTrack(trackId)
+        this.submitting = false
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "マイライブラリから削除しました",
@@ -133,6 +135,7 @@ export default {
           }
         )
       } catch(error) {
+        this.submitting = false
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "削除に失敗しました",

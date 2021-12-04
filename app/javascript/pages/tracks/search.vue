@@ -38,49 +38,19 @@
           </v-btn>
         </template>
       </v-text-field>
-      <v-card
-        class="mx-auto"
-        id="tracks-list"
+      <TracksListCard
+        :tracks="displayTracks"
+        :library="myLibrary"
+        :submitting="submitting"
+        @create-track="handleCreateTrack"
+        @delete-track="handleDeleteTrack"
       >
-        <v-list subheader>
-          <v-subheader>検索結果</v-subheader>
-          <v-list-item
-            v-for="track in displayTracks"
-            :key="track.index"
-          >
-
-            <v-list-item-avatar class="mr-3">
-              <v-img
-                alt="Track image"
-                :src="track.album.images[2].url"
-              ></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title v-text="track.name"></v-list-item-title>
-              <v-list-item-subtitle v-text="`${track.artists[0].name} - ${track.album.name}`"></v-list-item-subtitle>
-            </v-list-item-content>
-
-            <v-list-item-icon class="mr-4">
-              <v-icon
-                v-if="added(track.id)"
-                @click="handleDeleteTrack(track.id)"
-                color="white"
-              >
-                mdi-delete
-              </v-icon>
-              <v-icon
-                v-else
-                @click="handleCreateTrack(track.id)"
-                color="white"
-              >
-                mdi-plus
-              </v-icon>
-            </v-list-item-icon>
-
-          </v-list-item>
-        </v-list>
-      </v-card>
+        <template v-slot:subheader>
+          <v-subheader>
+            検索結果
+          </v-subheader>
+        </template>
+      </TracksListCard>
       <div
         class="text-center"
         v-if="displayTracks.length != 0"
@@ -101,6 +71,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex"
+import TracksListCard from "./components/TracksListCard"
 
 export default {
   name: "Search",
@@ -112,7 +83,12 @@ export default {
       lastPage: 1,
       displayTracks: [],
       pageSize: 10,
+      submitting: false
     }
+  },
+
+  components: {
+    TracksListCard
   },
 
   computed: {
@@ -124,14 +100,6 @@ export default {
         duration: 0,
         offset: 0,
         easing: "easeOutQuint",
-      }
-    },
-
-    added() {
-      return function(trackId) {
-        return this.myLibrary.some(myTrack => {
-          return myTrack.track_id == trackId
-        })
       }
     }
   },
@@ -170,6 +138,14 @@ export default {
           )
         }
       } catch(error) {
+        this.loading = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "検索に失敗しました",
+            type: "error",
+            status: true
+          }
+        )
         console.log(error)
       }
     },
@@ -180,8 +156,10 @@ export default {
     },
 
     async handleCreateTrack(trackId) {
+      this.submitting = true
       try {
         await this.createTrack(trackId)
+        this.submitting = false
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "マイライブラリに追加しました",
@@ -190,6 +168,7 @@ export default {
           }
         )
       } catch(error) {
+        this.submitting = false
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "追加に失敗しました",
@@ -202,8 +181,10 @@ export default {
     },
 
     async handleDeleteTrack(trackId) {
+      this.submitting = true
       try {
         await this.deleteTrack(trackId)
+        this.submitting = false
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "マイライブラリから削除しました",
@@ -212,6 +193,7 @@ export default {
           }
         )
       } catch(error) {
+        this.submitting = false
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "削除に失敗しました",
