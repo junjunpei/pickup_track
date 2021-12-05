@@ -34,7 +34,7 @@ const router = new VueRouter({
       meta: { requiredAuth: true }
     },
     {
-      path: '/mylibrary',
+      path: '/my-library',
       component: MyLibrary,
       name: 'MyLibrary',
       meta: { requiredAuth: true }

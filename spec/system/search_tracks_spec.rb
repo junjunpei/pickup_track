@@ -17,6 +17,7 @@ RSpec.describe "SearchTracks", type: :system do
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+        expect(find('#tracks-list')).to have_selector '#create-icon'
         expect(page).to have_selector '.v-pagination'
       end
     end

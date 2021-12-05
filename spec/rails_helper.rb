@@ -65,4 +65,5 @@ RSpec.configure do |config|
   # createの前のFactoryBotを省略できるようにする
   config.include FactoryBot::Syntax::Methods
   config.include LoginSupport
+  config.include TrackSupport
 end

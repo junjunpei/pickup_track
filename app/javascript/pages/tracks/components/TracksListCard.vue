@@ -29,6 +29,7 @@
             @click="handleDeleteTrack(track.id)"
             color="white"
             :disabled="submitting"
+            id="delete-icon"
           >
             mdi-delete
           </v-icon>
@@ -37,6 +38,7 @@
             @click="handleCreateTrack(track.id)"
             color="white"
             :disabled="submitting"
+            id="create-icon"
           >
             mdi-plus
           </v-icon>
