@@ -28,7 +28,15 @@
     <template v-if="authUser">
       <v-btn
         text
+        :to="{ name: 'MyLibrary' }"
+        class="mr-3"
+      >
+        マイライブラリ
+      </v-btn>
+      <v-btn
+        text
         :to="{ name: 'Search' }"
+        class="mr-3"
       >
         楽曲検索
       </v-btn>

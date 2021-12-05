@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Tracks", type: :system do
+RSpec.describe "SearchTracks", type: :system do
   let(:user) { create(:user) }
   before { login_as(user) }
 
@@ -17,6 +17,7 @@ RSpec.describe "Tracks", type: :system do
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+        expect(find('#tracks-list')).to have_selector '#create-icon'
         expect(page).to have_selector '.v-pagination'
       end
     end
@@ -41,5 +42,4 @@ RSpec.describe "Tracks", type: :system do
       end
     end
   end
-
 end

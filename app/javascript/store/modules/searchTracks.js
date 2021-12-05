@@ -17,8 +17,8 @@ const mutations = {
 const actions = {
   searchTracks({ commit }, search) {
     return axios.post('tracks/search', { search: search })
-      .then(res => {
-        commit('setTracks', res.data)
+      .then(response => {
+        commit('setTracks', response.data)
       })
   }
 }

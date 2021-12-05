@@ -25,7 +25,7 @@
               color="info"
               indeterminate
             ></v-progress-circular>
-            <v-icon>mdi-magnify</v-icon>
+            <v-icon v-else>mdi-magnify</v-icon>
           </v-fade-transition>
         </template>
         <template v-slot:append-outer>
@@ -38,41 +38,22 @@
           </v-btn>
         </template>
       </v-text-field>
-      <v-card
-        class="mx-auto"
-        id="tracks-list"
+      <TracksListCard
+        :tracks="displayTracks"
+        :library="myLibrary"
+        :submitting="submitting"
+        @create-track="handleCreateTrack"
+        @delete-track="handleDeleteTrack"
       >
-        <v-list subheader>
-          <v-subheader>検索結果</v-subheader>
-          <v-list-item
-            v-for="track in displayTracks"
-            :key="track.index"
-          >
-            <!-- <v-list-item-icon class="mr-4">
-              <v-icon :color="chat.active ? 'deep-purple accent-4' : 'grey'">
-                mdi-message-outline
-              </v-icon>
-            </v-list-item-icon> -->
-
-            <v-list-item-avatar class="mr-3">
-              <v-img
-                alt="Track image"
-                :src="track.album.images[2].url"
-              ></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title v-text="track.name"></v-list-item-title>
-              <v-list-item-subtitle v-text="`${track.artists[0].name} - ${track.album.name}`"></v-list-item-subtitle>
-            </v-list-item-content>
-
-
-          </v-list-item>
-        </v-list>
-      </v-card>
+        <template v-slot:subheader>
+          <v-subheader>
+            検索結果
+          </v-subheader>
+        </template>
+      </TracksListCard>
       <div
         class="text-center"
-        v-if="!displayTracks.length == 0"
+        v-if="displayTracks.length != 0"
       >
         <v-pagination
           v-model="page"
@@ -90,6 +71,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex"
+import TracksListCard from "./components/TracksListCard"
 
 export default {
   name: "Search",
@@ -100,14 +82,20 @@ export default {
       page: 1,
       lastPage: 1,
       displayTracks: [],
-      pageSize: 10
+      pageSize: 10,
+      submitting: false
     }
   },
 
-  computed: {
-    ...mapGetters("tracks", ["tracks"]),
+  components: {
+    TracksListCard
+  },
 
-    options () {
+  computed: {
+    ...mapGetters("searchTracks", ["tracks"]),
+    ...mapGetters("myLibrary", ["myLibrary"]),
+
+    options() {
       return {
         duration: 0,
         offset: 0,
@@ -116,8 +104,17 @@ export default {
     }
   },
 
+  created() {
+    this.fetchTracks()
+  },
+
   methods: {
-    ...mapActions("tracks", ["searchTracks"]),
+    ...mapActions("searchTracks", ["searchTracks"]),
+    ...mapActions("myLibrary", [
+      "fetchTracks",
+      "createTrack",
+      "deleteTrack"
+    ]),
 
     clearSearch() {
       this.search = ''
@@ -133,14 +130,22 @@ export default {
         this.page = 1
         if (this.tracks.length == 0) {
           this.$store.dispatch("flashMessages/showMessage",
+            {
+              message: "検索結果がありません",
+              type: "error",
+              status: true
+            }
+          )
+        }
+      } catch(error) {
+        this.loading = false
+        this.$store.dispatch("flashMessages/showMessage",
           {
-            message: "検索結果がありません",
+            message: "検索に失敗しました",
             type: "error",
             status: true
           }
         )
-        }
-      } catch(error) {
         console.log(error)
       }
     },
@@ -148,6 +153,56 @@ export default {
     pageChange() {
       this.$vuetify.goTo(0, this.options)
       this.displayTracks = this.tracks.slice(this.pageSize*(this.page - 1), this.pageSize*(this.page))
+    },
+
+    async handleCreateTrack(trackId) {
+      this.submitting = true
+      try {
+        await this.createTrack(trackId)
+        this.submitting = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "マイライブラリに追加しました",
+            type: "blue lighten-1",
+            status: true
+          }
+        )
+      } catch(error) {
+        this.submitting = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "追加に失敗しました",
+            type: "error",
+            status: true
+          }
+        )
+        console.log(error)
+      }
+    },
+
+    async handleDeleteTrack(trackId) {
+      this.submitting = true
+      try {
+        await this.deleteTrack(trackId)
+        this.submitting = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "マイライブラリから削除しました",
+            type: "pink lighten-1",
+            status: true
+          }
+        )
+      } catch(error) {
+        this.submitting = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "削除に失敗しました",
+            type: "error",
+            status: true
+          }
+        )
+        console.log(error)
+      }
     }
   }
 }
