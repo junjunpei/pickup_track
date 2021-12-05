@@ -99,6 +99,7 @@ export default {
           }
         )
       } catch(error) {
+        this.loading = false
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "メールアドレス、またはパスワードが間違っています",

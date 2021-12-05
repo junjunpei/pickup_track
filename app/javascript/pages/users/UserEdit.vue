@@ -1,10 +1,10 @@
 <template>
   <v-container
-    id="register-form"
+    id="user-edit-form"
     class="text-center form-group col-lg-6 offset-lg-3 mt-8"
   >
     <div class="h3">
-      ユーザー登録
+      ユーザー情報編集
     </div>
     <ValidationObserver
       ref="observer"
@@ -67,20 +67,6 @@
             label="パスワード確認"
           ></v-text-field>
         </ValidationProvider>
-        <!-- <ValidationProvider
-          v-slot="{ errors }"
-          rules="required"
-          name="checkbox"
-        >
-          <v-checkbox
-            v-model="checkbox"
-            :error-messages="errors"
-            value="1"
-            label="Option"
-            type="checkbox"
-            required
-          ></v-checkbox>
-        </ValidationProvider> -->
 
         <v-btn
           @click="register"
@@ -89,24 +75,18 @@
           :disabled="invalid || loading"
           color="success"
         >
-          登録
+          更新
         </v-btn>
-        <div class="text-center mt-7">
-          <router-link
-            color="blue"
-            :to="{ name: 'Login' }"
-          >
-            登録済みの方はこちら
-          </router-link>
-        </div>
       </form>
     </ValidationObserver>
   </v-container>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex"
+
 export default {
-  name: "Register",
+  name: 'EditUser',
   data() {
     return {
       user: {
@@ -122,40 +102,48 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters("users", ["authUser"])
+  },
+
+  created() {
+    this.user = Object.assign({}, this.authUser)
+  }
+
   methods: {
+    ...mapActions("users", ['updateUser']),
+
     submit() {
       this.$refs.observer.validate()
     },
 
-    register() {
+    handleUpdateUser() {
       this.loading = true
-      this.$axios.post("users", { user: this.user })
-        .then(response => {
-          this.loading = false,
-          this.$router.push({ name: 'Login' }),
-          this.$store.dispatch("flashMessages/showMessage",
-            {
-              message: "登録が完了しました",
-              type: "success",
-              status: true
-            },
-          )
-        })
-        .catch(error => {
-          this.loading = false
-          this.$store.dispatch("flashMessages/showMessage",
-            {
-              message: "登録に失敗しました",
-              type: "error",
-              status: true
-            }
-          ),
-          console.log(error)
-        })
+      try {
+        this.updateUser(this.user)
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "更新が完了しました",
+            type: "success",
+            status: true
+          },
+        )
+      }　catch(error) {
+        this.loading = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "更新に失敗しました",
+            type: "error",
+            status: true
+          },
+        )
+        console.log(error)
+      }
     }
   },
 }
 </script>
 
 <style scoped>
+
 </style>
