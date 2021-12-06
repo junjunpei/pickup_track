@@ -27,7 +27,7 @@
         <ValidationProvider
           v-slot="{ errors }"
           name="メールアドレス"
-          rules="required|email|unique"
+          :rules="{ required: true, email: true, unique: authUser.email }"
         >
           <v-text-field
             v-model="user.email"
@@ -39,7 +39,7 @@
         <ValidationProvider
           v-slot="{ errors }"
           name="パスワード"
-          rules="required|min:3"
+          rules="min:3"
           vid="password"
         >
           <v-text-field
@@ -55,7 +55,7 @@
         <ValidationProvider
           v-slot="{ errors }"
           name="パスワード確認"
-          rules="required|min:3|password_confirmed:@password"
+          rules="min:3|password_confirmed:@password"
         >
           <v-text-field
             v-model="user.password_confirmation"
@@ -69,10 +69,10 @@
         </ValidationProvider>
 
         <v-btn
-          @click="register"
+          @click="handleUpdateUser"
           class="mt-4"
           type="submit"
-          :disabled="invalid || loading"
+          :disabled="loading || invalid"
           color="success"
         >
           更新
@@ -108,7 +108,7 @@ export default {
 
   created() {
     this.user = Object.assign({}, this.authUser)
-  }
+  },
 
   methods: {
     ...mapActions("users", ['updateUser']),
@@ -128,7 +128,7 @@ export default {
             status: true
           },
         )
-      }　catch(error) {
+      } catch(error) {
         this.loading = false
         this.$store.dispatch("flashMessages/showMessage",
           {
