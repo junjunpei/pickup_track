@@ -13,8 +13,8 @@ class Api::SessionsController < ApplicationController
     end
   end
 
-  def destroy
-    logout
-    redirect_to root_path, success: (t '.success')
-  end
+  # def destroy
+  #   logout
+  #   redirect_to root_path, success: (t '.success')
+  # end
 end
