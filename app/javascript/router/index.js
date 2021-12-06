@@ -35,13 +35,13 @@ const router = new VueRouter({
       meta: { requiredAuth: true }
     },
     {
-      path: '/my-library',
+      path: '/mylibrary',
       component: MyLibrary,
       name: 'MyLibrary',
       meta: { requiredAuth: true }
     },
     {
-      path: '/user-edit',
+      path: '/user/edit',
       component: UserEdit,
       name: 'UserEdit',
       meta: { requiredAuth: true }
