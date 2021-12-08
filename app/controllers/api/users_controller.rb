@@ -43,15 +43,12 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  # def destroy
-  #   if params[:check] == '1'
-  #     User.find(params[:id]).destroy
-  #     redirect_to new_user_path, success: (t '.success')
-  #   else
-  #     flash.now[:danger] = (t '.fail')
-  #     render :delete
-  #   end
-  # end
+  def destroy
+    user = User.find(current_user.id)
+    user.destroy!
+    # render json: user
+  end
+
   private
 
   def user_params

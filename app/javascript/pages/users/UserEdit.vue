@@ -79,14 +79,24 @@
         </v-btn>
       </form>
     </ValidationObserver>
+    <UserLeave
+      @leave-user="handleLeaveUser"
+      :loading="this.loading"
+    />
   </v-container>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex"
+import UserLeave from "./components/UserLeave"
 
 export default {
   name: 'EditUser',
+
+  components: {
+    UserLeave
+  },
+
   data() {
     return {
       user: {
@@ -111,7 +121,10 @@ export default {
   },
 
   methods: {
-    ...mapActions("users", ['updateUser']),
+    ...mapActions("users", [
+      'updateUser',
+      'leaveUser'
+    ]),
 
     submit() {
       this.$refs.observer.validate()
@@ -121,6 +134,8 @@ export default {
       this.loading = true
       try {
         this.updateUser(this.user)
+        this.loading = false
+        // this.$router.push({ name: 'MyLibrary' })
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "更新が完了しました",
@@ -138,6 +153,31 @@ export default {
           },
         )
         console.log(error)
+      }
+    },
+
+    handleLeaveUser() {
+      this.loading = true
+      try {
+        this.leaveUser()
+        this.loading = false
+        this.$router.push({ name: 'Top' })
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "退会しました、ご利用ありがとうございました",
+            type: "success",
+            status: true
+          }
+        )
+      } catch(error) {
+        this.loading = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "退会に失敗しました",
+            type: "error",
+            status: true
+          }
+        )
       }
     }
   },

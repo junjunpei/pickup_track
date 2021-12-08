@@ -23,14 +23,6 @@ const actions = {
     commit("setAuthUser", userResponse.data)
   },
 
-  updateUser({ commit, state }, user) {
-    return axios.patch(`users/${state.authUser.id}`, user)
-      .then(response => {
-        commit('setUser', response.data)
-      })
-      .catch(error => console.log(error))
-  },
-
   logoutUser({ commit }) {
     localStorage.removeItem("auth_token")
     axios.defaults.headers.common["Authorization"] = ""
@@ -55,6 +47,22 @@ const actions = {
       commit("setAuthUser", null)
       return null
     }
+  },
+
+  updateUser({ commit, state }, user) {
+    return axios.patch(`users/${state.authUser.id}`, user)
+      .then(response => {
+        commit('setAuthUser', response.data)
+      })
+      .catch(error => console.log(error))
+  },
+
+  leaveUser( {commit, state }) {
+    return axios.delete(`users/${state.authUser.id}`)
+      .then(response => {
+        commit('setAuthUser', null)
+      })
+      .catch(error => console.log(error))
   }
 }
 
