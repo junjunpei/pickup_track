@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Logins", type: :system do
+RSpec.describe "Sessions", type: :system do
   let(:user) { create(:user) }
 
   describe 'ログイン' do
@@ -15,7 +15,10 @@ RSpec.describe "Logins", type: :system do
         find('#login').click
         sleep 3
         expect(page).to have_content 'ログインしました'
+        expect(page).to have_content '楽曲検索'
         find('#user-menu').click
+        expect(page).to have_content 'マイライブラリ'
+        expect(page).to have_content 'ユーザー情報編集'
         expect(page).to have_content 'ログアウト'
         expect(page).not_to have_content 'ログイン'
         expect(current_path).to eq root_path
@@ -103,5 +106,31 @@ RSpec.describe "Logins", type: :system do
         expect(current_path).to eq '/login'
       end
     end
+  end
+
+  describe 'ログアウト' do
+    context "ログアウトボタンを押す" do
+      it 'ログアウトに成功する' do
+        visit root_path
+        click_on 'ログイン'
+        expect(current_path).to eq '/login'
+        expect(page).to have_content 'ログイン'
+        fill_in 'メールアドレス', with: user.email
+        fill_in 'パスワード', with: 'pass'
+        find('#login').click
+        sleep 3
+        expect(page).to have_content 'ログインしました'
+        expect(page).to have_content '楽曲検索'
+        find('#user-menu').click
+        expect(page).to have_content 'マイライブラリ'
+        expect(page).to have_content 'ユーザー情報編集'
+        expect(page).to have_content 'ログアウト'
+        find('#logout').click
+        sleep 2
+        expect(page).to have_content 'ログアウトしました'
+        expect(current_path).to eq root_path
+      end
+    end
+
   end
 end
