@@ -15,6 +15,7 @@ RSpec.describe "Logins", type: :system do
         find('#login').click
         sleep 3
         expect(page).to have_content 'ログインしました'
+        find('#user-menu').click
         expect(page).to have_content 'ログアウト'
         expect(page).not_to have_content 'ログイン'
         expect(current_path).to eq root_path

@@ -10,11 +10,14 @@ RSpec.describe "CreateDeleteTracks", type: :system do
         visit "/search"
         fill_in 'Search', with: ENV['SEARCH_TRACK_NAME']
         click_on '検索'
+        sleep 2
         first('#create-icon').click
         sleep 1
         expect(page).to have_content 'マイライブラリに追加しました'
         expect(find('#tracks-list')).to have_selector '#delete-icon'
+        find('#user-menu').click
         click_on 'マイライブラリ'
+        expect(current_path).to eq '/mylibrary'
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
@@ -34,7 +37,9 @@ RSpec.describe "CreateDeleteTracks", type: :system do
         sleep 1
         expect(page).to have_content 'マイライブラリから削除しました'
         expect(find('#tracks-list')).to have_selector '#create-icon'
+        find('#user-menu').click
         click_on 'マイライブラリ'
+        expect(current_path).to eq '/mylibrary'
         expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_NAME']
         expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
         expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
@@ -47,7 +52,7 @@ RSpec.describe "CreateDeleteTracks", type: :system do
 
     context '表示されている曲を削除する' do
       it '正常に削除され、プラスアイコンに変わり、再読み込みをするとその曲が表示されていない' do
-        visit "/my-library"
+        visit "/mylibrary"
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
@@ -65,7 +70,7 @@ RSpec.describe "CreateDeleteTracks", type: :system do
 
     context '表示されている曲を削除し、再度追加する' do
       it '正常に追加され、ゴミ箱アイコンに戻り、再読み込みをしてもその曲が表示されている' do
-        visit "/my-library"
+        visit "/mylibrary"
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
@@ -89,7 +94,7 @@ RSpec.describe "CreateDeleteTracks", type: :system do
       before { track_create(ENV['SEARCH_TRACK_NAME3']) }
 
       it '検索された曲のみが表示されている' do
-        visit "/my-library"
+        visit "/mylibrary"
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
@@ -119,7 +124,7 @@ RSpec.describe "CreateDeleteTracks", type: :system do
       before { track_create(ENV['SEARCH_TRACK_NAME3']) }
 
       it '検索された曲のみが表示されている' do
-        visit "/my-library"
+        visit "/mylibrary"
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
@@ -149,7 +154,7 @@ RSpec.describe "CreateDeleteTracks", type: :system do
       before { track_create(ENV['SEARCH_TRACK_NAME3']) }
 
       it '検索された曲のみが表示されている' do
-        visit "/my-library"
+        visit "/mylibrary"
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
