@@ -21,7 +21,8 @@
         <v-card-title class="text-h5">
           退会する
         </v-card-title>
-        <v-divider></v-divider>
+
+        <v-divider />
 
         <v-card-text class="red--text">
           退会される場合は以下の注意事項をよくお読みいただき、
@@ -35,6 +36,7 @@
           ・再度ご利用いただく際は、会員登録が必要です。
           また、楽曲も再度追加し直す必要がございます。
         </v-card-text>
+
         <v-checkbox
           v-model="checkbox"
           class="pl-5"
@@ -46,8 +48,11 @@
             </div>
           </template>
         </v-checkbox>
+
         <v-card-actions>
-          <v-spacer></v-spacer>
+
+          <v-spacer />
+
           <v-btn
             color="success"
             text
