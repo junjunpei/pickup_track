@@ -41,6 +41,7 @@
           v-model="checkbox"
           class="pl-5"
           color="info"
+          id="check-box"
         >
           <template v-slot:label>
             <div class="info--text">
