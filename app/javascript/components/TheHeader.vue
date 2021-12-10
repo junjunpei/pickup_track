@@ -26,25 +26,60 @@
     <v-spacer />
 
     <template v-if="authUser">
-      <v-btn
-        text
-        :to="{ name: 'MyLibrary' }"
-        class="mr-3"
+      <v-menu
+        offset-y
+        transition="scale-transition"
       >
-        マイライブラリ
-      </v-btn>
+        <template v-slot:activator="{ on: menu, attrs }">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on: tooltip }">
+              <v-icon
+                x-large
+                v-bind="attrs"
+                v-on="{ ...tooltip, ...menu }"
+                class="mr-12"
+                id="user-menu"
+              >
+                mdi-account
+              </v-icon>
+            </template>
+            <span>ユーザーメニュー</span>
+          </v-tooltip>
+        </template>
+        <v-list>
+          <v-list-item
+            :to="{ name: 'MyLibrary' }"
+            id="my-library"
+          >
+            <v-list-item-title>
+              マイライブラリ
+            </v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            :to="{ name: 'UserEdit' }"
+            id="user-edit"
+          >
+            <v-list-item-title>
+              ユーザー情報編集
+            </v-list-item-title>
+          </v-list-item>
+          <v-divider />
+          <v-list-item
+            @click="handleLogout"
+            id="logout"
+          >
+            <v-list-item-title class="error--text">
+              ログアウト
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
       <v-btn
         text
         :to="{ name: 'Search' }"
-        class="mr-3"
+        class="mr-5"
       >
         楽曲検索
-      </v-btn>
-      <v-btn
-        text
-        @click="handleLogout"
-      >
-        ログアウト
       </v-btn>
     </template>
     <template v-else>

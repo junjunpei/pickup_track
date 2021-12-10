@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[create registered? me]
+  skip_before_action :require_login, only: %i[create registered? me update]
   skip_before_action :verify_authenticity_token
-  before_action :authenticate!, only: %i[me]
+  before_action :authenticate!, only: %i[me update]
 
   # def new
   #   return redirect_to root_path, info: (t 'defaults.message.already_logged_in') if logged_in?
@@ -35,27 +35,20 @@ class Api::UsersController < ApplicationController
   # end
 
   def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-      redirect_to root_path, success: (t '.success')
+    user = User.find(current_user.id)
+    if user.update(user_params)
+      render json: user
     else
-      flash.now[:danger] = (t '.fail')
-      render edit
+      render json: user.errors, status: :bad_request
     end
   end
 
-  # def delete
-  # end
+  def destroy
+    user = User.find(current_user.id)
+    user.destroy!
+    # render json: user
+  end
 
-  # def destroy
-  #   if params[:check] == '1'
-  #     User.find(params[:id]).destroy
-  #     redirect_to new_user_path, success: (t '.success')
-  #   else
-  #     flash.now[:danger] = (t '.fail')
-  #     render :delete
-  #   end
-  # end
   private
 
   def user_params

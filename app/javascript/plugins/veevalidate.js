@@ -34,12 +34,16 @@ extend('password_confirmed', {
   message: "パスワードと一致しません"
 });
 
-const isUnique = (value) => {
-  return axios.post('/validate/email', { email: value }).then((response) => {
-    return {
-      valid: response.data === false
-    };
-  });
+const isUnique = (value, authUserEmail) => {
+  return axios.post('/validate/email', { email: value })
+    .then((response) => {
+      const user = response.data
+      console.log(user.email)
+      console.log(authUserEmail[0])
+      return {
+        valid: user === false || user.email === authUserEmail[0]
+      };
+    });
 };
 
 extend('unique', {

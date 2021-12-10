@@ -1,10 +1,10 @@
 <template>
   <v-container
-    id="register-form"
+    id="user-edit-form"
     class="text-center form-group col-lg-6 offset-lg-3 mt-8"
   >
     <div class="h3">
-      ユーザー登録
+      ユーザー情報編集
     </div>
     <ValidationObserver
       ref="observer"
@@ -27,7 +27,7 @@
         <ValidationProvider
           v-slot="{ errors }"
           name="メールアドレス"
-          rules="required|email|unique"
+          :rules="{ required: true, email: true, unique: authUser.email }"
         >
           <v-text-field
             v-model="user.email"
@@ -39,7 +39,7 @@
         <ValidationProvider
           v-slot="{ errors }"
           name="パスワード"
-          rules="required|min:3"
+          rules="min:3"
           vid="password"
         >
           <v-text-field
@@ -55,7 +55,7 @@
         <ValidationProvider
           v-slot="{ errors }"
           name="パスワード確認"
-          rules="required|min:3|password_confirmed:@password"
+          rules="min:3|password_confirmed:@password"
         >
           <v-text-field
             v-model="user.password_confirmation"
@@ -67,46 +67,36 @@
             label="パスワード確認"
           ></v-text-field>
         </ValidationProvider>
-        <!-- <ValidationProvider
-          v-slot="{ errors }"
-          rules="required"
-          name="checkbox"
-        >
-          <v-checkbox
-            v-model="checkbox"
-            :error-messages="errors"
-            value="1"
-            label="Option"
-            type="checkbox"
-            required
-          ></v-checkbox>
-        </ValidationProvider> -->
 
         <v-btn
-          @click="register"
+          @click="handleUpdateUser"
           class="mt-4"
           type="submit"
-          :disabled="invalid || loading"
+          :disabled="loading || invalid"
           color="success"
         >
-          登録
+          更新
         </v-btn>
-        <div class="text-center mt-7">
-          <router-link
-            color="blue"
-            :to="{ name: 'Login' }"
-          >
-            登録済みの方はこちら
-          </router-link>
-        </div>
       </form>
     </ValidationObserver>
+    <UserLeave
+      @leave-user="handleLeaveUser"
+      :loading="this.loading"
+    />
   </v-container>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex"
+import UserLeave from "./components/UserLeave"
+
 export default {
-  name: "Register",
+  name: 'EditUser',
+
+  components: {
+    UserLeave
+  },
+
   data() {
     return {
       user: {
@@ -122,40 +112,78 @@ export default {
     }
   },
 
+  computed: {
+    ...mapGetters("users", ["authUser"])
+  },
+
+  created() {
+    this.user = Object.assign({}, this.authUser)
+  },
+
   methods: {
+    ...mapActions("users", [
+      'updateUser',
+      'leaveUser'
+    ]),
+
     submit() {
       this.$refs.observer.validate()
     },
 
-    register() {
+    handleUpdateUser() {
       this.loading = true
-      this.$axios.post("users", { user: this.user })
-        .then(response => {
-          this.loading = false,
-          this.$router.push({ name: 'Login' }),
-          this.$store.dispatch("flashMessages/showMessage",
-            {
-              message: "登録が完了しました",
-              type: "success",
-              status: true
-            },
-          )
-        })
-        .catch(error => {
-          this.loading = false
-          this.$store.dispatch("flashMessages/showMessage",
-            {
-              message: "登録に失敗しました",
-              type: "error",
-              status: true
-            }
-          ),
-          console.log(error)
-        })
+      try {
+        this.updateUser(this.user)
+        this.loading = false
+        // this.$router.push({ name: 'MyLibrary' })
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "更新が完了しました",
+            type: "success",
+            status: true
+          },
+        )
+      } catch(error) {
+        this.loading = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "更新に失敗しました",
+            type: "error",
+            status: true
+          },
+        )
+        console.log(error)
+      }
+    },
+
+    handleLeaveUser() {
+      this.loading = true
+      try {
+        this.leaveUser()
+        this.loading = false
+        this.$router.push({ name: 'Top' })
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "退会しました、ご利用ありがとうございました",
+            type: "success",
+            status: true
+          }
+        )
+      } catch(error) {
+        this.loading = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "退会に失敗しました",
+            type: "error",
+            status: true
+          }
+        )
+      }
     }
   },
 }
 </script>
 
 <style scoped>
+
 </style>

@@ -26,6 +26,7 @@ RSpec.describe "SearchTracks", type: :system do
       it '検索ボタンが押せなくなっている' do
         visit root_path
         click_on '楽曲検索'
+        expect(current_path).to eq '/search'
         fill_in 'Search', with: ''
         expect(page).to have_button '検索', disabled: true
       end
@@ -35,6 +36,7 @@ RSpec.describe "SearchTracks", type: :system do
       it '「検索結果がありません」というフラッシュメッセージが出る' do
         visit root_path
         click_on '楽曲検索'
+        expect(current_path).to eq '/search'
         fill_in 'Search', with: 'agohowhgowhigwghwio'
         click_on '検索'
         sleep 3

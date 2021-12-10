@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-  baseURL: 'api'
+  baseURL: '/api'
 })
 
 if (localStorage.auth_token) {
