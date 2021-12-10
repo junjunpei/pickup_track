@@ -105,6 +105,7 @@ RSpec.describe "UserEdits", type: :system do
       expect(page).to have_field '名前', with: user.name
       expect(page).to have_field 'メールアドレス', with: user.email
       fill_in 'メールアドレス', with: 'other'
+      sleep 1
       expect(page).to have_content 'メールアドレスの形式でご入力ください'
       expect(page).to have_button '更新', disabled: true
     end
