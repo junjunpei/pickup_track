@@ -60,32 +60,9 @@ RSpec.describe "CreateDeleteTracks", type: :system do
         find('#delete-icon').click
         sleep 1
         expect(page).to have_content 'マイライブラリから削除しました'
-        expect(find('#tracks-list')).to have_selector '#create-icon'
-        visit current_path
         expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_NAME']
         expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
         expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
-      end
-    end
-
-    context '表示されている曲を削除し、再度追加する' do
-      it '正常に追加され、ゴミ箱アイコンに戻り、再読み込みをしてもその曲が表示されている' do
-        visit "/mylibrary"
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
-        expect(find('#tracks-list')).to have_selector '#delete-icon'
-        find('#delete-icon').click
-        expect(page).to have_content 'マイライブラリから削除しました'
-        expect(find('#tracks-list')).to have_selector '#create-icon'
-        find('#create-icon').click
-        sleep 1
-        expect(page).to have_content 'マイライブラリに追加しました'
-        expect(find('#tracks-list')).to have_selector '#delete-icon'
-        visit current_path
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
       end
     end
 

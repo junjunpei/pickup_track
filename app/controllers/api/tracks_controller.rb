@@ -22,16 +22,16 @@ class Api::TracksController < ApplicationController
     render json: tracks
   end
 
-  def my_library
-    uri = URI.parse("#{ENV['TRACK_URL']}/#{params[:track_id]}")
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    header = { 'Authorization' => "Bearer #{@bearer_token}", 'Accept-Language' => 'ja;q=1' }
-    uri.query = URI.encode_www_form({ market: 'JP' })
-    response = http.get(uri.request_uri, header)
-    my_track = JSON.parse(response.body)
-    render json: my_track
-  end
+  # def my_library
+  #   uri = URI.parse("#{ENV['TRACK_URL']}/#{params[:track_id]}")
+  #   http = Net::HTTP.new(uri.host, uri.port)
+  #   http.use_ssl = true
+  #   header = { 'Authorization' => "Bearer #{@bearer_token}", 'Accept-Language' => 'ja;q=1' }
+  #   uri.query = URI.encode_www_form({ market: 'JP' })
+  #   response = http.get(uri.request_uri, header)
+  #   my_track = JSON.parse(response.body)
+  #   render json: my_track
+  # end
 
   def index
     @my_tracks = current_user.tracks.all.order(:id)
