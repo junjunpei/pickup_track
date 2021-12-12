@@ -14,7 +14,8 @@
         <v-list-item-avatar class="mr-3">
           <v-img
             alt="Track image"
-            :src="track.album.images[2].url"
+            :src="track.album.images[0].url"
+            v-model="track.image_url"
           ></v-img>
         </v-list-item-avatar>
 
@@ -35,7 +36,7 @@
           </v-icon>
           <v-icon
             v-else
-            @click="handleCreateTrack(track.id)"
+            @click="handleCreateTrack(track)"
             color="white"
             :disabled="submitting"
             id="create-icon"

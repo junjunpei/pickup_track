@@ -1,40 +1,58 @@
 <template>
-  <div
+  <v-container
     id="my-library"
-    class="col-lg-6 offset-lg-3"
   >
-    <v-container>
-      <div class="h2 mt-1 mb-5">
-        マイライブラリ
-      </div>
-      <v-text-field
-        v-model="search"
-        type="text"
-        filled
-        clearable
-        label="Search"
-        clear-icon="mdi-close-thick"
-        @click:clear="clearSearch"
+    <v-row align="center">
+      <v-col
+        lg="6"
+        offset-lg="3"
+        md="8"
+        offset-md="2"
+        sm="10"
+        offset-sm="1"
+        xs="10"
+        offset-xs="1"
       >
-        <template v-slot:prepend-inner>
-          <v-icon>mdi-magnify</v-icon>
-        </template>
-      </v-text-field>
-      <TracksListCard
-        :tracks="searchedTracks"
-        :library="myLibrary"
-        :submitting="submitting"
-        @create-track="handleCreateTrack"
-        @delete-track="handleDeleteTrack"
-      >
-      </TracksListCard>
-    </v-container>
-  </div>
+        <div class="mt-4 mb-5 d-flex justify-content-between">
+          <h2>
+            マイライブラリ
+          </h2>
+          <PickupTrack
+            :track="pickupTrack"
+            :loading="loading"
+            @pickup-track="handlePickupTrack"
+          />
+        </div>
+        <v-text-field
+          v-model="search"
+          type="text"
+          filled
+          clearable
+          label="Search"
+          clear-icon="mdi-close-thick"
+          @click:clear="clearSearch"
+        >
+          <template v-slot:prepend-inner>
+            <v-icon>mdi-magnify</v-icon>
+          </template>
+        </v-text-field>
+        <TracksListCard
+          :tracks="searchedTracks"
+          :library="myLibrary"
+          :submitting="loading"
+          @create-track="handleCreateTrack"
+          @delete-track="handleDeleteTrack"
+        >
+        </TracksListCard>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex"
 import TracksListCard from "./components/TracksListCard"
+import PickupTrack from "./components/PickupTrack"
 
 export default {
   name: "MyLibrary",
@@ -43,12 +61,14 @@ export default {
     return {
       myLibraryTracks: [],
       search: '',
-      submitting: false
+      loading: false,
+      pickupTrack: '',
     }
   },
 
   components: {
-    TracksListCard
+    TracksListCard,
+    PickupTrack
   },
 
   computed: {
@@ -62,6 +82,10 @@ export default {
       return this.sortTracks.filter(track => {
         return track.name.toLowerCase().indexOf(this.search.toLowerCase()) != -1 || track.artists[0].name.toLowerCase().indexOf(this.search.toLowerCase()) != -1 || track.album.name.toLowerCase().indexOf(this.search.toLowerCase()) != -1
       })
+    },
+
+    setPickupTrack() {
+      this.pickupTrack = this.searchedTracks[Math.floor(Math.random() * this.searchedTracks.length)]
     }
   },
 
@@ -156,6 +180,12 @@ export default {
 
     clearSearch() {
       this.search = ''
+    },
+
+    handlePickupTrack() {
+      this.loading = true
+      this.pickupTrack = this.searchedTracks[Math.floor(Math.random() * this.searchedTracks.length)]
+      this.loading = false
     }
   }
 }
