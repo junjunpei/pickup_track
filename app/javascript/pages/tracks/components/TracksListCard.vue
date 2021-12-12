@@ -46,6 +46,7 @@
           </v-list-item-icon>
         </v-list-item>
       </div>
+
       <div v-else-if="this.$route.name === 'MyLibrary'">
         <v-list-item
           v-for="(track, index) in this.tracks"
@@ -65,22 +66,12 @@
 
           <v-list-item-icon class="mr-1">
             <v-icon
-              v-if="added(track.track_id)"
               @click="handleDeleteTrack(track)"
               color="white"
               :disabled="submitting"
               id="delete-icon"
             >
               mdi-delete
-            </v-icon>
-            <v-icon
-              v-else
-              @click="handleAddTrack(track)"
-              color="white"
-              :disabled="submitting"
-              id="create-icon"
-            >
-              mdi-plus
             </v-icon>
           </v-list-item-icon>
         </v-list-item>

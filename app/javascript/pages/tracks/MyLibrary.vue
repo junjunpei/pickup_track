@@ -24,7 +24,6 @@
         :tracks="searchedTracks"
         :library="myLibrary"
         :submitting="submitting"
-        @create-track="handleAddTrack"
         @delete-track="handleDeleteTrack"
       >
         <template
