@@ -39,7 +39,7 @@ class Api::TracksController < ApplicationController
   end
 
   def create
-    track = current_user.tracks.build(track_id: params[:track_id])
+    track = current_user.tracks.build(track_params)
 
     if track.save
       render json: track
@@ -70,5 +70,9 @@ class Api::TracksController < ApplicationController
 
   def set_track
     @track = current_user.tracks.find(params[:id])
+  end
+
+  def track_params
+    params.require(:track).permit(:track_id, :name, :artist_name, :album_name, :image_url)
   end
 end

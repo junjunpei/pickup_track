@@ -7,43 +7,84 @@
       <slot
         name="subheader"
       ></slot>
-      <v-list-item
-        v-for="(track, index) in this.tracks"
-        :key="index"
-      >
-        <v-list-item-avatar class="mr-3">
-          <v-img
-            alt="Track image"
-            :src="track.album.images[2].url"
-          ></v-img>
-        </v-list-item-avatar>
+      <div v-if="this.$route.name === 'Search'">
+        <v-list-item
+          v-for="(track, index) in this.tracks"
+          :key="index"
+        >
+          <v-list-item-avatar class="ml-1 mr-3">
+            <v-img
+              alt="Track image"
+              :src="track.album.images[2].url"
+            ></v-img>
+          </v-list-item-avatar>
 
-        <v-list-item-content>
-          <v-list-item-title v-text="track.name"></v-list-item-title>
-          <v-list-item-subtitle v-text="`${track.artists[0].name} - ${track.album.name}`"></v-list-item-subtitle>
-        </v-list-item-content>
+          <v-list-item-content>
+            <v-list-item-title v-text="track.name"></v-list-item-title>
+            <v-list-item-subtitle v-text="`${track.artists[0].name} - ${track.album.name}`"></v-list-item-subtitle>
+          </v-list-item-content>
 
-        <v-list-item-icon class="mr-4">
-          <v-icon
-            v-if="added(track.id)"
-            @click="handleDeleteTrack(track.id)"
-            color="white"
-            :disabled="submitting"
-            id="delete-icon"
-          >
-            mdi-delete
-          </v-icon>
-          <v-icon
-            v-else
-            @click="handleCreateTrack(track.id)"
-            color="white"
-            :disabled="submitting"
-            id="create-icon"
-          >
-            mdi-plus
-          </v-icon>
-        </v-list-item-icon>
-      </v-list-item>
+          <v-list-item-icon class="mr-1">
+            <v-icon
+              v-if="added(track.id)"
+              @click="handleDeleteTrack(track)"
+              color="white"
+              :disabled="submitting"
+              id="delete-icon"
+            >
+              mdi-delete
+            </v-icon>
+            <v-icon
+              v-else
+              @click="handleAddTrack(track)"
+              color="white"
+              :disabled="submitting"
+              id="create-icon"
+            >
+              mdi-plus
+            </v-icon>
+          </v-list-item-icon>
+        </v-list-item>
+      </div>
+      <div v-else-if="this.$route.name === 'MyLibrary'">
+        <v-list-item
+          v-for="(track, index) in this.tracks"
+          :key="index"
+        >
+          <v-list-item-avatar class="ml-1 mr-3">
+            <v-img
+              alt="Track image"
+              :src="track.image_url"
+            ></v-img>
+          </v-list-item-avatar>
+
+          <v-list-item-content>
+            <v-list-item-title v-text="track.name"></v-list-item-title>
+            <v-list-item-subtitle v-text="`${track.artist_name} - ${track.album_name}`"></v-list-item-subtitle>
+          </v-list-item-content>
+
+          <v-list-item-icon class="mr-1">
+            <v-icon
+              v-if="added(track.track_id)"
+              @click="handleDeleteTrack(track)"
+              color="white"
+              :disabled="submitting"
+              id="delete-icon"
+            >
+              mdi-delete
+            </v-icon>
+            <v-icon
+              v-else
+              @click="handleAddTrack(track)"
+              color="white"
+              :disabled="submitting"
+              id="create-icon"
+            >
+              mdi-plus
+            </v-icon>
+          </v-list-item-icon>
+        </v-list-item>
+      </div>
     </v-list>
   </v-card>
 </template>
@@ -80,12 +121,12 @@ export default {
   },
 
   methods: {
-    handleCreateTrack(trackId) {
-      this.$emit('create-track', trackId)
+    handleAddTrack(addTrack) {
+      this.$emit('add-track', addTrack)
     },
 
-    handleDeleteTrack(trackId) {
-      this.$emit('delete-track', trackId)
+    handleDeleteTrack(deleteTrack) {
+      this.$emit('delete-track', deleteTrack)
     }
   }
 }

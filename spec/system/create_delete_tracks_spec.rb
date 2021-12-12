@@ -51,7 +51,7 @@ RSpec.describe "CreateDeleteTracks", type: :system do
     before { track_create(ENV['SEARCH_TRACK_NAME']) }
 
     context '表示されている曲を削除する' do
-      it '正常に削除され、プラスアイコンに変わり、再読み込みをするとその曲が表示されていない' do
+      it '正常に削除され、プラスアイコンに変わり、その曲が表示されていない' do
         visit "/mylibrary"
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']

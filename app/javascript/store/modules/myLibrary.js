@@ -33,16 +33,16 @@ const actions = {
       .catch(error => console.log(error.status))
   },
 
-  createTrack({ commit }, trackId) {
-    return axios.post('tracks', { track_id: trackId})
+  addTrack({ commit }, addTrack) {
+    return axios.post('tracks', addTrack)
       .then(response => {
         commit('addTrack', response.data)
       })
   },
 
-  deleteTrack({ commit, state }, trackId) {
+  deleteTrack({ commit, state }, track) {
     const deleteTrack = state.myLibrary.filter(myTrack => {
-      return myTrack.track_id.indexOf(trackId) != -1
+      return myTrack.track_id.indexOf(track.track_id) != -1
     })
 
     return axios.delete(`tracks/${deleteTrack[0].id}`, deleteTrack)
