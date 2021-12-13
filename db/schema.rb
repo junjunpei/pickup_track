@@ -10,13 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_28_084331) do
+ActiveRecord::Schema.define(version: 2021_12_12_073400) do
 
   create_table "tracks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.string "track_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "name"
+    t.text "artist_name"
+    t.text "album_name"
+    t.text "image_url"
     t.index ["user_id", "track_id"], name: "index_tracks_on_user_id_and_track_id", unique: true
     t.index ["user_id"], name: "index_tracks_on_user_id"
   end

@@ -42,7 +42,7 @@
         :tracks="displayTracks"
         :library="myLibrary"
         :submitting="submitting"
-        @create-track="handleCreateTrack"
+        @add-track="handleAddTrack"
         @delete-track="handleDeleteTrack"
       >
         <template v-slot:subheader>
@@ -83,7 +83,14 @@ export default {
       lastPage: 1,
       displayTracks: [],
       pageSize: 10,
-      submitting: false
+      submitting: false,
+      track: {
+        track_id: '',
+        name: '',
+        artist_name: '',
+        album_name: '',
+        image_url: ''
+      }
     }
   },
 
@@ -112,7 +119,7 @@ export default {
     ...mapActions("searchTracks", ["searchTracks"]),
     ...mapActions("myLibrary", [
       "fetchTracks",
-      "createTrack",
+      "addTrack",
       "deleteTrack"
     ]),
 
@@ -155,10 +162,15 @@ export default {
       this.displayTracks = this.tracks.slice(this.pageSize*(this.page - 1), this.pageSize*(this.page))
     },
 
-    async handleCreateTrack(trackId) {
+    async handleAddTrack(addTrack) {
+      this.track.track_id = addTrack.id
+      this.track.name = addTrack.name
+      this.track.artist_name = addTrack.artists[0].name
+      this.track.album_name = addTrack.album.name
+      this.track.image_url = addTrack.album.images[0].url
       this.submitting = true
       try {
-        await this.createTrack(trackId)
+        await this.addTrack(this.track)
         this.submitting = false
         this.$store.dispatch("flashMessages/showMessage",
           {
@@ -180,10 +192,15 @@ export default {
       }
     },
 
-    async handleDeleteTrack(trackId) {
+    async handleDeleteTrack(deleteTrack) {
+      this.track.track_id = deleteTrack.id
+      this.track.name = deleteTrack.name
+      this.track.artist_name = deleteTrack.artists[0].name
+      this.track.album_name = deleteTrack.album.name
+      this.track.image_url = deleteTrack.album.images[0].url
       this.submitting = true
       try {
-        await this.deleteTrack(trackId)
+        await this.deleteTrack(this.track)
         this.submitting = false
         this.$store.dispatch("flashMessages/showMessage",
           {
