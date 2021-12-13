@@ -22,16 +22,16 @@ class Api::TracksController < ApplicationController
     render json: tracks
   end
 
-  def my_library
-    uri = URI.parse("#{ENV['TRACK_URL']}/#{params[:track_id]}")
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    header = { 'Authorization' => "Bearer #{@bearer_token}", 'Accept-Language' => 'ja;q=1' }
-    uri.query = URI.encode_www_form({ market: 'JP' })
-    response = http.get(uri.request_uri, header)
-    my_track = JSON.parse(response.body)
-    render json: my_track
-  end
+  # def my_library
+  #   uri = URI.parse("#{ENV['TRACK_URL']}/#{params[:track_id]}")
+  #   http = Net::HTTP.new(uri.host, uri.port)
+  #   http.use_ssl = true
+  #   header = { 'Authorization' => "Bearer #{@bearer_token}", 'Accept-Language' => 'ja;q=1' }
+  #   uri.query = URI.encode_www_form({ market: 'JP' })
+  #   response = http.get(uri.request_uri, header)
+  #   my_track = JSON.parse(response.body)
+  #   render json: my_track
+  # end
 
   def index
     @my_tracks = current_user.tracks.all.order(:id)
@@ -39,7 +39,7 @@ class Api::TracksController < ApplicationController
   end
 
   def create
-    track = current_user.tracks.build(track_id: params[:track_id])
+    track = current_user.tracks.build(track_params)
 
     if track.save
       render json: track
@@ -70,5 +70,9 @@ class Api::TracksController < ApplicationController
 
   def set_track
     @track = current_user.tracks.find(params[:id])
+  end
+
+  def track_params
+    params.require(:track).permit(:track_id, :name, :artist_name, :album_name, :image_url)
   end
 end

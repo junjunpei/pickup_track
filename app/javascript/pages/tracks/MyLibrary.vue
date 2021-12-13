@@ -39,10 +39,25 @@
         <TracksListCard
           :tracks="searchedTracks"
           :library="myLibrary"
-          :submitting="loading"
-          @create-track="handleCreateTrack"
+          :submitting="submitting"
           @delete-track="handleDeleteTrack"
         >
+          <template
+            v-if="myLibrary.length === 0"
+            v-slot:subheader
+          >
+            <v-subheader>
+              まだ追加された曲はありません
+            </v-subheader>
+          </template>
+          <template
+            v-else
+            v-slot:subheader
+          >
+            <v-subheader>
+              {{ searchedTracks.length }}曲
+            </v-subheader>
+          </template>
         </TracksListCard>
       </v-col>
     </v-row>
@@ -59,10 +74,11 @@ export default {
 
   data() {
     return {
-      myLibraryTracks: [],
+      // myLibraryTracks: [],
       search: '',
       loading: false,
       pickupTrack: '',
+      submitting: false
     }
   },
 
@@ -74,48 +90,48 @@ export default {
   computed: {
     ...mapGetters("myLibrary", ["myLibrary"]),
 
-    sortTracks() {
-      return this.myLibraryTracks.sort((a,b) => a.index - b.index)
-    },
+    // sortTracks() {
+    //   return this.myLibraryTracks.sort((a,b) => a.index - b.index)
+    // },
 
     searchedTracks() {
-      return this.sortTracks.filter(track => {
-        return track.name.toLowerCase().indexOf(this.search.toLowerCase()) != -1 || track.artists[0].name.toLowerCase().indexOf(this.search.toLowerCase()) != -1 || track.album.name.toLowerCase().indexOf(this.search.toLowerCase()) != -1
+      return this.myLibrary.filter(track => {
+        return track.name.toLowerCase().indexOf(this.search.toLowerCase()) != -1 || track.artist_name.toLowerCase().indexOf(this.search.toLowerCase()) != -1 || track.album_name.toLowerCase().indexOf(this.search.toLowerCase()) != -1
       })
     },
 
-    setPickupTrack() {
-      this.pickupTrack = this.searchedTracks[Math.floor(Math.random() * this.searchedTracks.length)]
-    }
+    // setPickupTrack() {
+    //   this.pickupTrack = this.searchedTracks[Math.floor(Math.random() * this.searchedTracks.length)]
+    // }
   },
 
-  watch: {
-    myLibrary() {
-      const added = this.myLibraryTracks.some(myLibraryTrack => {
-        return this.myLibrary.indexOf(myLibraryTrack.id)
-      })
+  // watch: {
+  //   // myLibrary() {
+  //   //   const added = this.myLibraryTracks.some(myLibraryTrack => {
+  //   //     return this.myLibrary.indexOf(myLibraryTrack.id)
+  //   //   })
 
-      this.myLibrary.forEach((myTrack, index) => {
-        this.$axios.post("tracks/my-library",{ track_id: myTrack.track_id })
-          .then(response => {
-            if (!added) {
-              response.data["index"] = index
-              this.myLibraryTracks.push(response.data)
-            }
-          })
-          .catch(error => {
-            this.$store.dispatch("flashMessages/showMessage",
-              {
-                message: "ライブラリの読み込みに失敗しました",
-                type: "error",
-                status: true
-              }
-            )
-            console.log(error)
-          })
-      })
-    }
-  },
+  //   //   this.myLibrary.forEach((myTrack, index) => {
+  //   //     this.$axios.post("tracks/my-library",{ track_id: myTrack.track_id })
+  //   //       .then(response => {
+  //   //         if (!added) {
+  //   //           response.data["index"] = index
+  //   //           this.myLibraryTracks.push(response.data)
+  //   //         }
+  //   //       })
+  //   //       .catch(error => {
+  //   //         this.$store.dispatch("flashMessages/showMessage",
+  //   //           {
+  //   //             message: "ライブラリの読み込みに失敗しました",
+  //   //             type: "error",
+  //   //             status: true
+  //   //           }
+  //   //         )
+  //   //         console.log(error)
+  //   //       })
+  //   //   })
+  //   // }
+  // },
 
   created() {
     this.fetchTracks()
@@ -124,39 +140,39 @@ export default {
   methods: {
     ...mapActions("myLibrary", [
       "fetchTracks",
-      "createTrack",
+      // "addTrack",
       "deleteTrack",
     ]),
 
-    async handleCreateTrack(trackId) {
-      this.submitting = true
-      try {
-        await this.createTrack(trackId)
-        this.submitting = false
-        this.$store.dispatch("flashMessages/showMessage",
-          {
-            message: "マイライブラリに追加しました",
-            type: "blue lighten-1",
-            status: true
-          }
-        )
-      } catch(error) {
-        this.submitting = false
-        this.$store.dispatch("flashMessages/showMessage",
-          {
-            message: "追加に失敗しました",
-            type: "error",
-            status: true
-          }
-        )
-        console.log(error)
-      }
-    },
+    // async handleAddTrack(addTrack) {
+    //   this.submitting = true
+    //   try {
+    //     await this.addTrack(addTrack)
+    //     this.submitting = false
+    //     this.$store.dispatch("flashMessages/showMessage",
+    //       {
+    //         message: "マイライブラリに追加しました",
+    //         type: "blue lighten-1",
+    //         status: true
+    //       }
+    //     )
+    //   } catch(error) {
+    //     this.submitting = false
+    //     this.$store.dispatch("flashMessages/showMessage",
+    //       {
+    //         message: "追加に失敗しました",
+    //         type: "error",
+    //         status: true
+    //       }
+    //     )
+    //     console.log(error)
+    //   }
+    // },
 
-    async handleDeleteTrack(trackId) {
+    async handleDeleteTrack(deleteTrack) {
       this.submitting = true
       try {
-        await this.deleteTrack(trackId)
+        await this.deleteTrack(deleteTrack)
         this.submitting = false
         this.$store.dispatch("flashMessages/showMessage",
           {

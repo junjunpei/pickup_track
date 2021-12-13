@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    max-width="500"
+    max-width="400"
     v-model="dialog"
   >
     <template v-slot:activator="{ on, attrs }">
@@ -11,31 +11,51 @@
         v-on="on"
         @click="handlePickupTrack"
       >
+        <v-icon>mdi-music-circle-outline</v-icon>
         ピックアップ
       </v-btn>
+      <v-fab-transition>
+        <v-btn
+          v-show="visible"
+          color="success"
+          fab
+          fixed
+          bottom
+          right
+          large
+          v-bind="attrs"
+          v-on="on"
+          @click="handlePickupTrack"
+        >
+          <v-icon>mdi-music-note</v-icon>
+        </v-btn>
+      </v-fab-transition>
     </template>
     <v-card>
       <v-card-title class="text-h5">
-        ピックアップ結果
+        結果
       </v-card-title>
 
       <v-divider />
 
       <div class="d-flex flex-column justify-space-between align-center">
         <v-img
-          max-height="300"
-          max-width="300"
-          :src="this.track.album.images[0].url"
+          max-height="250"
+          max-width="250"
+          :src="this.track.image_url"
         />
         <h3
-          class="mt-7"
+          class="mt-3 mx-6"
           v-text="this.track.name"
         ></h3>
-        <p v-text="`${this.track.artists[0].name} - ${this.track.album.name}`"></p>
+        <p
+          v-text="`${this.track.artist_name} - ${this.track.album_name}`"
+          class="mx-6"
+        >
+        </p>
       </div>
 
       <v-card-actions>
-        <v-spacer />
         <v-btn
           color="primary"
           text
@@ -43,13 +63,14 @@
         >
           この曲を歌う！
         </v-btn>
+        <v-spacer />
         <v-btn
           color="success"
           text
           :disabled="loading"
           @click="handlePickupTrack"
         >
-          再ピックアップ
+          もう一度！
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -74,8 +95,13 @@ export default {
 
   data() {
     return {
-      dialog: false
+      dialog: false,
+      visible: false
     }
+  },
+
+  created() {
+    window.addEventListener("scroll", this.handleShowButton);
   },
 
   methods: {
@@ -85,6 +111,14 @@ export default {
 
     handleClosePickupModal() {
       this.dialog = false
+    },
+
+    handleShowButton() {
+      if (window.scrollY > 200) {
+        this.visible = true
+      } else {
+        this.visible = false
+      }
     }
   }
 }
