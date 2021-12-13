@@ -34,6 +34,14 @@
             まだ追加された曲はありません
           </v-subheader>
         </template>
+        <template
+          v-else
+          v-slot:subheader
+        >
+          <v-subheader>
+            {{ searchedTracks.length }}曲
+          </v-subheader>
+        </template>
       </TracksListCard>
     </v-container>
   </div>
