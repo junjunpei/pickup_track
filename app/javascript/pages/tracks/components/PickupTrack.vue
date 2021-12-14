@@ -2,6 +2,7 @@
   <v-dialog
     max-width="400"
     v-model="dialog"
+    id="pickup-modal"
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn
@@ -26,6 +27,7 @@
           v-bind="attrs"
           v-on="on"
           @click="handlePickupTrack"
+          id="pickup-fab"
         >
           <v-icon>mdi-music-note</v-icon>
         </v-btn>
