@@ -50,7 +50,7 @@ const actions = {
   },
 
   updateUser({ commit, state }, user) {
-    return axios.patch(`users/${state.authUser.id}`, user)
+    return axios.patch(`users/${state.authUser.id}`, { user: user })
       .then(response => {
         commit('setAuthUser', response.data)
       })

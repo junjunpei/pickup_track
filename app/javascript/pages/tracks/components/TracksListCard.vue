@@ -7,6 +7,7 @@
       <slot
         name="subheader"
       ></slot>
+
       <div v-if="this.$route.name === 'Search'">
         <v-list-item
           v-for="(track, index) in this.tracks"
