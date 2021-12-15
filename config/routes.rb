@@ -12,9 +12,9 @@ Rails.application.routes.draw do
     resources :tracks do
       collection do
         post 'search', to: 'tracks#search'
-        post 'my-library', to: 'tracks#my_library'
       end
     end
+    resources :password_resets, only: %i[create update]
   end
 
   get '*path', to: 'static_pages#top'
