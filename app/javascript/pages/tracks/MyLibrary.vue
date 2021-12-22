@@ -135,6 +135,7 @@ export default {
 
   created() {
     this.fetchTracks()
+    console.log(this.$route.params)
   },
 
   methods: {
