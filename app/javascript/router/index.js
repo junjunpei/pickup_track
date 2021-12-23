@@ -7,6 +7,7 @@ import Login from '../pages/users/Login.vue'
 import Search from '../pages/tracks/Search.vue'
 import MyLibrary from '../pages/tracks/MyLibrary'
 import UserEdit from '../pages/users/UserEdit'
+import PasswordReset from '../pages/users/PasswordReset'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const router = new VueRouter({
       component: UserEdit,
       name: 'UserEdit',
       meta: { requiredAuth: true }
+    },
+    {
+      path: '/reset_password',
+      component: PasswordReset,
+      name: 'PasswordReset'
     }
   ]
 })
