@@ -58,7 +58,6 @@
               ></v-text-field>
             </ValidationProvider>
             <v-btn
-              @click="register"
               class="mt-6"
               type="submit"
               outlined

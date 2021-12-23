@@ -1,5 +1,6 @@
-class Api::PasswordResetController < ApplicationController
+class Api::PasswordResetsController < ApplicationController
   skip_before_action :require_login
+  skip_before_action :verify_authenticity_token
 
   def create
     @user = User.find_by(email: params[:email])
@@ -15,7 +16,7 @@ class Api::PasswordResetController < ApplicationController
     @user.password_confirmation = params[:user][:password_confirmation]
 
     if @user.change_password(params[:user][:password])
-      render 
+      render
     end
   end
 end

@@ -10,7 +10,6 @@
         text
         v-bind="attrs"
         v-on="on"
-        @click="handlePickupTrack"
       >
         パスワードをお忘れの方
       </v-btn>
@@ -62,7 +61,7 @@
               text
               type:="submit"
               :disabled="invalid || loading"
-              @click="handlePickupTrack"
+              @click="handlePasswordResetMail"
             >
               送信する
             </v-btn>
@@ -107,6 +106,7 @@ export default {
       this.$axios.post("password_resets", { email: this.user.email })
         .then(response => {
           this.loading = false
+          this.dialog = false
           this.$store.dispatch("flashMessages/showMessage",
             {
               message: "メールを送信しました",
@@ -117,6 +117,7 @@ export default {
         })
         .catch(error => {
           this.loading = false
+          this.dialog = false
           this.$store.dispatch("flashMessages/showMessage",
             {
               message: "メールを送信しました",
