@@ -52,21 +52,23 @@
           >
             ログイン
           </v-btn>
-          <div class="text-center mt-7">
-            <router-link
-              color="blue"
-              :to="{ name: 'Register'}"
-            >
-              登録がまだの方はこちら
-            </router-link>
-          </div>
         </form>
       </ValidationObserver>
+      <div class="text-center mt-7">
+        <router-link
+          color="blue"
+          :to="{ name: 'Register'}"
+        >
+          登録がまだの方はこちら
+        </router-link>
+        <PasswordResetMail></PasswordResetMail>
+      </div>
   </v-container>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import PasswordResetMail from './components/PasswordResetMail.vue'
 
 export default {
   name: "Login",
@@ -79,6 +81,10 @@ export default {
       showPassword: false,
       loading: false
     }
+  },
+
+  components: {
+    PasswordResetMail
   },
 
   methods: {

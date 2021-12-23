@@ -65,6 +65,7 @@
           <v-btn
             color="error"
             text
+            type="submit"
             :disabled="!checkbox || loading"
             @click="handleLeaveUser"
           >
@@ -101,10 +102,15 @@ export default {
 
     handleCloseLeaveModal() {
       this.dialog = false
+      this.checkbox = false
     },
 
     handleLeaveUser() {
       this.$emit('leave-user')
+    },
+
+    submit() {
+      this.$refs.observer.validate()
     }
   }
 }

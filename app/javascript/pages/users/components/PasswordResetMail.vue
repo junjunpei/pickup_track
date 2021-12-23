@@ -6,7 +6,7 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn
-        color="success"
+        color="error"
         text
         v-bind="attrs"
         v-on="on"
@@ -21,6 +21,14 @@
       </v-card-title>
 
       <v-divider />
+
+      <v-card-text>
+        ご登録されているメールアドレスをご入力ください。
+        ご入力されたメールアドレス宛にパスワード再設定のメールを送信させていただきます。
+      </v-card-text>
+      <v-card-text class="error--text">
+        メールが届かない場合はメールアドレスが間違っている可能性がございます。ご確認の上、再度ご入力ください。
+      </v-card-text>
 
       <ValidationObserver
         ref="observer"
@@ -37,27 +45,29 @@
               prepend-icon="mdi-email"
               :error-messages="errors"
               label="メールアドレス"
-              class="mt-10"
+              class="mx-5"
             ></v-text-field>
           </ValidationProvider>
-      <v-card-actions>
-        <v-btn
-          color="error"
-          text
-          @click="handleClosePickupModal"
-        >
-          キャンセル
-        </v-btn>
-        <v-btn
-          color="success"
-          text
-          :disabled="invalid || loading"
-          @click="handlePickupTrack"
-        >
-          送信する
-        </v-btn>
-      </v-card-actions>
-      </form>
+          <v-card-actions class="mt-10">
+            <v-spacer/>
+            <v-btn
+              color="error"
+              text
+              @click="handleClosePasswordResetModal"
+            >
+              キャンセル
+            </v-btn>
+            <v-btn
+              color="success"
+              text
+              type:="submit"
+              :disabled="invalid || loading"
+              @click="handlePickupTrack"
+            >
+              送信する
+            </v-btn>
+          </v-card-actions>
+        </form>
       </ValidationObserver>
     </v-card>
   </v-dialog>
@@ -69,9 +79,55 @@ export default {
 
   data() {
     return {
-      dialog: false
+      dialog: false,
+      loading: false,
+      user: {
+        email: ''
+      }
     }
   },
+
+  methods: {
+    handleOpenModal() {
+      this.dialog = true
+    },
+
+    handleClosePasswordResetModal() {
+      this.dialog = false
+      this.$refs.observer.reset()
+      this.user.email = ''
+    },
+
+    submit() {
+      this.$refs.observer.validate()
+    },
+
+    handlePasswordResetMail() {
+      this.loading = true
+      this.$axios.post("password_resets", { email: this.user.email })
+        .then(response => {
+          this.loading = false
+          this.$store.dispatch("flashMessages/showMessage",
+            {
+              message: "メールを送信しました",
+              type: "success",
+              status: true
+            }
+          )
+        })
+        .catch(error => {
+          this.loading = false
+          this.$store.dispatch("flashMessages/showMessage",
+            {
+              message: "メールを送信しました",
+              type: "success",
+              status: true
+            }
+          )
+          console.log(error)
+        })
+    }
+  }
 }
 </script>
 
