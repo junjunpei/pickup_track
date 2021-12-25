@@ -135,6 +135,8 @@ export default {
       try {
         this.updateUser(this.user)
         this.loading = false
+        this.user.password = ''
+        this.user.password_confirmation = ''
         // this.$router.push({ name: 'MyLibrary' })
         this.$store.dispatch("flashMessages/showMessage",
           {

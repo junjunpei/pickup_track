@@ -58,6 +58,7 @@
               ></v-text-field>
             </ValidationProvider>
             <v-btn
+              @click="handlePasswordReset"
               class="mt-6"
               type="submit"
               outlined
@@ -83,14 +84,47 @@ export default {
       user: {
         password: '',
         password_confirmation: ''
-      }
+      },
+      showPassword: false,
+      showPasswordConfirmation: false
     }
+  },
+
+  created() {
+    console.log(this.$route.query.id)
   },
 
   methods: {
     submit() {
       this.$refs.observer.validate()
     },
+
+    handlePasswordReset() {
+      this.loading = true
+      this.$axios.patch(`password_resets/${this.$route.query.id}`, { user: this.user })
+        .then(response => {
+          this.loading = false
+          this.$router.push({ name: 'Login' })
+          this.$store.dispatch("flashMessages/showMessage",
+            {
+              message: "パスワードを変更しました",
+              type: "success",
+              status: true
+            }
+          )
+        })
+        .catch(error => {
+          this.loading = false
+          this.$store.dispatch("flashMessages/showMessage",
+            {
+              message: "パスワードの変更に失敗しました",
+              type: "error",
+              status: true
+            }
+          )
+          console.log(error)
+        })
+    }
   }
 }
 </script>

@@ -48,7 +48,7 @@ const router = new VueRouter({
       meta: { requiredAuth: true }
     },
     {
-      path: '/reset_password',
+      path: '/reset_password/:id',
       component: PasswordReset,
       name: 'PasswordReset'
     }

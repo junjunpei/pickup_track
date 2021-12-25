@@ -107,6 +107,8 @@ export default {
         .then(response => {
           this.loading = false
           this.dialog = false
+          this.user.email = ''
+          this.$refs.observer.reset()
           this.$store.dispatch("flashMessages/showMessage",
             {
               message: "メールを送信しました",
@@ -118,6 +120,8 @@ export default {
         .catch(error => {
           this.loading = false
           this.dialog = false
+          this.user.email = ''
+          this.$refs.observer.reset()
           this.$store.dispatch("flashMessages/showMessage",
             {
               message: "メールを送信しました",
