@@ -2,7 +2,7 @@
   <v-dialog
     max-width="400"
     v-model="dialog"
-    id="pickup-modal"
+    id="password-reset-modal"
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn
@@ -45,6 +45,7 @@
               :error-messages="errors"
               label="メールアドレス"
               class="mx-5"
+              id="password-reset-mail"
             ></v-text-field>
           </ValidationProvider>
           <v-card-actions class="mt-10">

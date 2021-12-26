@@ -90,10 +90,6 @@ export default {
     }
   },
 
-  created() {
-    console.log(this.$route.query.id)
-  },
-
   methods: {
     submit() {
       this.$refs.observer.validate()
