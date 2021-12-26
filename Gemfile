@@ -42,6 +42,8 @@ gem 'rails-i18n'
 
 gem 'jwt'
 
+gem 'config'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'better_errors'
@@ -55,6 +57,7 @@ group :development, :test do
   gem 'faker'
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'letter_opener_web'
 end
 
 group :development do

@@ -91,16 +91,16 @@
         >
           登録
         </v-btn>
-        <div class="text-center mt-7">
-          <router-link
-            color="blue"
-            :to="{ name: 'Login' }"
-          >
-            登録済みの方はこちら
-          </router-link>
-        </div>
       </form>
     </ValidationObserver>
+    <div class="text-center mt-7">
+      <router-link
+        color="blue"
+        :to="{ name: 'Login' }"
+      >
+        登録済みの方はこちら
+      </router-link>
+    </div>
   </v-container>
 </template>
 
