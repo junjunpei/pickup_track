@@ -107,9 +107,11 @@ import { mapGetters, mapActions } from "vuex"
 
 export default {
   name: "TheHeader",
+
   computed: {
     ...mapGetters("users", ["authUser"])
   },
+
   methods: {
     ...mapActions("users", ["logoutUser"]),
 

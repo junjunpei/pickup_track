@@ -27,6 +27,7 @@
           v-bind="attrs"
           v-on="on"
           @click="handlePickupTrack"
+          class="mb-13"
           id="pickup-fab"
         >
           <v-icon>mdi-music-note</v-icon>
@@ -103,7 +104,7 @@ export default {
   },
 
   created() {
-    window.addEventListener("scroll", this.handleShowButton);
+    window.addEventListener("scroll", this.handleShowButton)
   },
 
   methods: {

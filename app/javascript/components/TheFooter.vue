@@ -2,17 +2,44 @@
   <v-footer
     app
     absolute
-    class="justify-center"
     color="#292929"
+    padless
     height="80"
   >
-    <div class="title font-weight-light grey--text text--lighten-1 text-center">
-      &copy; {{ (new Date()).getFullYear() }} — Song Shuffle —
-    </div>
+    <v-row
+      align="center"
+      no-gutters
+    >
+      <div class="d-flex justify-content-around">
+        <v-btn
+          color="white"
+          text
+          rounded
+        >
+          利用規約
+        </v-btn>
+          <v-btn
+          color="white"
+          text
+          rounded
+        >
+          プライバシーポリシー
+        </v-btn>
+      </div>
+      <v-col
+        class="text-center white--text"
+        cols="12"
+      >
+        {{ (new Date()).getFullYear() }} — <strong>Pickup Track</strong> —
+      </v-col>
+    </v-row>
   </v-footer>
 </template>
 
 <script>
+export default {
+  name: "TheFooter"
+}
 </script>
 
 <style scoped>

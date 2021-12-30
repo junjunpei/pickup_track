@@ -105,37 +105,8 @@ export default {
     // }
   },
 
-  // watch: {
-  //   // myLibrary() {
-  //   //   const added = this.myLibraryTracks.some(myLibraryTrack => {
-  //   //     return this.myLibrary.indexOf(myLibraryTrack.id)
-  //   //   })
-
-  //   //   this.myLibrary.forEach((myTrack, index) => {
-  //   //     this.$axios.post("tracks/my-library",{ track_id: myTrack.track_id })
-  //   //       .then(response => {
-  //   //         if (!added) {
-  //   //           response.data["index"] = index
-  //   //           this.myLibraryTracks.push(response.data)
-  //   //         }
-  //   //       })
-  //   //       .catch(error => {
-  //   //         this.$store.dispatch("flashMessages/showMessage",
-  //   //           {
-  //   //             message: "ライブラリの読み込みに失敗しました",
-  //   //             type: "error",
-  //   //             status: true
-  //   //           }
-  //   //         )
-  //   //         console.log(error)
-  //   //       })
-  //   //   })
-  //   // }
-  // },
-
   created() {
     this.fetchTracks()
-    console.log(this.$route.params)
   },
 
   methods: {
