@@ -4,9 +4,9 @@ class Api::PasswordResetsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:email])
-    if @user&.deliver_reset_password_instructions!
-      head :ok
-    end
+    return unless @user&.deliver_reset_password_instructions!
+
+    head :ok
   end
 
   def update
