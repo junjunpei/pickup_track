@@ -86,7 +86,7 @@ export default {
 
   props: {
     track: {
-      type: Object,
+      type: [Object, String],
       required: true
     },
 
