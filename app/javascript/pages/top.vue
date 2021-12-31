@@ -283,6 +283,8 @@
 
 <script>
 export default {
+  name: "Top",
+
   data () {
     return {
       topImage: require('../images/top.jpg'),

@@ -25,77 +25,79 @@
 
     <v-spacer />
 
-    <template v-if="authUser">
-      <v-menu
-        offset-y
-        transition="scale-transition"
-      >
-        <template v-slot:activator="{ on: menu, attrs }">
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on: tooltip }">
-              <v-icon
-                x-large
-                v-bind="attrs"
-                v-on="{ ...tooltip, ...menu }"
-                class="mr-12"
-                id="user-menu"
-              >
-                mdi-account
-              </v-icon>
-            </template>
-            <span>ユーザーメニュー</span>
-          </v-tooltip>
-        </template>
-        <v-list>
-          <v-list-item
-            :to="{ name: 'MyLibrary' }"
-            id="my-library"
-          >
-            <v-list-item-title>
-              マイライブラリ
-            </v-list-item-title>
-          </v-list-item>
-          <v-list-item
-            :to="{ name: 'UserEdit' }"
-            id="user-edit"
-          >
-            <v-list-item-title>
-              ユーザー情報編集
-            </v-list-item-title>
-          </v-list-item>
-          <v-divider />
-          <v-list-item
-            @click="handleLogout"
-            id="logout"
-          >
-            <v-list-item-title class="error--text">
-              ログアウト
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-      <v-btn
-        text
-        :to="{ name: 'Search' }"
-        class="mr-5"
-      >
-        楽曲検索
-      </v-btn>
-    </template>
-    <template v-else>
-      <v-btn
-        :to="{ name: 'Register' }"
-        class="mr-6"
-        text
-      >
-        新規登録
-      </v-btn>
-      <v-btn
-        :to="{ name: 'Login' }"
-        text
-      >
-        ログイン
-      </v-btn>
+    <template v-if="$vuetify.breakpoint.mdAndUp">
+      <template v-if="authUser">
+        <v-menu
+          offset-y
+          transition="scale-transition"
+        >
+          <template v-slot:activator="{ on: menu, attrs }">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on: tooltip }">
+                <v-icon
+                  x-large
+                  v-bind="attrs"
+                  v-on="{ ...tooltip, ...menu }"
+                  class="mr-12"
+                  id="user-menu"
+                >
+                  mdi-account
+                </v-icon>
+              </template>
+              <span>ユーザーメニュー</span>
+            </v-tooltip>
+          </template>
+          <v-list>
+            <v-list-item
+              :to="{ name: 'MyLibrary' }"
+              id="my-library"
+            >
+              <v-list-item-title>
+                マイライブラリ
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item
+              :to="{ name: 'UserEdit' }"
+              id="user-edit"
+            >
+              <v-list-item-title>
+                ユーザー情報編集
+              </v-list-item-title>
+            </v-list-item>
+            <v-divider />
+            <v-list-item
+              @click="handleLogout"
+              id="logout"
+            >
+              <v-list-item-title class="error--text">
+                ログアウト
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        <v-btn
+          text
+          :to="{ name: 'Search' }"
+          class="mr-5"
+        >
+          楽曲検索
+        </v-btn>
+      </template>
+      <template v-else>
+        <v-btn
+          :to="{ name: 'Register' }"
+          class="mr-6"
+          text
+        >
+          新規登録
+        </v-btn>
+        <v-btn
+          :to="{ name: 'Login' }"
+          text
+        >
+          ログイン
+        </v-btn>
+      </template>
     </template>
   </v-app-bar>
 </template>
@@ -105,9 +107,11 @@ import { mapGetters, mapActions } from "vuex"
 
 export default {
   name: "TheHeader",
+
   computed: {
     ...mapGetters("users", ["authUser"])
   },
+
   methods: {
     ...mapActions("users", ["logoutUser"]),
 
