@@ -8,6 +8,7 @@ import Search from '../pages/tracks/Search.vue'
 import MyLibrary from '../pages/tracks/MyLibrary'
 import UserEdit from '../pages/users/UserEdit'
 import PasswordReset from '../pages/users/PasswordReset'
+import ContactForm from '../pages/contacts/ContactForm'
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const router = new VueRouter({
       path: '/reset_password/:id',
       component: PasswordReset,
       name: 'PasswordReset'
+    },
+    {
+      path: '/contact',
+      component: ContactForm,
+      name: 'ContactForm'
     }
   ]
 })
