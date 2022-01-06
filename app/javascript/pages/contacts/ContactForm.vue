@@ -73,6 +73,7 @@
             </ValidationProvider>
 
             <v-btn
+              @click="handleContactSubmit"
               type="submit"
               outlined
               :disabled="invalid || loading"
@@ -101,6 +102,39 @@ export default {
         message: ''
       },
       loading: false
+    }
+  },
+
+  methods: {
+    submit() {
+      this.$refs.observer.validate()
+    },
+
+    handleContactSubmit() {
+      this.loading = true
+      this.$axios.post("contacts", { contact: this.contact })
+        .then(response => {
+          this.loading = false
+
+          this.$store.dispatch("flashMessages/showMessage",
+            {
+              message: "お問い合わせが完了しました",
+              type: "success",
+              status: true
+            }
+          )
+        })
+        .catch(error => {
+          this.loading = false
+          this.$store.dispatch("flashMessages/showMessage",
+            {
+              message: "お問い合わせに失敗しました",
+              type: "error",
+              status: true
+            }
+          )
+          console.log(error)
+        })
     }
   }
 }

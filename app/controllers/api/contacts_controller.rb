@@ -4,10 +4,12 @@ class Api::ContactsController < ApplicationController
 
   def create
     @contact = Contact.new(contact_params)
-    if @contact.save
+    return unless @contact.save
+
+    if contact_params[:email] != ''
       ContactMailer.send_mail(@contact).deliver_now
-      head :ok
     end
+    head :ok
   end
 
   private
