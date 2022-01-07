@@ -10,7 +10,7 @@
       align="center"
       no-gutters
     >
-      <div class="d-flex justify-content-around">
+      <div class="d-flex justify-content-around pb-3">
         <v-btn
           color="white"
           text
