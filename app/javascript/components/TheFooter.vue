@@ -18,12 +18,20 @@
         >
           利用規約
         </v-btn>
-          <v-btn
+        <v-btn
           color="white"
           text
           rounded
         >
           プライバシーポリシー
+        </v-btn>
+        <v-btn
+          color="white"
+          text
+          rounded
+          :to="{ name: 'ContactForm' }"
+        >
+          お問い合わせ
         </v-btn>
       </div>
       <v-col
