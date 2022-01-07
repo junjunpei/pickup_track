@@ -115,7 +115,7 @@ export default {
       this.$axios.post("contacts", { contact: this.contact })
         .then(response => {
           this.loading = false
-
+          this.$router.push({ name: 'Top' })
           this.$store.dispatch("flashMessages/showMessage",
             {
               message: "お問い合わせが完了しました",
