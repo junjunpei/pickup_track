@@ -15,6 +15,7 @@
           color="white"
           text
           rounded
+          small
         >
           利用規約
         </v-btn>
@@ -22,6 +23,7 @@
           color="white"
           text
           rounded
+          small
         >
           プライバシーポリシー
         </v-btn>
@@ -29,6 +31,7 @@
           color="white"
           text
           rounded
+          small
           :to="{ name: 'ContactForm' }"
         >
           お問い合わせ
