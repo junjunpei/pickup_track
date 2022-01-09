@@ -21,7 +21,7 @@
 
       <v-divider />
 
-      <v-card-text>
+      <v-card-text class="mt-6">
         ご登録されているメールアドレスをご入力ください。
         ご入力されたメールアドレス宛にパスワード再設定のメールを送信させていただきます。
       </v-card-text>
@@ -48,7 +48,7 @@
               id="password-reset-mail"
             ></v-text-field>
           </ValidationProvider>
-          <v-card-actions class="mt-10">
+          <v-card-actions class="mt-5">
             <v-spacer/>
             <v-btn
               color="error"

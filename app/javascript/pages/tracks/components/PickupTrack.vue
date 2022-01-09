@@ -41,7 +41,7 @@
 
       <v-divider />
 
-      <div class="d-flex flex-column justify-space-between align-center">
+      <div class="d-flex flex-column justify-space-between align-center mt-7">
         <v-img
           max-height="250"
           max-width="250"
@@ -53,7 +53,7 @@
         ></h3>
         <p
           v-text="`${this.track.artist_name} - ${this.track.album_name}`"
-          class="mx-6"
+          class="mt-1 mx-6"
         >
         </p>
       </div>

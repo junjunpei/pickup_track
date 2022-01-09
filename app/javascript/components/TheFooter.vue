@@ -1,16 +1,12 @@
 <template>
   <v-footer
     app
-    absolute
     color="#292929"
-    padless
-    height="80"
   >
     <v-row
-      align="center"
       no-gutters
     >
-      <div class="d-flex justify-content-around pb-3">
+      <v-col class="d-flex justify-space-around pb-3">
         <v-btn
           color="white"
           text
@@ -36,7 +32,7 @@
         >
           お問い合わせ
         </v-btn>
-      </div>
+      </v-col>
       <v-col
         class="text-center white--text"
         cols="12"

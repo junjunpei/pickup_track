@@ -3,9 +3,9 @@
     id="user-edit-form"
     class="text-center form-group col-lg-6 offset-lg-3 mt-8"
   >
-    <div class="h3">
+    <h2>
       ユーザー情報編集
-    </div>
+    </h2>
     <ValidationObserver
       ref="observer"
       v-slot="{ invalid }"

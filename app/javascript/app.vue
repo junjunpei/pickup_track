@@ -1,11 +1,11 @@
 <template>
   <v-app>
     <TheHeader />
-    <v-main :class="{'mb-14':isActive}">
+    <v-main>
       <TheFlashMessages />
       <router-view />
     </v-main>
-    <TheFooter :class="{'mb-14':isActive}" class="bottom-0" />
+    <TheFooter :class="{'mb-14':isActive}" class="footer" />
     <TheBottomNavigation v-if="$vuetify.breakpoint.smAndDown" />
   </v-app>
 </template>
@@ -48,4 +48,7 @@ export default {
 </script>
 
 <style scoped>
+.footer {
+  position: static;
+}
 </style>

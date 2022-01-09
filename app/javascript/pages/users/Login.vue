@@ -3,9 +3,9 @@
     id="login-form"
     class="text-center form-group col-lg-6 offset-lg-3"
   >
-    <div class="h3 mt-10">
+    <h2 class="mt-10">
       ログイン
-    </div>
+    </h2>
     <ValidationObserver
       ref="observer"
       v-slot="{ invalid }"
