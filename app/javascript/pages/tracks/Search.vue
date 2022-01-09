@@ -4,9 +4,9 @@
     class="col-lg-6 offset-lg-3"
   >
     <v-container>
-      <div class="h2 mt-1 mb-5">
+      <h2 class="mt-1 mb-5">
         楽曲検索
-      </div>
+      </h2>
       <v-text-field
         v-model="search"
         type="text"

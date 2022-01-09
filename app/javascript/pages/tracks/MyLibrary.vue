@@ -13,7 +13,7 @@
         xs="10"
         offset-xs="1"
       >
-        <div class="mt-4 mb-5 d-flex justify-content-between">
+        <div class="mt-4 mb-5 d-flex justify-space-between">
           <h2>
             マイライブラリ
           </h2>

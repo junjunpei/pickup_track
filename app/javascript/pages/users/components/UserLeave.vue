@@ -24,7 +24,7 @@
 
         <v-divider />
 
-        <v-card-text class="red--text">
+        <v-card-text class="red--text mt-6">
           退会される場合は以下の注意事項をよくお読みいただき、
           同意するにチェックを入れた上で退会ボタンを押してください。
         </v-card-text>
@@ -39,7 +39,7 @@
 
         <v-checkbox
           v-model="checkbox"
-          class="pl-5"
+          class="ml-5"
           color="info"
           id="check-box"
         >
