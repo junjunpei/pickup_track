@@ -10,6 +10,7 @@ import UserEdit from '../pages/users/UserEdit'
 import PasswordReset from '../pages/users/PasswordReset'
 import ContactForm from '../pages/contacts/ContactForm'
 import NotFoundError from '../pages/errors/NotFoundError'
+import InternalServerError from '../pages/errors/InternalServerError'
 
 Vue.use(VueRouter)
 
@@ -63,6 +64,11 @@ const router = new VueRouter({
       path: '*',
       component: NotFoundError,
       name: 'NotfoundError'
+    },
+    {
+      path: '/error',
+      component: InternalServerError,
+      name: 'InternalServerError'
     }
   ]
 })
