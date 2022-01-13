@@ -8,7 +8,7 @@ import Search from '../pages/tracks/Search.vue'
 import MyLibrary from '../pages/tracks/MyLibrary'
 import UserEdit from '../pages/users/UserEdit'
 import PasswordReset from '../pages/users/PasswordReset'
-import ContactForm from '../pages/contacts/ContactForm'
+import ContactForm from '../pages/shared/ContactForm'
 import NotFoundError from '../pages/errors/NotFoundError'
 import InternalServerError from '../pages/errors/InternalServerError'
 
