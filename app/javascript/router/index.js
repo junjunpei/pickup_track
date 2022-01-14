@@ -12,6 +12,7 @@ import ContactForm from '../pages/shared/ContactForm'
 import NotFoundError from '../pages/errors/NotFoundError'
 import InternalServerError from '../pages/errors/InternalServerError'
 import TermsOfService from '../pages/shared/TermsOfService'
+import PrivacyPolicy from '../pages/shared/PrivacyPolicy'
 
 Vue.use(VueRouter)
 
@@ -75,6 +76,11 @@ const router = new VueRouter({
       path: '/terms',
       component: TermsOfService,
       name: 'TermsOfService'
+    },
+    {
+      path: '/privacy',
+      component: PrivacyPolicy,
+      name: 'PrivacyPolicy'
     }
   ]
 })

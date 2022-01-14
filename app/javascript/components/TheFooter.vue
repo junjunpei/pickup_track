@@ -21,6 +21,7 @@
           text
           rounded
           small
+          :to="{ name: 'PrivacyPolicy' }"
         >
           プライバシーポリシー
         </v-btn>
