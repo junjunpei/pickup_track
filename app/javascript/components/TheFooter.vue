@@ -12,6 +12,7 @@
           text
           rounded
           small
+          :to="{ name: 'TermsOfService' }"
         >
           利用規約
         </v-btn>

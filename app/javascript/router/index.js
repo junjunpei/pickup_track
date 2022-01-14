@@ -11,6 +11,7 @@ import PasswordReset from '../pages/users/PasswordReset'
 import ContactForm from '../pages/shared/ContactForm'
 import NotFoundError from '../pages/errors/NotFoundError'
 import InternalServerError from '../pages/errors/InternalServerError'
+import TermsOfService from '../pages/shared/TermsOfService'
 
 Vue.use(VueRouter)
 
@@ -69,6 +70,11 @@ const router = new VueRouter({
       path: '/error',
       component: InternalServerError,
       name: 'InternalServerError'
+    },
+    {
+      path: '/terms',
+      component: TermsOfService,
+      name: 'TermsOfService'
     }
   ]
 })
