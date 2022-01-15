@@ -81,7 +81,7 @@
     <h2 class="mt-8">第9条（アクセス解析ツール）</h2>
     <ol class="mt-3 ml-6">
       <li>本サービスでは、Googleによるアクセス解析ツール「Googleアナリティクス」を使用しています。このGoogleアナリティクスはデータの収集のためにCookieを使用しています。このデータは匿名で収集されており、個人を特定するものではありません。</li>
-      <li class="mt-2">この機能はCookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。この規約に関しての詳細は<v-btn color="success" text class="px-0" href="https://marketingplatform.google.com/about/analytics/terms/jp/">Googleアナリティクスサービス利用規約ページ</v-btn>や<v-btn color="success" text class="px-0" href="https://policies.google.com/technologies/ads?hl=ja">Googleポリシーと規約ページ</v-btn>をご覧ください。</li>
+      <li class="mt-2">この機能はCookieを無効にすることで収集を拒否することが出来ますので、お使いのブラウザの設定をご確認ください。この規約に関しての詳細は<a href="https://marketingplatform.google.com/about/analytics/terms/jp/">Googleアナリティクスサービス利用規約ページ</a>や<a href="https://policies.google.com/technologies/ads?hl=ja">Googleポリシーと規約ページ</a>をご覧ください。</li>
     </ol>
 
     <h2 class="mt-8">第10条（お問い合わせ窓口）</h2>
