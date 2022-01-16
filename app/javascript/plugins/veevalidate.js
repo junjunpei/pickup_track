@@ -50,3 +50,8 @@ extend('unique', {
   validate: isUnique,
   message: "このメールアドレスは登録済みです"
 });
+
+extend('required_checkbox', {
+  ...required,
+  message: "登録を完了するにはチェックを入れてください"
+});
