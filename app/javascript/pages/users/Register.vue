@@ -67,20 +67,25 @@
             label="パスワード確認"
           ></v-text-field>
         </ValidationProvider>
-        <!-- <ValidationProvider
+        <ValidationProvider
           v-slot="{ errors }"
-          rules="required"
+          rules="required_checkbox"
           name="checkbox"
         >
           <v-checkbox
             v-model="checkbox"
             :error-messages="errors"
             value="1"
-            label="Option"
             type="checkbox"
             required
-          ></v-checkbox>
-        </ValidationProvider> -->
+          >
+            <template v-slot:label>
+              <div>
+                <v-btn color="success" text @click.stop="handleOpenTermsModal" class="px-0">利用規約</v-btn>及び<v-btn color="success" text @click.stop="handleOpenPrivacyModal" class="px-0">プライバシーポリシー</v-btn>に同意する
+              </div>
+            </template>
+          </v-checkbox>
+        </ValidationProvider>
 
         <v-btn
           @click="register"
@@ -101,12 +106,41 @@
         登録済みの方はこちら
       </router-link>
     </div>
+    <v-dialog
+      max-width="500"
+      v-model="dialog"
+    >
+      <v-card>
+        <TermsOfService v-if="showTerms" />
+        <PrivacyPolicy v-else-if="showPrivacy" />
+
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="success"
+            text
+            @click="handleCloseModal"
+          >
+            閉じる
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
+import TermsOfService from '../shared/TermsOfService.vue'
+import PrivacyPolicy from '../shared/PrivacyPolicy.vue'
+
 export default {
   name: "Register",
+
+  components: {
+    TermsOfService,
+    PrivacyPolicy
+  },
+
   data() {
     return {
       user: {
@@ -115,10 +149,13 @@ export default {
         password: '',
         password_confirmation: '',
       },
-      // checkbox: null,
+      checkbox: null,
       showPassword: false,
       showPasswordConfirmation: false,
-      loading: false
+      loading: false,
+      dialog: false,
+      showTerms: false,
+      showPrivacy: false
     }
   },
 
@@ -152,6 +189,24 @@ export default {
           ),
           console.log(error)
         })
+    },
+
+    handleOpenTermsModal() {
+      this.dialog = true
+      this.showPrivacy = false
+      this.showTerms = true
+    },
+
+    handleOpenPrivacyModal() {
+      this.dialog = true
+      this.showTerms = false
+      this.showPrivacy = true
+    },
+
+    handleCloseModal() {
+      this.dialog = false
+      this.showTerms = false
+      this.showPrivacy = false
     }
   },
 }

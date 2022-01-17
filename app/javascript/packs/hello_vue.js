@@ -15,10 +15,10 @@ import '../plugins/veevalidate'
 
 Vue.prototype.$axios = axios
 
-Vue.config.errorHandler = (err, vm, info) => {
-  console.error(`errorHandler: ${info}`, err)
-  router.replace({ name: 'InternalServerError' })
-}
+// Vue.config.errorHandler = (err, vm, info) => {
+//   console.error(`errorHandler: ${info}`, err)
+//   router.replace({ name: 'InternalServerError' })
+// }
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
