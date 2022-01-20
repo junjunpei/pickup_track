@@ -19,7 +19,7 @@
                   tag="h1"
                 >
                   <span
-                  :class="[$vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2']"
+                    :class="[$vuetify.breakpoint.xs ? 'text-h5' : 'text-h3']"
                     class="font-weight-light"
                   >
                     WELCOME TO
@@ -28,10 +28,10 @@
                   <br>
 
                   <span
-                    :class="[$vuetify.breakpoint.smAndDown ? 'display-3': 'display-4']"
+                    :class="[$vuetify.breakpoint.xs ? 'text-h3' : 'text-h2']"
                     class="font-weight-black"
                   >
-                    Song Shuffle
+                    Pickup Track
                   </span>
 
                 </v-col>
@@ -51,14 +51,19 @@
       </v-row>
     </section>
 
-    <section id="about-me">
-      <div class="py-12"></div>
+    <section>
+      <div class="py-8"></div>
 
       <v-container class="text-center">
-        <h2 class="display-2 font-weight-bold mb-3">ABOUT ME</h2>
-
+        <span
+          :class="[$vuetify.breakpoint.xs ? 'text-h4': 'text-h3']"
+          class="font-weight-bold mb-3"
+          id="about-me"
+        >
+          ABOUT ME
+        </span>
         <v-responsive
-          class="mx-auto mb-8"
+          class="mx-auto my-8"
           width="56"
         >
           <v-divider class="mb-1"></v-divider>
@@ -72,34 +77,47 @@
         >
           ランダムで歌う曲を決めてくれることにより、カラオケで歌う曲に悩む時間を減らし、カラオケをより楽しめるようにするアプリケーション
         </v-responsive>
-
+        <p class="success--text mb-10">※曲を聴くことはできません</p>
         <div></div>
 
         <v-btn
           color="green accent-3"
+          :to="{ name: 'Search' }"
+          large
+          outlined
+          v-if="authUser"
+        >
+          さっそく楽曲を探す
+        </v-btn>
+        <v-btn
+          color="green accent-3"
           :to="{ name: 'Register' }"
           large
+          outlined
+          v-else
         >
-          <span class="white--text text--darken-1 font-weight-bold">
-            新規登録
-          </span>
+          新規登録
         </v-btn>
       </v-container>
 
-      <div class="py-12"></div>
+      <div class="py-8"></div>
     </section>
 
     <section
       id="features"
       class="black"
     >
-      <div class="py-12"></div>
+      <div class="py-8"></div>
 
       <v-container class="text-center">
-        <h2 class="display-2 font-weight-bold mb-3">VUETIFY FEATURES</h2>
-
+        <span
+          :class="[$vuetify.breakpoint.xs ? 'text-h4': 'text-h3']"
+          class="font-weight-bold mb-3"
+        >
+          FEATURES
+        </span>
         <v-responsive
-          class="mx-auto mb-12"
+          class="mx-auto my-8"
           width="56"
         >
           <v-divider class="mb-1"></v-divider>
@@ -109,28 +127,25 @@
 
         <v-row>
           <v-col
-            v-for="({ icon, title, text }, i) in features"
+            v-for="({ src, title, text }, i) in features"
             :key="i"
             cols="12"
             md="4"
           >
             <v-card
-              class="py-12 px-4"
+              class="px-4"
               color="black"
               flat
             >
               <v-theme-provider dark>
-                <div>
-                  <v-avatar
-                    color="primary"
-                    size="88"
-                  >
-                    <v-icon
-                      large
-                      v-text="icon"
-                    ></v-icon>
-                  </v-avatar>
-                </div>
+                <v-col align="center">
+                  <v-img
+                    :src="src"
+                    height="300"
+                    width="400"
+                    contain
+                  />
+                </v-col>
               </v-theme-provider>
 
               <v-card-title
@@ -150,179 +165,40 @@
 
       <div class="py-12"></div>
     </section>
-
-    <section
-      id="blog"
-      class="green accent-2"
-    >
-      <div class="py-12"></div>
-
-      <v-container>
-        <h2 class="display-2 font-weight-bold mb-3 text-uppercase text-center">Blog</h2>
-
-        <v-responsive
-          class="mx-auto mb-12"
-          width="56"
-        >
-          <v-divider class="mb-1"></v-divider>
-
-          <v-divider></v-divider>
-        </v-responsive>
-
-        <v-row>
-          <v-col
-            v-for="({ src, text, title }, i) in articles"
-            :key="i"
-            cols="12"
-            md="4"
-          >
-            <v-img
-              :src="src"
-              class="mb-4"
-              height="275"
-              max-width="100%"
-            ></v-img>
-
-            <h3
-              class="font-weight-black mb-4 text-uppercase"
-              v-text="title"
-            ></h3>
-
-            <div
-              class="title font-weight-light mb-5"
-              v-text="text"
-            ></div>
-
-            <v-btn
-              class="ml-n4 font-weight-black"
-              text
-            >
-              Continue Reading
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-
-      <div class="py-12"></div>
-    </section>
-
-    <v-sheet
-      id="contact"
-      color="#333333"
-      dark
-      tag="section"
-      tile
-    >
-      <div class="py-12"></div>
-
-      <v-container>
-        <h2 class="display-2 font-weight-bold mb-3 text-uppercase text-center">Contact Me</h2>
-
-        <v-responsive
-          class="mx-auto mb-12"
-          width="56"
-        >
-          <v-divider class="mb-1"></v-divider>
-
-          <v-divider></v-divider>
-        </v-responsive>
-
-        <v-theme-provider light>
-          <v-row>
-            <v-col cols="12">
-              <v-text-field
-                flat
-                label="Name*"
-                solo
-              ></v-text-field>
-            </v-col>
-
-            <v-col cols="12">
-              <v-text-field
-                flat
-                label="Email*"
-                solo
-              ></v-text-field>
-            </v-col>
-
-            <v-col cols="12">
-              <v-text-field
-                flat
-                label="Subject*"
-                solo
-              ></v-text-field>
-            </v-col>
-
-            <v-col cols="12">
-              <v-textarea
-                flat
-                label="Message*"
-                solo
-              ></v-textarea>
-            </v-col>
-
-            <v-col
-              class="mx-auto"
-              cols="auto"
-            >
-              <v-btn
-                color="accent"
-                x-large
-              >
-                Submit
-              </v-btn>
-            </v-col>
-          </v-row>
-        </v-theme-provider>
-      </v-container>
-
-      <div class="py-12"></div>
-    </v-sheet>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
   name: "Top",
 
   data () {
     return {
       topImage: require('../images/top.jpg'),
-      articles: [
-        {
-          src: 'https://images.unsplash.com/photo-1423784346385-c1d4dac9893a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-          title: 'Mobile first & Responsive',
-          text: 'Phasellus lorem enim, luctus ut velit eget, convallis egestas eros. Sed ornare ligula eget tortor tempor, quis porta tellus dictum.',
-        },
-        {
-          src: 'https://images.unsplash.com/photo-1475938476802-32a7e851dad1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-          title: 'Think outside the box',
-          text: 'Nam ut leo ipsum. Maecenas pretium aliquam feugiat. Aenean vel tempor est, vitae tincidunt risus. Sed sodales vestibulum nibh.',
-        },
-        {
-          src: 'https://images.unsplash.com/photo-1416339442236-8ceb164046f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1892&q=80',
-          title: 'Small changes, big difference',
-          text: 'Vestibulum in dictum velit, in rhoncus nibh. Maecenas neque libero, interdum a dignissim in, aliquet vitae lectus. Phasellus lorem enim, luctus ut velit eget.',
-        },
-      ],
       features: [
         {
-          icon: 'mdi-account-group-outline',
-          title: 'Vibrant Community',
-          text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto cupiditate sint possimus quidem atque harum excepturi nemo velit tempora! Enim inventore fuga, qui ipsum eveniet facilis obcaecati corrupti asperiores nam',
+          src: require('../images/add.svg'),
+          title: '曲を検索して追加する',
+          text: '数千万曲の楽曲の中から曲名、アーティスト名、アルバム名等から検索可能です。また、そこからお好きな曲をワンタッチでマイライブラリに追加したり削除することができます。',
         },
         {
-          icon: 'mdi-update',
-          title: 'Frequent Updates',
-          text: 'Sed ut elementum justo. Suspendisse non justo enim. Vestibulum cursus mauris dui, a luctus ex blandit. Lorem ipsum dolor sit amet consectetur adipisicing elit. qui ipsum eveniet facilis obcaecati corrupti consectetur adipisicing elit.',
+          src: require('../images/choose.svg'),
+          title: 'マイライブラリからピックアップ',
+          text: 'マイライブラリに追加した楽曲の中からランダムで1曲をピックアップ！もし、気分じゃない楽曲が出ても、何度でもピックアップすることができます。',
         },
         {
-          icon: 'mdi-shield-outline',
-          title: 'Long-term Support',
-          text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto cupiditate sint possimus quidem atque harum excepturi nemo velit tempora! Enim inventore fuga, qui ipsum eveniet facilis obcaecati corrupti asperiores nam',
+          src: require('../images/music.svg'),
+          title: 'あとは歌うだけ！',
+          text: '歌う楽曲が決まったなら、あとは気持ちよく歌ってカラオケを楽しみましょう！',
         },
       ],
     }
+  },
+
+  computed: {
+    ...mapGetters("users", ["authUser"])
   }
 }
 </script>
