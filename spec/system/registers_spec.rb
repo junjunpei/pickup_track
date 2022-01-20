@@ -14,6 +14,7 @@ RSpec.describe "Registers", type: :system do
         fill_in 'メールアドレス', with: 'test@example.com'
         fill_in 'パスワード', with: 'pass'
         fill_in 'パスワード確認', with: 'pass'
+        check '利用規約及びプライバシーポリシーに同意する', allow_label_click: true
         click_on '登録'
         sleep 3
         expect(current_path).to eq '/login'
@@ -61,6 +62,7 @@ RSpec.describe "Registers", type: :system do
         fill_in 'メールアドレス', with: 'test@example.com'
         fill_in 'パスワード', with: ''
         fill_in 'パスワード確認', with: 'pass'
+        check '利用規約及びプライバシーポリシーに同意する', allow_label_click: true
         expect(page).to have_content 'パスワードは必須項目です'
         expect(page).to have_button '登録', disabled: true
       end
@@ -91,6 +93,7 @@ RSpec.describe "Registers", type: :system do
         fill_in 'メールアドレス', with: 'test@example.com'
         fill_in 'パスワード', with: 'pass'
         fill_in 'パスワード確認', with: 'pass'
+        check '利用規約及びプライバシーポリシーに同意する', allow_label_click: true
         expect(page).to have_content '名前は10文字以下でご入力ください'
         expect(page).to have_button '登録', disabled: true
       end
@@ -154,6 +157,23 @@ RSpec.describe "Registers", type: :system do
         fill_in 'パスワード', with: 'pass'
         fill_in 'パスワード確認', with: 'password'
         expect(page).to have_content 'パスワードと一致しません'
+        expect(page).to have_button '登録', disabled: true
+      end
+    end
+
+    context 'チェックボックスをチェックしない' do
+      it '登録ボタンが押せなくなっている' do
+        visit root_path
+        click_on '新規登録', match: :first
+        expect(current_path).to eq '/register'
+        expect(page).to have_content 'ユーザー登録'
+        fill_in '名前', with: 'example'
+        fill_in 'メールアドレス', with: 'test@example.com'
+        fill_in 'パスワード', with: 'pass'
+        fill_in 'パスワード確認', with: 'pass'
+        check '利用規約及びプライバシーポリシーに同意する', allow_label_click: true
+        uncheck '利用規約及びプライバシーポリシーに同意する', allow_label_click: true
+        expect(page).to have_content '登録を完了するにはチェックを入れてください'
         expect(page).to have_button '登録', disabled: true
       end
     end
