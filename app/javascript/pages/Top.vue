@@ -76,17 +76,26 @@
         >
           ランダムで歌う曲を決めてくれることにより、カラオケで歌う曲に悩む時間を減らし、カラオケをより楽しめるようにするアプリケーション
         </v-responsive>
-        <p class="success--text">※曲を聴くことはできません</p>
+        <p class="success--text mb-10">※曲を聴くことはできません</p>
         <div></div>
 
         <v-btn
-          color="green accent-3 mt-3"
+          color="green accent-3"
+          :to="{ name: 'Search' }"
+          large
+          outlined
+          v-if="authUser"
+        >
+          さっそく楽曲を探す
+        </v-btn>
+        <v-btn
+          color="green accent-3"
           :to="{ name: 'Register' }"
           large
+          outlined
+          v-else
         >
-          <span class="white--text text--darken-1 font-weight-bold">
-            新規登録
-          </span>
+          新規登録
         </v-btn>
       </v-container>
 
@@ -159,6 +168,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
   name: "Top",
 
@@ -183,6 +194,10 @@ export default {
         },
       ],
     }
+  },
+
+  computed: {
+    ...mapGetters("users", ["authUser"])
   }
 }
 </script>
