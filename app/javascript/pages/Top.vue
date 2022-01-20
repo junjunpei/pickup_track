@@ -51,13 +51,14 @@
       </v-row>
     </section>
 
-    <section id="about-me">
-      <div class="py-12"></div>
+    <section>
+      <div class="py-8"></div>
 
       <v-container class="text-center">
         <span
           :class="[$vuetify.breakpoint.xs ? 'text-h4': 'text-h3']"
           class="font-weight-bold mb-3"
+          id="about-me"
         >
           ABOUT ME
         </span>
@@ -99,14 +100,14 @@
         </v-btn>
       </v-container>
 
-      <div class="py-12"></div>
+      <div class="py-8"></div>
     </section>
 
     <section
       id="features"
       class="black"
     >
-      <div class="py-12"></div>
+      <div class="py-8"></div>
 
       <v-container class="text-center">
         <span
