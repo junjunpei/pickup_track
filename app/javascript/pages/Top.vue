@@ -19,7 +19,7 @@
                   tag="h1"
                 >
                   <span
-                  :class="[$vuetify.breakpoint.smAndDown ? 'display-1' : 'display-2']"
+                    :class="[$vuetify.breakpoint.xs ? 'text-h5' : 'text-h3']"
                     class="font-weight-light"
                   >
                     WELCOME TO
@@ -28,10 +28,10 @@
                   <br>
 
                   <span
-                    :class="[$vuetify.breakpoint.smAndDown ? 'display-3': 'display-4']"
+                    :class="[$vuetify.breakpoint.xs ? 'text-h3' : 'text-h2']"
                     class="font-weight-black"
                   >
-                    Song Shuffle
+                    Pickup Track
                   </span>
 
                 </v-col>
@@ -55,10 +55,14 @@
       <div class="py-12"></div>
 
       <v-container class="text-center">
-        <h2 class="display-2 font-weight-bold mb-3">ABOUT ME</h2>
-
+        <span
+          :class="[$vuetify.breakpoint.xs ? 'text-h4': 'text-h3']"
+          class="font-weight-bold mb-3"
+        >
+          ABOUT ME
+        </span>
         <v-responsive
-          class="mx-auto mb-8"
+          class="mx-auto my-8"
           width="56"
         >
           <v-divider class="mb-1"></v-divider>
@@ -72,11 +76,11 @@
         >
           ランダムで歌う曲を決めてくれることにより、カラオケで歌う曲に悩む時間を減らし、カラオケをより楽しめるようにするアプリケーション
         </v-responsive>
-
+        <p class="success--text">※曲を聴くことはできません</p>
         <div></div>
 
         <v-btn
-          color="green accent-3"
+          color="green accent-3 mt-3"
           :to="{ name: 'Register' }"
           large
         >
@@ -96,10 +100,14 @@
       <div class="py-12"></div>
 
       <v-container class="text-center">
-        <h2 class="display-2 font-weight-bold mb-3">VUETIFY FEATURES</h2>
-
+        <span
+          :class="[$vuetify.breakpoint.xs ? 'text-h4': 'text-h3']"
+          class="font-weight-bold mb-3"
+        >
+          FEATURES
+        </span>
         <v-responsive
-          class="mx-auto mb-12"
+          class="mx-auto my-8"
           width="56"
         >
           <v-divider class="mb-1"></v-divider>
@@ -109,28 +117,25 @@
 
         <v-row>
           <v-col
-            v-for="({ icon, title, text }, i) in features"
+            v-for="({ src, title, text }, i) in features"
             :key="i"
             cols="12"
             md="4"
           >
             <v-card
-              class="py-12 px-4"
+              class="px-4"
               color="black"
               flat
             >
               <v-theme-provider dark>
-                <div>
-                  <v-avatar
-                    color="primary"
-                    size="88"
-                  >
-                    <v-icon
-                      large
-                      v-text="icon"
-                    ></v-icon>
-                  </v-avatar>
-                </div>
+                <v-col align="center">
+                  <v-img
+                    :src="src"
+                    height="300"
+                    width="400"
+                    contain
+                  />
+                </v-col>
               </v-theme-provider>
 
               <v-card-title
@@ -307,19 +312,19 @@ export default {
       ],
       features: [
         {
-          icon: 'mdi-account-group-outline',
-          title: 'Vibrant Community',
-          text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto cupiditate sint possimus quidem atque harum excepturi nemo velit tempora! Enim inventore fuga, qui ipsum eveniet facilis obcaecati corrupti asperiores nam',
+          src: require('../images/add.svg'),
+          title: '曲を検索して追加する',
+          text: '数千万曲の楽曲の中から曲名、アーティスト名、アルバム名等から検索可能です。また、そこからお好きな曲をワンタッチでマイライブラリに追加したり削除することができます。',
         },
         {
-          icon: 'mdi-update',
-          title: 'Frequent Updates',
-          text: 'Sed ut elementum justo. Suspendisse non justo enim. Vestibulum cursus mauris dui, a luctus ex blandit. Lorem ipsum dolor sit amet consectetur adipisicing elit. qui ipsum eveniet facilis obcaecati corrupti consectetur adipisicing elit.',
+          src: require('../images/choose.svg'),
+          title: 'マイライブラリからピックアップ',
+          text: 'マイライブラリに追加した楽曲の中からランダムで1曲をピックアップ！もし、気分じゃない楽曲が出ても、何度でもピックアップすることができます。',
         },
         {
-          icon: 'mdi-shield-outline',
-          title: 'Long-term Support',
-          text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto cupiditate sint possimus quidem atque harum excepturi nemo velit tempora! Enim inventore fuga, qui ipsum eveniet facilis obcaecati corrupti asperiores nam',
+          src: require('../images/music.svg'),
+          title: 'あとは歌うだけ！',
+          text: '歌う楽曲が決まったなら、あとは気持ちよく歌ってカラオケを楽しみましょう！',
         },
       ],
     }
