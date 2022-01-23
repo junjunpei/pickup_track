@@ -41,7 +41,7 @@
 
       <v-divider />
 
-      <div class="d-flex flex-column justify-space-between align-center mt-7">
+      <div class="d-flex flex-column justify-space-between align-center mt-7 mb-4">
         <v-img
           max-height="250"
           max-width="250"
@@ -60,20 +60,30 @@
 
       <v-card-actions>
         <v-btn
-          color="primary"
-          text
-          @click="handleClosePickupModal"
-        >
-          この曲を歌う！
-        </v-btn>
-        <v-spacer />
-        <v-btn
           color="success"
+          class="px-0"
           text
           :disabled="loading"
           @click="handlePickupTrack"
         >
           もう一度！
+        </v-btn>
+        <v-btn
+          color="primary"
+          class="px-0"
+          text
+          :disabled="loading"
+          @click="handleAddHistory"
+        >
+          この曲を歌う！
+        </v-btn>
+        <v-spacer />
+        <v-btn
+          color="error"
+          text
+          @click="handleClosePickupModal"
+        >
+          キャンセル
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -110,6 +120,11 @@ export default {
   methods: {
     handlePickupTrack() {
       this.$emit('pickup-track')
+    },
+
+    handleAddHistory() {
+      this.$emit('history-track', this.track)
+      this.dialog = false
     },
 
     handleClosePickupModal() {

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     end
     resources :password_resets, only: %i[create update]
     resources :contacts, only: :create
+    resources :histories, only: %i[index create destroy]
   end
 
   get '*path', to: 'static_pages#top'

@@ -21,6 +21,7 @@
             :track="pickupTrack"
             :loading="loading"
             @pickup-track="handlePickupTrack"
+            @history-track="handleAddHistory"
           />
         </div>
         <v-text-field
@@ -116,30 +117,20 @@ export default {
       "deleteTrack",
     ]),
 
-    // async handleAddTrack(addTrack) {
-    //   this.submitting = true
-    //   try {
-    //     await this.addTrack(addTrack)
-    //     this.submitting = false
-    //     this.$store.dispatch("flashMessages/showMessage",
-    //       {
-    //         message: "マイライブラリに追加しました",
-    //         type: "blue lighten-1",
-    //         status: true
-    //       }
-    //     )
-    //   } catch(error) {
-    //     this.submitting = false
-    //     this.$store.dispatch("flashMessages/showMessage",
-    //       {
-    //         message: "追加に失敗しました",
-    //         type: "error",
-    //         status: true
-    //       }
-    //     )
-    //     console.log(error)
-    //   }
-    // },
+    ...mapActions("historyTracks", [
+      "addHistory"
+    ]),
+
+    async handleAddHistory(addHistoryTrack) {
+      this.loading = true
+      try {
+        await this.addHistory(addHistoryTrack)
+        this.loading = false
+      } catch(error) {
+        this.loading = false
+        console.log(error)
+      }
+    },
 
     async handleDeleteTrack(deleteTrack) {
       this.submitting = true
