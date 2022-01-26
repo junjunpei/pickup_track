@@ -13,7 +13,6 @@
           outlined
           dense
           :items="order"
-          :loading="this.loading"
           class="mb-n5"
         ></v-select>
       </v-col>
@@ -89,11 +88,6 @@ export default {
     },
 
     submitting: {
-      type: Boolean,
-      required: true
-    },
-
-    loading: {
       type: Boolean,
       required: true
     },

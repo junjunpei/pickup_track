@@ -53,7 +53,6 @@
         <HistoryTracksList
           :tracks="historyTracks"
           :submitting="submitting"
-          :loading="loading"
           :tracksTimes="historyTracksTimes"
         >
           <template v-slot:subheader>
@@ -81,7 +80,6 @@ export default {
   data() {
     return {
       submitting: false,
-      loading: false,
       historyTracksTimes: ""
     }
   },
@@ -100,14 +98,11 @@ export default {
     ...mapActions("historyTracks", ["fetchHistoryTracks"]),
 
     handleFetchHistoryTracksTimes() {
-      this.loading = true
       this.$axios.get("histories/times")
         .then(response => {
-          this.loading = false
           this.historyTracksTimes = response.data
         })
         .catch(error => {
-          this.loading = false
           console.log(error)
         })
     }
