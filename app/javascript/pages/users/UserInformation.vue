@@ -54,6 +54,7 @@
           :tracks="historyTracks"
           :submitting="submitting"
           :tracksTimes="historyTracksTimes"
+          @delete-history-track="handleDeleteHistoryTrack"
         >
           <template v-slot:subheader>
             <v-subheader>
@@ -95,7 +96,10 @@ export default {
   },
 
   methods: {
-    ...mapActions("historyTracks", ["fetchHistoryTracks"]),
+    ...mapActions("historyTracks",[
+      "fetchHistoryTracks",
+      "deleteHistoryTrack"
+    ]),
 
     handleFetchHistoryTracksTimes() {
       this.$axios.get("histories/times")
@@ -105,6 +109,31 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+
+    async handleDeleteHistoryTrack(deleteTrack) {
+      this.submitting = true
+      try {
+        await this.deleteHistoryTrack(deleteTrack)
+        this.submitting = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "履歴から削除されました",
+            type: "pink lighten-1",
+            status: true
+          }
+        )
+      } catch(error) {
+        this.submitting = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "削除に失敗しました",
+            type: "error",
+            status: true
+          }
+        )
+        console.log(error)
+      }
     }
   }
 }

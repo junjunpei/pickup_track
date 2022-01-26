@@ -1,6 +1,7 @@
 class Api::HistoriesController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate!
+  before_action :set_history_track, only: :destroy
 
   def index
     @history_tracks = current_user.histories.all.order(id: :desc)
@@ -23,12 +24,17 @@ class Api::HistoriesController < ApplicationController
   end
 
   def destroy
-
+    @history_track.destroy!
+    render json: @history_track
   end
 
   private
 
   def history_params
     params.require(:history).permit(:track_id, :artist_id, :name, :artist_name, :album_name, :image_url, :track_url)
+  end
+
+  def set_history_track
+    @history_track = current_user.histories.find(params[:id])
   end
 end

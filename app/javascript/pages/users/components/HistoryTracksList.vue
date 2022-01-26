@@ -36,7 +36,7 @@
 
           <v-list-item-icon class="mr-1">
             <v-icon
-              @click="handleDeleteTrack(track)"
+              @click="handleDeleteHistoryTrack(track)"
               :disabled="submitting"
               id="delete-history-icon"
             >
@@ -93,10 +93,16 @@ export default {
     },
 
     tracksTimes: {
-      type: [Object, String],
+      type: [Array, String],
       requred: true
     }
   },
+
+  methods: {
+    handleDeleteHistoryTrack(deleteTrack) {
+      this.$emit("delete-history-track", deleteTrack)
+    }
+  }
 }
 </script>
 

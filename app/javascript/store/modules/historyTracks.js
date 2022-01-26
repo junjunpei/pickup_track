@@ -16,6 +16,12 @@ const mutations = {
   addHistoryTrack: (state, track) => {
     state.historyTracks.push(track)
   },
+
+  deleteHistoryTrack: (state, deleteTrack) => {
+    state.historyTracks = state.historyTracks.filter(track => {
+      return track.id != deleteTrack.id
+    })
+  }
 }
 
 const actions = {
@@ -26,12 +32,19 @@ const actions = {
       })
   },
 
-  addHistoryTrack({ commit }, track) {
-    return axios.post("histories", track)
+  addHistoryTrack({ commit }, addTrack) {
+    return axios.post("histories", addTrack)
       .then(response => {
         commit("addHistoryTrack", response.data)
       })
   },
+
+  deleteHistoryTrack({ commit }, deleteTrack) {
+    return axios.delete(`histories/${deleteTrack.id}`, deleteTrack)
+      .then(response => {
+        commit("deleteHistoryTrack", response.data)
+      })
+  }
 }
 
 export default {
