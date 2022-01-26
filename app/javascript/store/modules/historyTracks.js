@@ -9,16 +9,27 @@ const getters = {
 }
 
 const mutations = {
-  addHistory: (state, track) => {
+  setHistoryTracks: (state, tracks) => {
+    state.historyTracks = tracks
+  },
+
+  addHistoryTrack: (state, track) => {
     state.historyTracks.push(track)
   },
 }
 
 const actions = {
-  addHistory({ commit }, addHistoryTrack) {
-    return axios.post('histories', addHistoryTrack)
+  fetchHistoryTracks({ commit }) {
+    axios.get("histories")
       .then(response => {
-        commit('addHistory', response.data)
+        commit("setHistoryTracks", response.data)
+      })
+  },
+
+  addHistoryTrack({ commit }, track) {
+    return axios.post("histories", track)
+      .then(response => {
+        commit("addHistoryTrack", response.data)
       })
   },
 }

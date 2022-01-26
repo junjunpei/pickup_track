@@ -13,6 +13,7 @@ import NotFoundError from '../pages/errors/NotFoundError'
 import InternalServerError from '../pages/errors/InternalServerError'
 import TermsOfService from '../pages/shared/TermsOfService'
 import PrivacyPolicy from '../pages/shared/PrivacyPolicy'
+import UserInformation from "../pages/users/UserInformation"
 
 Vue.use(VueRouter)
 
@@ -81,6 +82,11 @@ const router = new VueRouter({
       path: '/privacy',
       component: PrivacyPolicy,
       name: 'PrivacyPolicy'
+    },
+    {
+      path: "/user",
+      component: UserInformation,
+      name: "UserInformation"
     }
   ]
 })

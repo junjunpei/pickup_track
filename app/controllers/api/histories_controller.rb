@@ -3,7 +3,13 @@ class Api::HistoriesController < ApplicationController
   before_action :authenticate!
 
   def index
+    @history_tracks = current_user.histories.all.order(id: :desc)
+    render json: @history_tracks
+  end
 
+  def times
+    @history_tracks_times = current_user.histories.group(:track_id, :name, :artist_name, :album_name, :image_url).order('count(track_id) desc').count.to_a
+    render json: @history_tracks_times
   end
 
   def create

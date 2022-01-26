@@ -14,7 +14,7 @@ class Api::TracksController < ApplicationController
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     header = { 'Authorization' => "Bearer #{@bearer_token}", 'Accept-Language' => 'ja' }
-    uri.query = URI.encode_www_form({ q: params[:search], type: 'track', limit: '50', offset: '0', market: 'JP' })
+    uri.query = URI.encode_www_form({ q: params[:search], type: 'track', limit: '50', market: 'JP' })
     response = http.get(uri.request_uri, header)
     response_body = JSON.parse(response.body)
     tracks = response_body['tracks']['items']

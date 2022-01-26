@@ -2,7 +2,7 @@
   <v-container
     id="my-library"
   >
-    <v-row align="center">
+    <v-row>
       <v-col
         lg="6"
         offset-lg="3"
@@ -39,7 +39,6 @@
         </v-text-field>
         <TracksListCard
           :tracks="searchedTracks"
-          :library="myLibrary"
           :submitting="submitting"
           @delete-track="handleDeleteTrack"
         >
@@ -118,13 +117,13 @@ export default {
     ]),
 
     ...mapActions("historyTracks", [
-      "addHistory"
+      "addHistoryTrack"
     ]),
 
     async handleAddHistory(addHistoryTrack) {
       this.loading = true
       try {
-        await this.addHistory(addHistoryTrack)
+        await this.addHistoryTrack(addHistoryTrack)
         this.loading = false
       } catch(error) {
         this.loading = false
