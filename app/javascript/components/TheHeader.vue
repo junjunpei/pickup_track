@@ -58,7 +58,7 @@
             </v-list-item>
             <v-list-item
               :to="{ name: 'UserInformation' }"
-              id="user-edit"
+              id="user-information"
             >
               <v-list-item-title>
                 ユーザー情報

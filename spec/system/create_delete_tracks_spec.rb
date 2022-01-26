@@ -33,7 +33,7 @@ RSpec.describe "CreateDeleteTracks", type: :system do
         sleep 1
         expect(page).to have_content 'マイライブラリに追加しました'
         expect(find('#tracks-list')).to have_selector '#delete-icon'
-        find('#delete-icon').click
+        first('#delete-icon').click
         sleep 1
         expect(page).to have_content 'マイライブラリから削除しました'
         expect(find('#tracks-list')).to have_selector '#create-icon'
