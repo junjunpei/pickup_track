@@ -95,6 +95,12 @@ export default {
     ...mapGetters("historyTracks", ["historyTracks"]),
   },
 
+  watch: {
+    historyTracks: function() {
+      this.handleFetchHistoryTracksTimes()
+    }
+  },
+
   methods: {
     ...mapActions("historyTracks",[
       "fetchHistoryTracks",
