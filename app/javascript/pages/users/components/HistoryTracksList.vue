@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="mx-auto"
-    id="tracks-list"
+    id="history-list"
   >
     <v-list>
       <slot
@@ -14,6 +14,7 @@
           dense
           :items="order"
           class="mb-n5"
+          id="order-status"
         ></v-select>
       </v-col>
 
