@@ -86,10 +86,12 @@ export default {
       submitting: false,
       track: {
         track_id: '',
+        artist_id: '',
         name: '',
         artist_name: '',
         album_name: '',
-        image_url: ''
+        image_url: '',
+        track_url: ''
       }
     }
   },
@@ -164,10 +166,12 @@ export default {
 
     async handleAddTrack(addTrack) {
       this.track.track_id = addTrack.id
+      this.track.artist_id = addTrack.artists[0].id
       this.track.name = addTrack.name
       this.track.artist_name = addTrack.artists[0].name
       this.track.album_name = addTrack.album.name
       this.track.image_url = addTrack.album.images[0].url
+      this.track.track_url = addTrack.external_urls.spotify
       this.submitting = true
       try {
         await this.addTrack(this.track)
@@ -194,10 +198,12 @@ export default {
 
     async handleDeleteTrack(deleteTrack) {
       this.track.track_id = deleteTrack.id
+      this.track.artist_id = deleteTrack.artists[0].id
       this.track.name = deleteTrack.name
       this.track.artist_name = deleteTrack.artists[0].name
       this.track.album_name = deleteTrack.album.name
       this.track.image_url = deleteTrack.album.images[0].url
+      this.track.track_url = deleteTrack.external_urls.spotify
       this.submitting = true
       try {
         await this.deleteTrack(this.track)

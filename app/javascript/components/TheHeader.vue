@@ -57,11 +57,11 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item
-              :to="{ name: 'UserEdit' }"
-              id="user-edit"
+              :to="{ name: 'UserInformation' }"
+              id="user-information"
             >
               <v-list-item-title>
-                ユーザー情報編集
+                ユーザー情報
               </v-list-item-title>
             </v-list-item>
             <v-divider />

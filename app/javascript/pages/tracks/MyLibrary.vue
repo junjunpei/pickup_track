@@ -2,7 +2,7 @@
   <v-container
     id="my-library"
   >
-    <v-row align="center">
+    <v-row>
       <v-col
         lg="6"
         offset-lg="3"
@@ -21,6 +21,7 @@
             :track="pickupTrack"
             :loading="loading"
             @pickup-track="handlePickupTrack"
+            @history-track="handleAddHistory"
           />
         </div>
         <v-text-field
@@ -38,7 +39,6 @@
         </v-text-field>
         <TracksListCard
           :tracks="searchedTracks"
-          :library="myLibrary"
           :submitting="submitting"
           @delete-track="handleDeleteTrack"
         >
@@ -116,30 +116,20 @@ export default {
       "deleteTrack",
     ]),
 
-    // async handleAddTrack(addTrack) {
-    //   this.submitting = true
-    //   try {
-    //     await this.addTrack(addTrack)
-    //     this.submitting = false
-    //     this.$store.dispatch("flashMessages/showMessage",
-    //       {
-    //         message: "マイライブラリに追加しました",
-    //         type: "blue lighten-1",
-    //         status: true
-    //       }
-    //     )
-    //   } catch(error) {
-    //     this.submitting = false
-    //     this.$store.dispatch("flashMessages/showMessage",
-    //       {
-    //         message: "追加に失敗しました",
-    //         type: "error",
-    //         status: true
-    //       }
-    //     )
-    //     console.log(error)
-    //   }
-    // },
+    ...mapActions("historyTracks", [
+      "addHistoryTrack"
+    ]),
+
+    async handleAddHistory(addHistoryTrack) {
+      this.loading = true
+      try {
+        await this.addHistoryTrack(addHistoryTrack)
+        this.loading = false
+      } catch(error) {
+        this.loading = false
+        console.log(error)
+      }
+    },
 
     async handleDeleteTrack(deleteTrack) {
       this.submitting = true

@@ -35,7 +35,7 @@
       </v-btn>
 
       <v-btn
-        :to="{ name: 'UserEdit' }"
+        :to="{ name: 'UserInformation' }"
         exact
       >
         <span style="font-size:x-small">ユーザー情報</span>

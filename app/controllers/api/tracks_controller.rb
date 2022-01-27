@@ -9,13 +9,12 @@ class Api::TracksController < ApplicationController
 
   def search
     # return unless params[:search].present?
-    # result = RSpotify::Track.search(params[:search])
-    # @tracks = Kaminari.paginate_array(result).page(params[:page]).per(10)
+    # tracks = RSpotify::Track.search(params[:search], limit: 50, market: 'JP')
     uri = URI.parse(ENV['SEARCH_URL'])
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
-    header = { 'Authorization' => "Bearer #{@bearer_token}", 'Accept-Language' => 'ja;q=1' }
-    uri.query = URI.encode_www_form({ q: params[:search], type: 'track', limit: '50', offset: '0', market: 'JP' })
+    header = { 'Authorization' => "Bearer #{@bearer_token}", 'Accept-Language' => 'ja' }
+    uri.query = URI.encode_www_form({ q: params[:search], type: 'track', limit: '50', market: 'JP' })
     response = http.get(uri.request_uri, header)
     response_body = JSON.parse(response.body)
     tracks = response_body['tracks']['items']
@@ -73,6 +72,6 @@ class Api::TracksController < ApplicationController
   end
 
   def track_params
-    params.require(:track).permit(:track_id, :name, :artist_name, :album_name, :image_url)
+    params.require(:track).permit(:track_id, :artist_id, :name, :artist_name, :album_name, :image_url, :track_url)
   end
 end

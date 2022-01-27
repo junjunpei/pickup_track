@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_03_092709) do
+ActiveRecord::Schema.define(version: 2022_01_21_064227) do
 
   create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.string "email"
@@ -18,6 +18,20 @@ ActiveRecord::Schema.define(version: 2022_01_03_092709) do
     t.text "message", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "track_id", null: false
+    t.string "artist_id", null: false
+    t.text "name"
+    t.text "artist_name"
+    t.text "album_name"
+    t.text "image_url"
+    t.text "track_url", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_histories_on_user_id"
   end
 
   create_table "tracks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
@@ -29,6 +43,8 @@ ActiveRecord::Schema.define(version: 2022_01_03_092709) do
     t.text "artist_name"
     t.text "album_name"
     t.text "image_url"
+    t.string "artist_id", null: false
+    t.text "track_url", null: false
     t.index ["user_id", "track_id"], name: "index_tracks_on_user_id_and_track_id", unique: true
     t.index ["user_id"], name: "index_tracks_on_user_id"
   end
@@ -51,5 +67,6 @@ ActiveRecord::Schema.define(version: 2022_01_03_092709) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
   end
 
+  add_foreign_key "histories", "users"
   add_foreign_key "tracks", "users"
 end

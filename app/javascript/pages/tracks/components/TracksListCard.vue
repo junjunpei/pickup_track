@@ -92,8 +92,7 @@ export default {
     },
 
     library: {
-      type: Array,
-      required: true
+      type: Array
     },
 
     submitting: {
@@ -123,3 +122,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>

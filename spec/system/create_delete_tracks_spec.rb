@@ -10,7 +10,7 @@ RSpec.describe "CreateDeleteTracks", type: :system do
         visit "/search"
         fill_in 'Search', with: ENV['SEARCH_TRACK_NAME']
         click_on '検索'
-        sleep 2
+        sleep 3
         first('#create-icon').click
         sleep 1
         expect(page).to have_content 'マイライブラリに追加しました'
@@ -33,7 +33,7 @@ RSpec.describe "CreateDeleteTracks", type: :system do
         sleep 1
         expect(page).to have_content 'マイライブラリに追加しました'
         expect(find('#tracks-list')).to have_selector '#delete-icon'
-        find('#delete-icon').click
+        first('#delete-icon').click
         sleep 1
         expect(page).to have_content 'マイライブラリから削除しました'
         expect(find('#tracks-list')).to have_selector '#create-icon'
