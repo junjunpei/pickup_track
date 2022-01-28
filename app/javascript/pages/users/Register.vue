@@ -100,12 +100,13 @@
       </form>
     </ValidationObserver>
     <div class="text-center mt-7">
-      <router-link
-        color="blue"
+      <v-btn
+        text
+        color="light-blue accent-3"
         :to="{ name: 'Login' }"
       >
         登録済みの方はこちら
-      </router-link>
+      </v-btn>
     </div>
     <v-dialog
       max-width="500"

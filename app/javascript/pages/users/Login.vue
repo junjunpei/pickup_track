@@ -56,12 +56,13 @@
       </form>
     </ValidationObserver>
     <div class="text-center mt-7">
-      <router-link
-        color="blue"
+      <v-btn
+        text
+        color="light-blue accent-3"
         :to="{ name: 'Register'}"
       >
         登録がまだの方はこちら
-      </router-link>
+      </v-btn>
       <PasswordResetMail></PasswordResetMail>
     </div>
   </v-container>
