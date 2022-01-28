@@ -25,14 +25,10 @@
                     WELCOME TO
                   </span>
 
-                  <br>
+                  <v-row>
+                    <v-img width="100" :src="logo"></v-img>
+                  </v-row>
 
-                  <span
-                    :class="[$vuetify.breakpoint.xs ? 'text-h3' : 'text-h2']"
-                    class="font-weight-black"
-                  >
-                    Pickup Track
-                  </span>
 
                 </v-col>
 
@@ -177,6 +173,7 @@ export default {
   data () {
     return {
       topImage: require('../images/top.jpg'),
+      logo: require('../images/Pickup2.png'),
       features: [
         {
           src: require('../images/add.svg'),

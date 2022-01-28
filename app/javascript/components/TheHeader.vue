@@ -4,23 +4,12 @@
     color="black"
     height="80"
   >
-    <v-avatar
-      class="mr-3"
-      color="grey lighten-5"
-      size="30"
-    >
-      <v-img
-        contain
-        max-height="70%"
-      ></v-img>
-    </v-avatar>
 
     <v-toolbar-title
       style="cursor: pointer"
       @click="$router.push('/')"
-      class="font-weight-black headline"
     >
-      Song Shuffle
+      <v-img :width="width" :src="logo"></v-img>
     </v-toolbar-title>
 
     <v-spacer />
@@ -108,8 +97,24 @@ import { mapGetters, mapActions } from "vuex"
 export default {
   name: "TheHeader",
 
+  data() {
+    return {
+      logo: require('../images/Pickup2.png')
+    }
+  },
+
   computed: {
-    ...mapGetters("users", ["authUser"])
+    ...mapGetters("users", ["authUser"]),
+
+    width () {
+      switch (this.$vuetify.breakpoint.name) {
+        case 'xs': return 200
+        case 'sm': return 280
+        case 'md': return 280
+        case 'lg': return 320
+        case 'xl': return 320
+      }
+    }
   },
 
   methods: {
