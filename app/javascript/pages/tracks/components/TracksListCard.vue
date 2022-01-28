@@ -17,7 +17,20 @@
             <v-img
               alt="Track image"
               :src="track.album.images[2].url"
-            ></v-img>
+            >
+              <template v-slot:placeholder>
+                <v-row
+                  class="fill-height ma-0"
+                  align="center"
+                  justify="center"
+                >
+                  <v-progress-circular
+                    indeterminate
+                    color="white"
+                  ></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -57,7 +70,20 @@
             <v-img
               alt="Track image"
               :src="track.image_url"
-            ></v-img>
+            >
+              <template v-slot:placeholder>
+                <v-row
+                  class="fill-height ma-0"
+                  align="center"
+                  justify="center"
+                >
+                  <v-progress-circular
+                    indeterminate
+                    color="white"
+                  ></v-progress-circular>
+                </v-row>
+              </template>
+            </v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
