@@ -15,7 +15,21 @@
     <v-spacer />
 
     <template v-if="$vuetify.breakpoint.mdAndUp">
+      <v-btn
+        text
+        :to="{ name: 'Top' }"
+        class="mr-5"
+        exact
+      >
+        ホーム
+      </v-btn>
       <template v-if="authUser">
+        <v-btn
+          text
+          :to="{ name: 'Search' }"
+        >
+          楽曲検索
+        </v-btn>
         <v-menu
           offset-y
           transition="scale-transition"
@@ -27,7 +41,7 @@
                   x-large
                   v-bind="attrs"
                   v-on="{ ...tooltip, ...menu }"
-                  class="mr-12"
+                  class="mr-12 ml-8"
                   id="user-menu"
                 >
                   mdi-account
@@ -64,13 +78,6 @@
             </v-list-item>
           </v-list>
         </v-menu>
-        <v-btn
-          text
-          :to="{ name: 'Search' }"
-          class="mr-5"
-        >
-          楽曲検索
-        </v-btn>
       </template>
       <template v-else>
         <v-btn
