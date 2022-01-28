@@ -21,6 +21,7 @@
         class="mr-5"
         exact
       >
+        <v-icon>mdi-home</v-icon>
         ホーム
       </v-btn>
       <template v-if="authUser">
@@ -28,6 +29,7 @@
           text
           :to="{ name: 'Search' }"
         >
+          <v-icon>mdi-magnify</v-icon>
           楽曲検索
         </v-btn>
         <v-menu
@@ -56,6 +58,7 @@
               id="my-library"
             >
               <v-list-item-title>
+                <v-icon>mdi-music-box-multiple</v-icon>
                 マイライブラリ
               </v-list-item-title>
             </v-list-item>
@@ -64,6 +67,7 @@
               id="user-information"
             >
               <v-list-item-title>
+                <v-icon>mdi-account</v-icon>
                 ユーザー情報
               </v-list-item-title>
             </v-list-item>
@@ -73,6 +77,7 @@
               id="logout"
             >
               <v-list-item-title class="error--text">
+                <v-icon color="error">mdi-logout</v-icon>
                 ログアウト
               </v-list-item-title>
             </v-list-item>
@@ -85,12 +90,14 @@
           class="mr-6"
           text
         >
+          <v-icon>mdi-account-plus</v-icon>
           新規登録
         </v-btn>
         <v-btn
           :to="{ name: 'Login' }"
           text
         >
+          <v-icon>mdi-login</v-icon>
           ログイン
         </v-btn>
       </template>

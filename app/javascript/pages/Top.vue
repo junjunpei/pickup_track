@@ -83,6 +83,7 @@
           outlined
           v-if="authUser"
         >
+          <v-icon>mdi-magnify</v-icon>
           さっそく楽曲を探す
         </v-btn>
         <v-btn
@@ -92,6 +93,7 @@
           outlined
           v-else
         >
+          <v-icon>mdi-account-plus</v-icon>
           新規登録
         </v-btn>
       </v-container>
