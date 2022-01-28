@@ -30,6 +30,7 @@
         </template>
         <template v-slot:append-outer>
           <v-btn
+            outlined
             color="green accent-3"
             @click="searchTrack"
             :disabled="!search || loading"

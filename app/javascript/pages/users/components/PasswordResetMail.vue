@@ -58,7 +58,7 @@
               キャンセル
             </v-btn>
             <v-btn
-              color="success"
+              color="green accent-3"
               text
               type:="submit"
               :disabled="invalid || loading"

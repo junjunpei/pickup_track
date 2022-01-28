@@ -81,7 +81,7 @@
           >
             <template v-slot:label>
               <div>
-                <v-btn color="success" text @click.stop="handleOpenTermsModal" class="px-0">利用規約</v-btn>及び<v-btn color="success" text @click.stop="handleOpenPrivacyModal" class="px-0">プライバシーポリシー</v-btn>に同意する
+                <v-btn color="pink" text @click.stop="handleOpenTermsModal" class="px-0">利用規約</v-btn>及び<v-btn color="pink" text @click.stop="handleOpenPrivacyModal" class="px-0">プライバシーポリシー</v-btn>に同意する
               </div>
             </template>
           </v-checkbox>
@@ -89,10 +89,11 @@
 
         <v-btn
           @click="register"
+          outlined
           class="mt-4"
           type="submit"
           :disabled="invalid || loading"
-          color="success"
+          color="green accent-3"
         >
           登録
         </v-btn>
@@ -117,7 +118,7 @@
         <v-card-actions>
           <v-spacer />
           <v-btn
-            color="success"
+            color="green accent-3"
             text
             @click="handleCloseModal"
           >

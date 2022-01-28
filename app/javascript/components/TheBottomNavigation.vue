@@ -1,7 +1,7 @@
 <template>
   <v-bottom-navigation
     app
-    color="success"
+    color="green accent-3"
     grow
     v-model="value"
   >

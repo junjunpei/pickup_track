@@ -70,10 +70,11 @@
 
         <v-btn
           @click="handleUpdateUser"
+          outlined
           class="mt-4"
           type="submit"
           :disabled="loading || invalid"
-          color="success"
+          color="green accent-3"
         >
           更新
         </v-btn>

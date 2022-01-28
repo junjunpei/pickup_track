@@ -77,7 +77,7 @@
               type="submit"
               outlined
               :disabled="invalid || loading"
-              color="success"
+              color="green accent-3"
               class="mt-3"
             >
               送信

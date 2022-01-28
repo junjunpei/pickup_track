@@ -6,7 +6,7 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-btn
-        color="success"
+        color="green accent-3"
         outlined
         v-bind="attrs"
         v-on="on"
@@ -18,7 +18,7 @@
       <v-fab-transition>
         <v-btn
           v-show="visible"
-          color="success"
+          color="green accent-3"
           fab
           fixed
           bottom
@@ -60,7 +60,7 @@
 
       <v-card-actions>
         <v-btn
-          color="success"
+          color="green accent-3"
           class="px-0"
           text
           :disabled="loading"
@@ -69,7 +69,7 @@
           もう一度！
         </v-btn>
         <v-btn
-          color="primary"
+          color="light-blue accent-3"
           class="px-0"
           text
           :disabled="loading"

@@ -44,10 +44,11 @@
 
         <v-btn
           @click="login"
+          outlined
           class="mt-10"
           type="submit"
           :disabled="invalid || loading"
-          color="success"
+          color="green accent-3"
           id="login"
         >
           ログイン

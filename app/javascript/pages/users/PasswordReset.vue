@@ -63,7 +63,7 @@
               type="submit"
               outlined
               :disabled="invalid || loading"
-              color="success"
+              color="green accent-3"
             >
               更新
             </v-btn>

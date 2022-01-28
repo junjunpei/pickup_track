@@ -41,7 +41,7 @@
             </v-list-item-content>
           </v-list-item>
           <v-btn
-            color="success"
+            color="green accent-3"
             outlined
             class="mt-3"
             :to="{ name: 'UserEdit' }"

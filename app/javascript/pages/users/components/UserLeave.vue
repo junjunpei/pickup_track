@@ -44,7 +44,7 @@
           id="check-box"
         >
           <template v-slot:label>
-            <div class="info--text">
+            <div class="light-blue--text text--accent-3">
               上記の注意事項に同意する。
             </div>
           </template>
@@ -55,7 +55,7 @@
           <v-spacer />
 
           <v-btn
-            color="success"
+            color="green accent-3"
             text
             @click="handleCloseLeaveModal"
           >
