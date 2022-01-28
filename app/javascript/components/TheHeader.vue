@@ -99,7 +99,7 @@ export default {
 
   data() {
     return {
-      logo: require('../images/Pickup2.png')
+      logo: require('../images/logo.png')
     }
   },
 

@@ -173,7 +173,7 @@ export default {
   data () {
     return {
       topImage: require('../images/top.jpg'),
-      logo: require('../images/Pickup2.png'),
+      logo: require('../images/logo.png'),
       features: [
         {
           src: require('../images/add.svg'),
