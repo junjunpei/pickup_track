@@ -94,7 +94,7 @@
           v-else
         >
           <v-icon>mdi-account-plus</v-icon>
-          新規登録
+          ユーザー登録
         </v-btn>
       </v-container>
 

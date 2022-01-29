@@ -64,7 +64,7 @@
         :to="{ name: 'Register' }"
         exact
       >
-        <span style="font-size:x-small">新規登録</span>
+        <span style="font-size:x-small">ユーザー登録</span>
 
         <v-icon>mdi-account-plus</v-icon>
       </v-btn>

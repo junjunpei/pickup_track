@@ -35,12 +35,30 @@ export default {
     this.handleShowFooterMargin()
   },
 
+  mounted() {
+    let route = this.$route
+    this.setMeta(route)
+  },
+
+  watch: {
+    "$route" (route, from) {
+      this.setMeta(route)
+    }
+  },
+
   methods: {
     handleShowFooterMargin() {
       if (window.innerWidth < 960) {
         this.isActive = true
       } else {
         this.isActive = false
+      }
+    },
+
+    setMeta(route) {
+      if (route.meta.title) {
+        let setTitle = route.meta.title
+        document.title = setTitle
       }
     }
   }
