@@ -7,7 +7,7 @@
 
     <v-toolbar-title
       style="cursor: pointer"
-      @click="$router.push('/')"
+      @click="$router.push('/').catch(err => {})"
     >
       <v-img :width="width" :src="logo"></v-img>
     </v-toolbar-title>
