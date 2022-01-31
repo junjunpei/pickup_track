@@ -95,6 +95,14 @@ export default {
     }
   },
 
+  watch: {
+    dialog: function(boolean) {
+      if (boolean == false) {
+        this.checkbox = false
+      }
+    }
+  },
+
   methods: {
     handleOpenLeaveModal() {
       this.dialog = true
@@ -102,7 +110,6 @@ export default {
 
     handleCloseLeaveModal() {
       this.dialog = false
-      this.checkbox = false
     },
 
     handleLeaveUser() {
