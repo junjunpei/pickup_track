@@ -10,6 +10,7 @@
       <v-btn
         :to="{ name: 'Top' }"
         exact
+        v-if="homeActive"
       >
         <span style="font-size:x-small">ホーム</span>
 
@@ -43,7 +44,7 @@
         <v-icon>mdi-account</v-icon>
       </v-btn>
 
-      <v-btn @click="handleLogout">
+      <v-btn v-if="logoutActive" @click="handleLogout">
         <span style="font-size:x-small">ログアウト</span>
 
         <v-icon>mdi-logout</v-icon>
@@ -89,8 +90,15 @@ export default {
 
   data() {
     return {
-      value: 1
+      value: 1,
+      homeActive: false,
+      logoutActive: false
     }
+  },
+
+  created() {
+    window.addEventListener('resize', this.handleShowLogout)
+    this.handleShowLogout()
   },
 
   computed: {
@@ -121,7 +129,20 @@ export default {
           }
         )
       }
-    }
+    },
+
+    handleShowLogout() {
+      if (window.innerWidth > 330) {
+        this.homeActive = true
+        this.logoutActive = true
+      } else if (window.innerWidth > 250) {
+        this.homeActive = true
+        this.logoutActive = false
+      } else {
+        this.homeActive = false
+        this.logoutActive = false
+      }
+    },
   }
 }
 </script>

@@ -40,15 +40,26 @@
               <v-list-item-title class="list-item">{{ historyTracks.length }}回</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-btn
-            color="green accent-3"
-            outlined
-            class="mt-3"
-            :to="{ name: 'UserEdit' }"
-          >
-            <v-icon>mdi-account-edit-outline</v-icon>
-            ユーザー情報編集
-          </v-btn>
+
+          <v-row class="mt-3 justify-space-around">
+            <v-btn
+              color="green accent-3"
+              outlined
+              :to="{ name: 'UserEdit' }"
+            >
+              <v-icon>mdi-account-edit-outline</v-icon>
+              ユーザー情報編集
+            </v-btn>
+
+            <v-btn
+              color="error"
+              outlined
+              @click="handleLogout"
+            >
+              <v-icon>mdi-logout</v-icon>
+              ログアウト
+            </v-btn>
+          </v-row>
         </v-list>
         <HistoryTracksList
           :tracks="historyTracks"
@@ -107,6 +118,8 @@ export default {
       "deleteHistoryTrack"
     ]),
 
+    ...mapActions("users", ["logoutUser"]),
+
     handleFetchHistoryTracksTimes() {
       this.$axios.get("histories/times")
         .then(response => {
@@ -139,6 +152,29 @@ export default {
           }
         )
         console.log(error)
+      }
+    },
+
+    async handleLogout() {
+      try {
+        await this.logoutUser()
+        this.$router.push({ name: "Top" }).catch(err => {})
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "ログアウトしました",
+            type: "success",
+            status: true
+          }
+        )
+      } catch(error) {
+        console.log(error)
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "ログアウトに失敗しました",
+            type: "error",
+            status: true
+          }
+        )
       }
     }
   }
