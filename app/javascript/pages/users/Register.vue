@@ -172,6 +172,14 @@ export default {
     }
   },
 
+  watch: {
+    dialog: function(boolean) {
+      if (boolean == false) {
+        this.handleCloseModal()
+      }
+    }
+  },
+
   methods: {
     submit() {
       this.$refs.observer.validate()
