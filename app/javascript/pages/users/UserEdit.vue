@@ -92,7 +92,6 @@
         <UserLeave
           @leave-user="handleLeaveUser"
           :loading="this.loading"
-          class="text-center"
         />
       </v-col>
     </v-row>
@@ -104,7 +103,7 @@ import { mapGetters, mapActions } from "vuex"
 import UserLeave from "./components/UserLeave"
 
 export default {
-  name: 'EditUser',
+  name: "EditUser",
 
   components: {
     UserLeave
