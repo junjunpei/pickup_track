@@ -9,7 +9,10 @@
       style="cursor: pointer"
       @click="$router.push('/').catch(err => {})"
     >
-      <v-img :width="width" :src="logo"></v-img>
+      <v-img
+        :width="width"
+        :src="logo"
+      ></v-img>
     </v-toolbar-title>
 
     <v-spacer />
@@ -28,6 +31,7 @@
         <v-btn
           text
           :to="{ name: 'Search' }"
+          exact
         >
           <v-icon>mdi-magnify</v-icon>
           楽曲検索
@@ -56,6 +60,7 @@
             <v-list-item
               :to="{ name: 'MyLibrary' }"
               id="my-library"
+              exact
             >
               <v-list-item-title>
                 <v-icon>mdi-music-box-multiple</v-icon>
@@ -65,6 +70,7 @@
             <v-list-item
               :to="{ name: 'UserInformation' }"
               id="user-information"
+              exact
             >
               <v-list-item-title>
                 <v-icon>mdi-account</v-icon>
@@ -89,6 +95,7 @@
           :to="{ name: 'Register' }"
           class="mr-6"
           text
+          exact
         >
           <v-icon>mdi-account-plus</v-icon>
           ユーザー登録
@@ -96,6 +103,7 @@
         <v-btn
           :to="{ name: 'Login' }"
           text
+          exact
         >
           <v-icon>mdi-login</v-icon>
           ログイン
@@ -137,7 +145,7 @@ export default {
     async handleLogout() {
       try {
         await this.logoutUser()
-        this.$router.push({ name: "Top" })
+        this.$router.push({ name: "Top" }).catch(err => {})
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "ログアウトしました",

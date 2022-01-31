@@ -14,6 +14,7 @@
         small
         class="mb-2"
         :to="{ name: 'TermsOfService' }"
+        exact
       >
         利用規約
       </v-btn>
@@ -24,6 +25,7 @@
         small
         class="mb-2"
         :to="{ name: 'PrivacyPolicy' }"
+        exact
       >
         プライバシーポリシー
       </v-btn>
@@ -34,6 +36,7 @@
         small
         class="mb-2"
         :to="{ name: 'ContactForm' }"
+        exact
       >
         お問い合わせ
       </v-btn>
