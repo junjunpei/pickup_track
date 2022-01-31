@@ -7,7 +7,7 @@ RSpec.describe "Registers", type: :system do
     context 'フォームの正常に入力されている' do
       it '登録に成功する' do
         visit root_path
-        click_on '新規登録', match: :first
+        click_on 'ユーザー登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -25,7 +25,7 @@ RSpec.describe "Registers", type: :system do
     context '名前が未入力' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録', match: :first
+        click_on 'ユーザー登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: ''
@@ -40,7 +40,7 @@ RSpec.describe "Registers", type: :system do
     context 'メールアドレスが未入力' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録', match: :first
+        click_on 'ユーザー登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -55,7 +55,7 @@ RSpec.describe "Registers", type: :system do
     context 'パスワードが未入力' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録', match: :first
+        click_on 'ユーザー登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -71,7 +71,7 @@ RSpec.describe "Registers", type: :system do
     context 'パスワード確認が未入力' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録', match: :first
+        click_on 'ユーザー登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -86,7 +86,7 @@ RSpec.describe "Registers", type: :system do
     context '名前が11文字以上' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録', match: :first
+        click_on 'ユーザー登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'aaaaaaaaaaa'
@@ -102,7 +102,7 @@ RSpec.describe "Registers", type: :system do
     context 'メールアドレスの形式で入力されていない' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録', match: :first
+        click_on 'ユーザー登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -118,7 +118,7 @@ RSpec.describe "Registers", type: :system do
       it '登録ボタンが押せなくなっている' do
         existed_user = create(:user)
         visit root_path
-        click_on '新規登録', match: :first
+        click_on 'ユーザー登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -133,7 +133,7 @@ RSpec.describe "Registers", type: :system do
     context 'パスワードとパスワード確認が2文字以下' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録', match: :first
+        click_on 'ユーザー登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -149,7 +149,7 @@ RSpec.describe "Registers", type: :system do
     context 'パスワードとパスワード確認が一致しない' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録', match: :first
+        click_on 'ユーザー登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
@@ -164,7 +164,7 @@ RSpec.describe "Registers", type: :system do
     context 'チェックボックスをチェックしない' do
       it '登録ボタンが押せなくなっている' do
         visit root_path
-        click_on '新規登録', match: :first
+        click_on 'ユーザー登録', match: :first
         expect(current_path).to eq '/register'
         expect(page).to have_content 'ユーザー登録'
         fill_in '名前', with: 'example'
