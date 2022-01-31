@@ -1,11 +1,9 @@
 <template>
-  <v-container
-    id="my-library"
-  >
+  <v-container id="my-library">
     <v-row>
       <v-col
-        lg="6"
-        offset-lg="3"
+        lg="8"
+        offset-lg="2"
         md="8"
         offset-md="2"
         sm="10"
@@ -13,7 +11,7 @@
         xs="10"
         offset-xs="1"
       >
-        <div class="mt-4 mb-5 d-flex justify-space-between">
+        <div class="my-5 d-flex justify-space-between">
           <h2>
             マイライブラリ
           </h2>
@@ -28,6 +26,7 @@
           v-model="search"
           type="text"
           filled
+          dense
           clearable
           label="Search"
           clear-icon="mdi-close-thick"

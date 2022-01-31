@@ -4,8 +4,8 @@
   >
     <v-row>
       <v-col
-        lg="6"
-        offset-lg="3"
+        lg="8"
+        offset-lg="2"
         md="8"
         offset-md="2"
         sm="10"

@@ -47,7 +47,7 @@
       </v-row>
     </section>
 
-    <section>
+    <section class="black">
       <div class="py-8"></div>
 
       <v-container class="text-center">
@@ -101,10 +101,7 @@
       <div class="py-8"></div>
     </section>
 
-    <section
-      id="features"
-      class="black"
-    >
+    <section id="features">
       <div class="py-8"></div>
 
       <v-container class="text-center">
@@ -132,7 +129,7 @@
           >
             <v-card
               class="px-4"
-              color="black"
+              color="#121212"
               flat
             >
               <v-theme-provider dark>

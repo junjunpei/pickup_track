@@ -1,73 +1,82 @@
 <template>
-  <div
-    id="tracks-search"
-    class="col-lg-6 offset-lg-3"
-  >
-    <v-container>
-      <h2 class="mt-1 mb-5">
-        楽曲検索
-      </h2>
-      <v-text-field
-        v-model="search"
-        type="text"
-        filled
-        clearable
-        label="Search"
-        clear-icon="mdi-close-thick"
-        @click:clear="clearSearch"
-        @keydown.enter="searchTrack"
+  <v-container id="tracks-search">
+    <v-row>
+      <v-col
+        lg="8"
+        offset-lg="2"
+        md="8"
+        offset-md="2"
+        sm="10"
+        offset-sm="1"
+        xs="10"
+        offset-xs="1"
       >
-        <template v-slot:prepend-inner>
-          <v-fade-transition leave-absolute>
-            <v-progress-circular
-              v-if="loading"
-              size="24"
-              color="info"
-              indeterminate
-            ></v-progress-circular>
-            <v-icon v-else>mdi-magnify</v-icon>
-          </v-fade-transition>
-        </template>
-        <template v-slot:append-outer>
-          <v-btn
-            outlined
+        <h2 class="my-5">
+          楽曲検索
+        </h2>
+        <v-text-field
+          v-model="search"
+          type="text"
+          filled
+          clearable
+          dense
+          label="Search"
+          clear-icon="mdi-close-thick"
+          @click:clear="clearSearch"
+          @keydown.enter="searchTrack"
+        >
+          <template v-slot:prepend-inner>
+            <v-fade-transition leave-absolute>
+              <v-progress-circular
+                v-if="loading"
+                size="24"
+                color="info"
+                indeterminate
+              ></v-progress-circular>
+              <v-icon v-else>mdi-magnify</v-icon>
+            </v-fade-transition>
+          </template>
+          <template v-slot:append-outer>
+            <v-btn
+              outlined
+              color="green accent-3"
+              @click="searchTrack"
+              :disabled="!search || loading"
+            >
+              検索
+            </v-btn>
+          </template>
+        </v-text-field>
+        <TracksListCard
+          :tracks="displayTracks"
+          :library="myLibrary"
+          :submitting="submitting"
+          @add-track="handleAddTrack"
+          @delete-track="handleDeleteTrack"
+        >
+          <template v-slot:subheader>
+            <v-subheader>
+              検索結果
+            </v-subheader>
+          </template>
+        </TracksListCard>
+        <div
+          class="text-center"
+          v-if="displayTracks.length != 0"
+        >
+          <v-pagination
+            v-model="page"
+            :length="lastPage"
             color="green accent-3"
-            @click="searchTrack"
-            :disabled="!search || loading"
-          >
-            検索
-          </v-btn>
-        </template>
-      </v-text-field>
-      <TracksListCard
-        :tracks="displayTracks"
-        :library="myLibrary"
-        :submitting="submitting"
-        @add-track="handleAddTrack"
-        @delete-track="handleDeleteTrack"
-      >
-        <template v-slot:subheader>
-          <v-subheader>
-            検索結果
-          </v-subheader>
-        </template>
-      </TracksListCard>
-      <div
-        class="text-center"
-        v-if="displayTracks.length != 0"
-      >
-        <v-pagination
-          v-model="page"
-          :length="lastPage"
-          color="green accent-3"
-          circle
-          prev-icon="mdi-menu-left"
-          next-icon="mdi-menu-right"
-          @input="pageChange"
-        ></v-pagination>
-      </div>
-    </v-container>
-  </div>
+            circle
+            prev-icon="mdi-menu-left"
+            next-icon="mdi-menu-right"
+            @input="pageChange"
+          ></v-pagination>
+        </div>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

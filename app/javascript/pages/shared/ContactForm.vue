@@ -4,8 +4,8 @@
   >
     <v-row>
       <v-col
-        lg="6"
-        offset-lg="3"
+        lg="8"
+        offset-lg="2"
         md="8"
         offset-md="2"
         sm="10"
@@ -13,7 +13,7 @@
         xs="10"
         offset-xs="1"
       >
-        <h2 class="mt-5">
+        <h2 class="mt-7">
           お問い合わせ
         </h2>
         <ValidationObserver

@@ -1,70 +1,83 @@
 <template>
   <v-container
     id="login-form"
-    class="text-center form-group col-lg-6 offset-lg-3"
   >
-    <h2 class="mt-10">
-      ログイン
-    </h2>
-    <ValidationObserver
-      ref="observer"
-      v-slot="{ invalid }"
-    >
-      <form @submit.prevent="submit">
-        <ValidationProvider
-          v-slot="{ errors }"
-          name="メールアドレス"
-          rules="required|email"
-        >
-          <v-text-field
-            v-model="user.email"
-            prepend-icon="mdi-email"
-            :error-messages="errors"
-            label="メールアドレス"
-            class="mt-10"
-          ></v-text-field>
-        </ValidationProvider>
-        <ValidationProvider
-          v-slot="{ errors }"
-          name="パスワード"
-          rules="required|min:3"
-          vid="password"
-        >
-          <v-text-field
-            v-model="user.password"
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            prepend-icon="mdi-shield-lock"
-            :error-messages="errors"
-            :type="showPassword ? 'text' : 'password'"
-            @click:append="showPassword = !showPassword"
-            label="パスワード"
-            class="mt-10"
-          ></v-text-field>
-        </ValidationProvider>
-
-        <v-btn
-          @click="login"
-          outlined
-          class="mt-10"
-          type="submit"
-          :disabled="invalid || loading"
-          color="green accent-3"
-          id="login"
-        >
-          ログイン
-        </v-btn>
-      </form>
-    </ValidationObserver>
-    <div class="text-center mt-7">
-      <v-btn
-        text
-        color="light-blue accent-3"
-        :to="{ name: 'Register'}"
+    <v-row>
+      <v-col
+        lg="8"
+        offset-lg="2"
+        md="8"
+        offset-md="2"
+        sm="10"
+        offset-sm="1"
+        xs="10"
+        offset-xs="1"
       >
-        登録がまだの方はこちら
-      </v-btn>
-      <PasswordResetMail></PasswordResetMail>
-    </div>
+        <h2 class="mt-8">
+          ログイン
+        </h2>
+        <ValidationObserver
+          ref="observer"
+          v-slot="{ invalid }"
+          class="text-center"
+        >
+          <form @submit.prevent="submit">
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="メールアドレス"
+              rules="required|email"
+            >
+              <v-text-field
+                v-model="user.email"
+                prepend-icon="mdi-email"
+                :error-messages="errors"
+                label="メールアドレス"
+                class="mt-10"
+              ></v-text-field>
+            </ValidationProvider>
+            <ValidationProvider
+              v-slot="{ errors }"
+              name="パスワード"
+              rules="required|min:3"
+              vid="password"
+            >
+              <v-text-field
+                v-model="user.password"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                prepend-icon="mdi-shield-lock"
+                :error-messages="errors"
+                :type="showPassword ? 'text' : 'password'"
+                @click:append="showPassword = !showPassword"
+                label="パスワード"
+                class="mt-10"
+              ></v-text-field>
+            </ValidationProvider>
+
+            <v-btn
+              @click="login"
+              outlined
+              class="mt-10"
+              type="submit"
+              :disabled="invalid || loading"
+              color="green accent-3"
+              id="login"
+            >
+              ログイン
+            </v-btn>
+          </form>
+        </ValidationObserver>
+        <div class="text-center mt-7">
+          <v-btn
+            text
+            color="light-blue accent-3"
+            :to="{ name: 'Register'}"
+          >
+            登録がまだの方はこちら
+          </v-btn>
+          <PasswordResetMail />
+        </div>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
