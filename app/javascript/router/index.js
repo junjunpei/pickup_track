@@ -23,72 +23,85 @@ const router = new VueRouter({
     {
       path: '/',
       component: Top,
-      name: 'Top'
+      name: 'Top',
+      meta: { title: "PICKUP TRACK" }
     },
     {
       path: '/register',
       component: Register,
-      name: 'Register'
+      name: 'Register',
+      meta: { title: "ユーザー登録 | PICKUP TRACK" }
     },
     {
       path: '/login',
       component: Login,
-      name: 'Login'
+      name: 'Login',
+      meta: { title: "ログイン | PICKUP TRACK" }
     },
     {
       path: '/search',
       component: Search,
       name: 'Search',
-      meta: { requiredAuth: true }
+      meta: { requiredAuth: true, title: "楽曲検索 | PICKUP TRACK" }
     },
     {
       path: '/mylibrary',
       component: MyLibrary,
       name: 'MyLibrary',
-      meta: { requiredAuth: true }
+      meta: { requiredAuth: true, title: "マイライブラリ | PICKUP TRACK" }
     },
     {
       path: '/user/edit',
       component: UserEdit,
       name: 'UserEdit',
-      meta: { requiredAuth: true }
+      meta: { requiredAuth: true, title: "ユーザー情報編集 | PICKUP TRACK" }
     },
     {
       path: '/reset_password/:id',
       component: PasswordReset,
-      name: 'PasswordReset'
+      name: 'PasswordReset',
+      meta: { title: "パスワード再設定 | PICKUP TRACK" }
     },
     {
       path: '/contact',
       component: ContactForm,
-      name: 'ContactForm'
+      name: 'ContactForm',
+      meta: { title: "お問い合わせ | PICKUP TRACK" }
     },
     {
       path: '*',
       component: NotFoundError,
-      name: 'NotfoundError'
+      name: 'NotfoundError',
+      meta: { title: "ページが見つかりませんでした | PICKUP TRACK" }
     },
     {
       path: '/error',
       component: InternalServerError,
-      name: 'InternalServerError'
+      name: 'InternalServerError',
+      meta: { title: "サーバーエラー | PICKUP TRACK" }
     },
     {
       path: '/terms',
       component: TermsOfService,
-      name: 'TermsOfService'
+      name: 'TermsOfService',
+      meta: { title: "利用規約 | PICKUP TRACK" }
     },
     {
       path: '/privacy',
       component: PrivacyPolicy,
-      name: 'PrivacyPolicy'
+      name: 'PrivacyPolicy',
+      meta: { title: "プライバシーポリシー | PICKUP TRACK" }
     },
     {
       path: "/user",
       component: UserInformation,
-      name: "UserInformation"
+      name: "UserInformation",
+      meta: { requiredAuth: true, title: "ユーザー情報 | PICKUP TRACK" }
     }
-  ]
+  ],
+  scrollBehavior() {
+    return { x: 0, y: 0 }
+  }
 })
 
 router.beforeEach((to, from, next) => {

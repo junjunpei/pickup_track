@@ -1,11 +1,9 @@
 <template>
-  <v-container
-    id="password-reset"
-  >
+  <v-container id="password-reset">
     <v-row>
       <v-col
-        lg="6"
-        offset-lg="3"
+        lg="8"
+        offset-lg="2"
         md="8"
         offset-md="2"
         sm="10"
@@ -13,10 +11,10 @@
         xs="10"
         offset-xs="1"
       >
-        <h2>
+        <h2 class="mt-8">
           パスワード再設定
         </h2>
-        <p class="mt-5">新しいパスワードをご入力ください。</p>
+        <p class="mt-7">新しいパスワードをご入力ください。</p>
         <ValidationObserver
           ref="observer"
           v-slot="{ invalid }"
@@ -55,6 +53,7 @@
                 :type="showPasswordConfirmation ? 'text' : 'password'"
                 @click:append="showPasswordConfirmation = !showPasswordConfirmation"
                 label="パスワード確認"
+                class="mt-3"
               ></v-text-field>
             </ValidationProvider>
             <v-btn
@@ -63,7 +62,7 @@
               type="submit"
               outlined
               :disabled="invalid || loading"
-              color="success"
+              color="green accent-3"
             >
               更新
             </v-btn>

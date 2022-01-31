@@ -25,14 +25,10 @@
                     WELCOME TO
                   </span>
 
-                  <br>
+                  <v-row>
+                    <v-img width="100" :src="logo"></v-img>
+                  </v-row>
 
-                  <span
-                    :class="[$vuetify.breakpoint.xs ? 'text-h3' : 'text-h2']"
-                    class="font-weight-black"
-                  >
-                    Pickup Track
-                  </span>
 
                 </v-col>
 
@@ -51,7 +47,7 @@
       </v-row>
     </section>
 
-    <section>
+    <section class="black">
       <div class="py-8"></div>
 
       <v-container class="text-center">
@@ -87,6 +83,7 @@
           outlined
           v-if="authUser"
         >
+          <v-icon>mdi-magnify</v-icon>
           さっそく楽曲を探す
         </v-btn>
         <v-btn
@@ -96,17 +93,15 @@
           outlined
           v-else
         >
-          新規登録
+          <v-icon>mdi-account-plus</v-icon>
+          ユーザー登録
         </v-btn>
       </v-container>
 
       <div class="py-8"></div>
     </section>
 
-    <section
-      id="features"
-      class="black"
-    >
+    <section id="features">
       <div class="py-8"></div>
 
       <v-container class="text-center">
@@ -134,7 +129,7 @@
           >
             <v-card
               class="px-4"
-              color="black"
+              color="#121212"
               flat
             >
               <v-theme-provider dark>
@@ -177,6 +172,7 @@ export default {
   data () {
     return {
       topImage: require('../images/top.jpg'),
+      logo: require('../images/logo.png'),
       features: [
         {
           src: require('../images/add.svg'),

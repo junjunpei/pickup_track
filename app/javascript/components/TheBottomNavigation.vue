@@ -1,7 +1,7 @@
 <template>
   <v-bottom-navigation
     app
-    color="success"
+    color="green accent-3"
     grow
     v-model="value"
   >
@@ -10,6 +10,7 @@
       <v-btn
         :to="{ name: 'Top' }"
         exact
+        v-if="homeActive"
       >
         <span style="font-size:x-small">ホーム</span>
 
@@ -43,7 +44,7 @@
         <v-icon>mdi-account</v-icon>
       </v-btn>
 
-      <v-btn @click="handleLogout">
+      <v-btn v-if="logoutActive" @click="handleLogout">
         <span style="font-size:x-small">ログアウト</span>
 
         <v-icon>mdi-logout</v-icon>
@@ -64,7 +65,7 @@
         :to="{ name: 'Register' }"
         exact
       >
-        <span style="font-size:x-small">新規登録</span>
+        <span style="font-size:x-small">ユーザー登録</span>
 
         <v-icon>mdi-account-plus</v-icon>
       </v-btn>
@@ -89,8 +90,15 @@ export default {
 
   data() {
     return {
-      value: 1
+      value: 1,
+      homeActive: false,
+      logoutActive: false
     }
+  },
+
+  created() {
+    window.addEventListener('resize', this.handleShowLogout)
+    this.handleShowLogout()
   },
 
   computed: {
@@ -121,7 +129,20 @@ export default {
           }
         )
       }
-    }
+    },
+
+    handleShowLogout() {
+      if (window.innerWidth > 330) {
+        this.homeActive = true
+        this.logoutActive = true
+      } else if (window.innerWidth > 250) {
+        this.homeActive = true
+        this.logoutActive = false
+      } else {
+        this.homeActive = false
+        this.logoutActive = false
+      }
+    },
   }
 }
 </script>

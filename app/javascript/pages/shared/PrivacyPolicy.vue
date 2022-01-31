@@ -85,7 +85,7 @@
     </ol>
 
     <h2 class="mt-8">第10条（お問い合わせ窓口）</h2>
-    <p class="mt-3 ml-4">本ポリシーに関するお問い合わせは，<v-btn color="success" text class="px-0" :to="{ name: 'ContactForm' }">お問い合わせフォーム</v-btn>までお願いいたします。</p>
+    <p class="mt-3 ml-4">本ポリシーに関するお問い合わせは，<v-btn color="green accent-3" text class="px-0" :to="{ name: 'ContactForm' }">お問い合わせフォーム</v-btn>までお願いいたします。</p>
 
     <p class="mt-15 mb-10" align="right">以上</p>
   </v-container>
