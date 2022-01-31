@@ -95,7 +95,6 @@ export default {
     handleClosePasswordResetModal() {
       this.dialog = false
       this.$refs.observer.reset()
-      this.user.email = ''
     },
 
     submit() {
