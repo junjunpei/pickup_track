@@ -117,7 +117,6 @@ export default {
         password: '',
         password_confirmation: '',
       },
-      // checkbox: null,
       showPassword: false,
       showPasswordConfirmation: false,
       loading: false
@@ -149,7 +148,6 @@ export default {
         this.loading = false
         this.user.password = ''
         this.user.password_confirmation = ''
-        // this.$router.push({ name: 'MyLibrary' })
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "更新が完了しました",
