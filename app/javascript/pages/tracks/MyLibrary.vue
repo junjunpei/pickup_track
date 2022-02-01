@@ -17,6 +17,7 @@
           </h2>
           <PickupTrack
             :track="pickupTrack"
+            :tracks="searchedTracks"
             :loading="loading"
             @pickup-track="handlePickupTrack"
             @history-track="handleAddHistory"

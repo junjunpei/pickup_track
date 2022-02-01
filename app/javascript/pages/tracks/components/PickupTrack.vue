@@ -29,7 +29,7 @@
       v-model="dialog"
       id="pickup-modal"
     >
-      <v-card>
+      <v-card v-if="this.tracks.length >= 1">
         <v-card-title class="text-h5">
           結果
         </v-card-title>
@@ -82,6 +82,31 @@
           </v-btn>
         </v-card-actions>
       </v-card>
+
+      <v-card v-else>
+        <v-card-title>楽曲を追加してからピックアップしてください</v-card-title>
+        <div class="text-center my-5">
+          <v-btn
+            color="green accent-3"
+            :to="{ name: 'Search' }"
+            outlined
+          >
+            <v-icon>mdi-magnify</v-icon>
+            楽曲検索画面へ
+          </v-btn>
+        </div>
+
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="error"
+            text
+            @click="handleClosePickupModal"
+          >
+            閉じる
+          </v-btn>
+        </v-card-actions>
+      </v-card>
     </v-dialog>
   </div>
 </template>
@@ -92,12 +117,16 @@ export default {
 
   props: {
     track: {
-      type: [Object, String],
-      required: true
+      type: [Object, String]
     },
 
     loading: {
       type: Boolean,
+      required: true
+    },
+
+    tracks: {
+      type: Array,
       required: true
     }
   },
