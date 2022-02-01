@@ -17,6 +17,7 @@
           </h2>
           <PickupTrack
             :track="pickupTrack"
+            :tracks="searchedTracks"
             :loading="loading"
             @pickup-track="handlePickupTrack"
             @history-track="handleAddHistory"
@@ -73,7 +74,6 @@ export default {
 
   data() {
     return {
-      // myLibraryTracks: [],
       search: '',
       loading: false,
       pickupTrack: '',
@@ -89,19 +89,11 @@ export default {
   computed: {
     ...mapGetters("myLibrary", ["myLibrary"]),
 
-    // sortTracks() {
-    //   return this.myLibraryTracks.sort((a,b) => a.index - b.index)
-    // },
-
     searchedTracks() {
       return this.myLibrary.filter(track => {
         return track.name.toLowerCase().indexOf(this.search.toLowerCase()) != -1 || track.artist_name.toLowerCase().indexOf(this.search.toLowerCase()) != -1 || track.album_name.toLowerCase().indexOf(this.search.toLowerCase()) != -1
       })
-    },
-
-    // setPickupTrack() {
-    //   this.pickupTrack = this.searchedTracks[Math.floor(Math.random() * this.searchedTracks.length)]
-    // }
+    }
   },
 
   created() {

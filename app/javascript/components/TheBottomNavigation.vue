@@ -3,7 +3,6 @@
     app
     color="green accent-3"
     grow
-    v-model="value"
   >
     <template v-if="authUser">
 
@@ -44,7 +43,10 @@
         <v-icon>mdi-account</v-icon>
       </v-btn>
 
-      <v-btn v-if="logoutActive" @click="handleLogout">
+      <v-btn
+        v-if="logoutActive"
+        @click="handleLogout"
+      >
         <span style="font-size:x-small">ログアウト</span>
 
         <v-icon>mdi-logout</v-icon>
@@ -90,7 +92,6 @@ export default {
 
   data() {
     return {
-      value: 1,
       homeActive: false,
       logoutActive: false
     }
@@ -111,7 +112,7 @@ export default {
     async handleLogout() {
       try {
         await this.logoutUser()
-        this.$router.push({ name: "Top" })
+        this.$router.push({ name: "Top" }).catch(err => {})
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "ログアウトしました",

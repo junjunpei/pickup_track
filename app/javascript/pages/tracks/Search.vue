@@ -53,6 +53,7 @@
           :submitting="submitting"
           @add-track="handleAddTrack"
           @delete-track="handleDeleteTrack"
+          v-if="this.displayTracks.length >= 1"
         >
           <template v-slot:subheader>
             <v-subheader>

@@ -12,9 +12,4 @@ class Api::SessionsController < ApplicationController
       head :unautorized
     end
   end
-
-  # def destroy
-  #   logout
-  #   redirect_to root_path, success: (t '.success')
-  # end
 end

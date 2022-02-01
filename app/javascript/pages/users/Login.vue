@@ -66,7 +66,7 @@
             </v-btn>
           </form>
         </ValidationObserver>
-        <div class="text-center mt-7">
+        <div class="mt-5 d-flex justify-center">
           <v-btn
             text
             color="light-blue accent-3"

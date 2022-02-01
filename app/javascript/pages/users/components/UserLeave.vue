@@ -1,22 +1,20 @@
 <template>
-  <v-container>
+  <v-row
+    justify="center"
+    class="mt-5"
+  >
+    <v-btn
+      color="error"
+      text
+      @click.stop="handleOpenLeaveModal"
+    >
+      退会する
+    </v-btn>
     <v-dialog
       max-width="500"
       id="user-leave-modal"
       v-model="dialog"
     >
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="error"
-          text
-          v-bind="attrs"
-          v-on="on"
-          class="mt-5"
-        >
-          退会する
-        </v-btn>
-      </template>
-
       <v-card>
         <v-card-title class="text-h5">
           退会する
@@ -74,7 +72,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-container>
+  </v-row>
 </template>
 
 <script>
@@ -95,6 +93,15 @@ export default {
     }
   },
 
+  watch: {
+    dialog: function(boolean) {
+      if (boolean == false) {
+        this.checkbox = false
+        this.handleCloseLeaveModal()
+      }
+    }
+  },
+
   methods: {
     handleOpenLeaveModal() {
       this.dialog = true
@@ -102,11 +109,10 @@ export default {
 
     handleCloseLeaveModal() {
       this.dialog = false
-      this.checkbox = false
     },
 
     handleLeaveUser() {
-      this.$emit('leave-user')
+      this.$emit("leave-user")
     },
 
     submit() {

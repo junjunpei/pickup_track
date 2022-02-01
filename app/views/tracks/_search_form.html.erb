@@ -1,8 +1,0 @@
-<%= form_with url: url, method: :get, local: true do |f| %>
-  <div class="input-group mb-3">
-    <%= f.text_field :search, class: 'form-control', placeholder: (t 'tracks.index.search_word') %>
-    <div class="input-group-append">
-      <%= f.submit (t 'tracks.index.search'), class: 'btn btn-primary' %>
-    </div>
-  </div>
-<% end %>

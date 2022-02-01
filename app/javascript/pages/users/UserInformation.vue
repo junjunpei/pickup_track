@@ -158,7 +158,7 @@ export default {
     async handleLogout() {
       try {
         await this.logoutUser()
-        this.$router.push({ name: "Top" }).catch(err => {})
+        this.$router.push({ name: "Top" })
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "ログアウトしました",

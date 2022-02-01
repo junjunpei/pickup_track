@@ -3,11 +3,6 @@ class Api::UsersController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :authenticate!, only: %i[me update]
 
-  # def new
-  #   return redirect_to root_path, info: (t 'defaults.message.already_logged_in') if logged_in?
-  #   @user = User.new
-  # end
-
   def create
     user = User.new(user_params)
     if user.save
@@ -29,10 +24,6 @@ class Api::UsersController < ApplicationController
   def me
     render json: current_user
   end
-
-  # def show
-  #   @user = User.find(params[:id])
-  # end
 
   def update
     user = User.find(current_user.id)

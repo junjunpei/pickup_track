@@ -92,7 +92,6 @@
         <UserLeave
           @leave-user="handleLeaveUser"
           :loading="this.loading"
-          class="text-center"
         />
       </v-col>
     </v-row>
@@ -104,7 +103,7 @@ import { mapGetters, mapActions } from "vuex"
 import UserLeave from "./components/UserLeave"
 
 export default {
-  name: 'EditUser',
+  name: "EditUser",
 
   components: {
     UserLeave
@@ -118,7 +117,6 @@ export default {
         password: '',
         password_confirmation: '',
       },
-      // checkbox: null,
       showPassword: false,
       showPasswordConfirmation: false,
       loading: false
@@ -150,7 +148,6 @@ export default {
         this.loading = false
         this.user.password = ''
         this.user.password_confirmation = ''
-        // this.$router.push({ name: 'MyLibrary' })
         this.$store.dispatch("flashMessages/showMessage",
           {
             message: "更新が完了しました",
