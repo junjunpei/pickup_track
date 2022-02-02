@@ -13,7 +13,7 @@ AllCops:
 Layout/LineLength:
   Enabled: false
 
-# HTTP通信を行なっているためコードが長くなっている"api/tracks_controller"のみ除外
+# HTTP通信を行なっているためコードが長くなっている'api/tracks_controller'のみ除外
 Metrics/AbcSize:
   Exclude:
   - 'app/controllers/api/tracks_controller.rb'
@@ -30,8 +30,11 @@ Metrics/ClassLength:
   CountComments: false
 
 # メソッドの行数の制限、コメントは除外
+# metaタグを記載した'application_helper.rb'も除外
 Metrics/MethodLength:
   CountComments: false
+  Exclude:
+  - 'app/helpers/application_helper.rb'
 
 # 日本語のコメントを許容
 Style/AsciiComments:
