@@ -9,6 +9,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.3.0",
     "axios": "^0.24.0",
+    "express": "^4.17.2",
     "jquery": "^3.6.0",
     "node-sass": "^7.0.1",
     "popper.js": "^1.16.1",
@@ -26,5 +27,12 @@
   "devDependencies": {
     "material-design-icons-iconfont": "^6.1.0",
     "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "postinstall": "yarn build",
+    "start": "node server.js"
   }
 }
