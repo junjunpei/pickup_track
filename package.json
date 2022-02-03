@@ -8,6 +8,7 @@
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "5.4.3",
+    "@vue/cli": "^4.5.15",
     "axios": "^0.24.0",
     "express": "^4.17.2",
     "jquery": "^3.6.0",
@@ -27,12 +28,5 @@
   "devDependencies": {
     "material-design-icons-iconfont": "^6.1.0",
     "webpack-dev-server": "^3.11.2"
-  },
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "postinstall": "yarn build",
-    "start": "node server.js"
   }
 }
