@@ -20,14 +20,14 @@ default: &default
 
 development:
   <<: *default
-  database: song_shuffle_development
+  database: pickup_track_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: song_shuffle_test
+  database: pickup_track_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -50,6 +50,6 @@ test:
 #
 production:
   <<: *default
-  database: song_shuffle_production
-  username: song_shuffle
-  password: <%= ENV['SONG_SHUFFLE_DATABASE_PASSWORD'] %>
+  database: pickup_track_production
+  username: pickup_track
+  password: <%= ENV['DATABASE_PASSWORD'] %>
