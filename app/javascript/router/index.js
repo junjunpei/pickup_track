@@ -14,6 +14,7 @@ import InternalServerError from '../pages/errors/InternalServerError'
 import TermsOfService from '../pages/shared/TermsOfService'
 import PrivacyPolicy from '../pages/shared/PrivacyPolicy'
 import UserInformation from "../pages/users/UserInformation"
+import VueGtag from "vue-gtag"
 
 Vue.use(VueRouter)
 
@@ -103,6 +104,10 @@ const router = new VueRouter({
     return { x: 0, y: 0 }
   }
 })
+
+Vue.use(VueGtag, {
+  config: { id: "G-CMJ10ZYXGQ" }
+}, router)
 
 router.beforeEach((to, from, next) => {
   store.dispatch("users/fetchAuthUser")
