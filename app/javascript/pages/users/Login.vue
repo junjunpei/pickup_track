@@ -66,7 +66,7 @@
             </v-btn>
           </form>
         </ValidationObserver>
-        <div class="mt-5 d-flex justify-center">
+        <v-row class="mt-5 justify-space-around">
           <v-btn
             text
             color="light-blue accent-3"
@@ -75,7 +75,7 @@
             登録がまだの方はこちら
           </v-btn>
           <PasswordResetMail />
-        </div>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
