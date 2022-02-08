@@ -28,10 +28,9 @@
           type="text"
           filled
           dense
-          clearable
           label="Search"
-          clear-icon="mdi-close-thick"
-          @click:clear="clearSearch"
+          :append-icon="this.search != '' ? 'mdi-close-thick' : ''"
+          @click:append="clearSearch"
         >
           <template v-slot:prepend-inner>
             <v-icon>mdi-magnify</v-icon>
@@ -103,8 +102,7 @@ export default {
   methods: {
     ...mapActions("myLibrary", [
       "fetchTracks",
-      // "addTrack",
-      "deleteTrack",
+      "deleteTrack"
     ]),
 
     ...mapActions("historyTracks", [
