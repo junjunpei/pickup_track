@@ -4,7 +4,6 @@
     color="black"
     height="80"
   >
-
     <v-toolbar-title
       style="cursor: pointer"
       @click="$router.push('/').catch(err => {})"
@@ -18,15 +17,6 @@
     <v-spacer />
 
     <template v-if="$vuetify.breakpoint.mdAndUp">
-      <v-btn
-        text
-        :to="{ name: 'Top' }"
-        class="mr-5"
-        exact
-      >
-        <v-icon>mdi-home</v-icon>
-        ホーム
-      </v-btn>
       <template v-if="authUser">
         <v-btn
           text
@@ -36,59 +26,34 @@
           <v-icon>mdi-magnify</v-icon>
           楽曲検索
         </v-btn>
-        <v-menu
-          offset-y
-          transition="scale-transition"
+
+        <v-btn
+          text
+          :to="{ name: 'MyLibrary' }"
+          exact
         >
-          <template v-slot:activator="{ on: menu, attrs }">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on: tooltip }">
-                <v-icon
-                  x-large
-                  v-bind="attrs"
-                  v-on="{ ...tooltip, ...menu }"
-                  class="mr-12 ml-8"
-                  id="user-menu"
-                >
-                  mdi-account
-                </v-icon>
-              </template>
-              <span>ユーザーメニュー</span>
-            </v-tooltip>
-          </template>
-          <v-list>
-            <v-list-item
-              :to="{ name: 'MyLibrary' }"
-              id="my-library"
-              exact
-            >
-              <v-list-item-title>
-                <v-icon>mdi-music-box-multiple</v-icon>
-                マイライブラリ
-              </v-list-item-title>
-            </v-list-item>
-            <v-list-item
-              :to="{ name: 'UserInformation' }"
-              id="user-information"
-              exact
-            >
-              <v-list-item-title>
-                <v-icon>mdi-account</v-icon>
-                ユーザー情報
-              </v-list-item-title>
-            </v-list-item>
-            <v-divider />
-            <v-list-item
-              @click="handleLogout"
-              id="logout"
-            >
-              <v-list-item-title class="error--text">
-                <v-icon color="error">mdi-logout</v-icon>
-                ログアウト
-              </v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
+          <v-icon>mdi-music-box-multiple</v-icon>
+          マイライブラリ
+        </v-btn>
+
+        <v-btn
+          text
+          :to="{ name: 'UserInformation' }"
+          exact
+        >
+          <v-icon>mdi-account</v-icon>
+          ユーザー情報
+        </v-btn>
+
+        <v-btn
+          text
+          @click="handleLogout"
+          exact
+          color="error"
+        >
+          <v-icon>mdi-logout</v-icon>
+          ログアウト
+        </v-btn>
       </template>
       <template v-else>
         <v-btn
