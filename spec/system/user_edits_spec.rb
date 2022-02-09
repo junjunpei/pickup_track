@@ -8,8 +8,7 @@ RSpec.describe "UserEdits", type: :system do
     context "名前を変更する" do
       it "更新に成功し、フラッシュメッセージが表示され、表示されている名前が変更後のものになっている" do
         visit root_path
-        find('#user-menu').click
-        find('#user-information').click
+        click_on 'ユーザー情報'
         expect(current_path).to eq '/user'
         click_on 'ユーザー情報編集'
         expect(page).to have_field '名前', with: user.name
@@ -26,8 +25,7 @@ RSpec.describe "UserEdits", type: :system do
   context "メールアドレスを変更する" do
     it "更新に成功し、フラッシュメッセージが表示され、表示されているメールアドレスが変更後のものになっている" do
       visit root_path
-      find('#user-menu').click
-      find('#user-information').click
+      click_on 'ユーザー情報'
       expect(current_path).to eq '/user'
       click_on 'ユーザー情報編集'
       expect(page).to have_field '名前', with: user.name
@@ -43,8 +41,7 @@ RSpec.describe "UserEdits", type: :system do
   context "パスワードを変更する" do
     it "更新に成功し、フラッシュメッセージが表示される" do
       visit root_path
-      find('#user-menu').click
-      find('#user-information').click
+      click_on 'ユーザー情報'
       expect(current_path).to eq '/user'
       click_on 'ユーザー情報編集'
       expect(page).to have_field '名前', with: user.name
@@ -60,8 +57,7 @@ RSpec.describe "UserEdits", type: :system do
   context "名前を未入力にする" do
     it "エラーメッセージが表示され、更新ボタンが押せなくなっている" do
       visit root_path
-      find('#user-menu').click
-      find('#user-information').click
+      click_on 'ユーザー情報'
       expect(current_path).to eq '/user'
       click_on 'ユーザー情報編集'
       expect(page).to have_field '名前', with: user.name
@@ -75,8 +71,7 @@ RSpec.describe "UserEdits", type: :system do
   context "名前を11文字で入力にする" do
     it "エラーメッセージが表示され、更新ボタンが押せなくなっている" do
       visit root_path
-      find('#user-menu').click
-      find('#user-information').click
+      click_on 'ユーザー情報'
       expect(current_path).to eq '/user'
       click_on 'ユーザー情報編集'
       expect(page).to have_field '名前', with: user.name
@@ -90,8 +85,7 @@ RSpec.describe "UserEdits", type: :system do
   context "メールアドレスを未入力にする" do
     it "エラーメッセージが表示され、更新ボタンが押せなくなっている" do
       visit root_path
-      find('#user-menu').click
-      find('#user-information').click
+      click_on 'ユーザー情報'
       expect(current_path).to eq '/user'
       click_on 'ユーザー情報編集'
       expect(page).to have_field '名前', with: user.name
@@ -105,8 +99,7 @@ RSpec.describe "UserEdits", type: :system do
   context "メールアドレスがメールアドレスの形式で入力されていない" do
     it "エラーメッセージが表示され、更新ボタンが押せなくなっている" do
       visit root_path
-      find('#user-menu').click
-      find('#user-information').click
+      click_on 'ユーザー情報'
       expect(current_path).to eq '/user'
       click_on 'ユーザー情報編集'
       expect(page).to have_field '名前', with: user.name
@@ -122,8 +115,7 @@ RSpec.describe "UserEdits", type: :system do
     it "エラーメッセージが表示され、更新ボタンが押せなくなっている" do
       existed_user = create(:user)
       visit root_path
-      find('#user-menu').click
-      find('#user-information').click
+      click_on 'ユーザー情報'
       expect(current_path).to eq '/user'
       click_on 'ユーザー情報編集'
       expect(page).to have_field '名前', with: user.name
@@ -138,8 +130,7 @@ RSpec.describe "UserEdits", type: :system do
   context "一度メールアドレスのフィールドを空にしてから自分のメールアドレスを入力する" do
     it "登録済みのエラーが出ない" do
       visit root_path
-      find('#user-menu').click
-      find('#user-information').click
+      click_on 'ユーザー情報'
       expect(current_path).to eq '/user'
       click_on 'ユーザー情報編集'
       expect(page).to have_field '名前', with: user.name
@@ -154,8 +145,7 @@ RSpec.describe "UserEdits", type: :system do
   context "パスワードとパスワード確認を2文字で入力する" do
     it "エラーメッセージが表示され、更新ボタンが押せなくなっている" do
       visit root_path
-      find('#user-menu').click
-      find('#user-information').click
+      click_on 'ユーザー情報'
       expect(current_path).to eq '/user'
       click_on 'ユーザー情報編集'
       expect(page).to have_field '名前', with: user.name
@@ -171,8 +161,7 @@ RSpec.describe "UserEdits", type: :system do
   context "パスワードとパスワード確認が一致していない" do
     it "エラーメッセージが表示され、更新ボタンが押せなくなっている" do
       visit root_path
-      find('#user-menu').click
-      find('#user-information').click
+      click_on 'ユーザー情報'
       expect(current_path).to eq '/user'
       click_on 'ユーザー情報編集'
       expect(page).to have_field '名前', with: user.name
