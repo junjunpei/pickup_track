@@ -15,7 +15,6 @@ RSpec.describe "CreateDeleteTracks", type: :system do
         sleep 1
         expect(page).to have_content 'マイライブラリに追加しました'
         expect(find('#tracks-list')).to have_selector '#delete-icon'
-        find('#user-menu').click
         click_on 'マイライブラリ'
         expect(current_path).to eq '/mylibrary'
         expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
@@ -37,7 +36,6 @@ RSpec.describe "CreateDeleteTracks", type: :system do
         sleep 1
         expect(page).to have_content 'マイライブラリから削除しました'
         expect(find('#tracks-list')).to have_selector '#create-icon'
-        find('#user-menu').click
         click_on 'マイライブラリ'
         expect(current_path).to eq '/mylibrary'
         expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_NAME']

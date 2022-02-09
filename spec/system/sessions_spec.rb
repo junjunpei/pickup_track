@@ -16,7 +16,6 @@ RSpec.describe "Sessions", type: :system do
         sleep 3
         expect(page).to have_content 'ログインしました'
         expect(page).to have_content '楽曲検索'
-        find('#user-menu').click
         expect(page).to have_content 'マイライブラリ'
         expect(page).to have_content 'ユーザー情報'
         expect(page).to have_content 'ログアウト'
@@ -121,11 +120,10 @@ RSpec.describe "Sessions", type: :system do
         sleep 3
         expect(page).to have_content 'ログインしました'
         expect(page).to have_content '楽曲検索'
-        find('#user-menu').click
         expect(page).to have_content 'マイライブラリ'
         expect(page).to have_content 'ユーザー情報'
         expect(page).to have_content 'ログアウト'
-        find('#logout').click
+        click_on 'ログアウト'
         sleep 2
         expect(page).to have_content 'ログアウトしました'
         expect(current_path).to eq root_path
