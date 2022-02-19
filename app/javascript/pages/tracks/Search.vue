@@ -49,7 +49,7 @@
         </v-text-field>
         <TracksListCard
           :tracks="displayTracks"
-          :library="myLibrary"
+          :myLibrary="myLibrary"
           :submitting="submitting"
           @add-track="handleAddTrack"
           @delete-track="handleDeleteTrack"

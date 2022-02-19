@@ -15,6 +15,9 @@ Rails.application.routes.draw do
       collection do
         post 'search', to: 'tracks#search'
       end
+      member do
+        get 'recommend', to: 'tracks#recommend'
+      end
     end
     resources :password_resets, only: %i[create update]
     resources :contacts, only: :create
