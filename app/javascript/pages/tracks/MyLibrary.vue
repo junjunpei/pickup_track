@@ -16,6 +16,7 @@
             マイライブラリ
           </h2>
           <PickupTrack
+            v-if="tab === 0"
             :track="pickupTrack"
             :tracks="searchedTracks"
             :loading="loading"
@@ -24,6 +25,7 @@
           />
         </div>
         <v-text-field
+          v-if="tab === 0"
           v-model="search"
           type="text"
           filled
@@ -36,7 +38,7 @@
             <v-icon>mdi-magnify</v-icon>
           </template>
         </v-text-field>
-        <TracksListCard
+        <MyLibraryList
           :tracks="searchedTracks"
           :submitting="submitting"
           :recommendTracks="recommendTracks"
@@ -44,6 +46,7 @@
           @delete-track="handleDeleteTrack"
           @delete-recommend-track="handleDeleteRecommendTrack"
           @add-track="handleAddTrack"
+          @tab-change="tabChange"
         >
           <template
             v-if="myLibrary.length === 0"
@@ -61,7 +64,7 @@
               {{ searchedTracks.length }}曲
             </v-subheader>
           </template>
-        </TracksListCard>
+        </MyLibraryList>
       </v-col>
     </v-row>
   </v-container>
@@ -69,7 +72,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex"
-import TracksListCard from "./components/TracksListCard"
+import MyLibraryList from "./components/MyLibraryList"
 import PickupTrack from "./components/PickupTrack"
 
 export default {
@@ -81,6 +84,7 @@ export default {
       loading: false,
       pickupTrack: '',
       submitting: false,
+      tab: 0,
       track: {
         track_id: '',
         artist_id: '',
@@ -94,7 +98,7 @@ export default {
   },
 
   components: {
-    TracksListCard,
+    MyLibraryList,
     PickupTrack
   },
 
@@ -113,19 +117,15 @@ export default {
   created() {
     this.fetchTracks()
 
-    var unwatch = this.$watch("pickupTrack", function() {
-      this.fetchRecommendTracks(this.pickupTrack)
+    var unwatch = this.$watch("searchedTracks", function() {
+      this.handlePickupTrack()
       unwatch()
     })
   },
 
-  mounted() {
-    this.handlePickupTrack()
-  },
-
   watch: {
-    searchedTracks: function() {
-      this.handlePickupTrack()
+    pickupTrack: function() {
+      this.fetchRecommendTracks(this.pickupTrack)
     }
   },
 
@@ -252,6 +252,10 @@ export default {
       this.loading = true
       this.pickupTrack = this.searchedTracks[Math.floor(Math.random() * this.searchedTracks.length)]
       this.loading = false
+    },
+
+    tabChange(changeTab) {
+      this.tab = changeTab
     }
   }
 }

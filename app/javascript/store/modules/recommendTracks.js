@@ -16,7 +16,7 @@ const mutations = {
 
 const actions = {
   fetchRecommendTracks({ commit }, track) {
-    axios.get(`tracks/${track.id}/recommend`, track)
+    axios.get(`tracks/${track.id}/recommend`)
       .then(response => {
         commit("setRecommendTracks", response.data)
       })

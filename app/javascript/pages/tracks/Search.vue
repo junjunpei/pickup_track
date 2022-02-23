@@ -47,7 +47,7 @@
             </v-btn>
           </template>
         </v-text-field>
-        <TracksListCard
+        <SearchTracksList
           :tracks="displayTracks"
           :myLibrary="myLibrary"
           :submitting="submitting"
@@ -60,7 +60,7 @@
               検索結果
             </v-subheader>
           </template>
-        </TracksListCard>
+        </SearchTracksList>
         <div
           class="text-center"
           v-if="displayTracks.length != 0"
@@ -82,7 +82,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex"
-import TracksListCard from "./components/TracksListCard"
+import SearchTracksList from "./components/SearchTracksList"
 
 export default {
   name: "Search",
@@ -108,7 +108,7 @@ export default {
   },
 
   components: {
-    TracksListCard
+    SearchTracksList
   },
 
   computed: {

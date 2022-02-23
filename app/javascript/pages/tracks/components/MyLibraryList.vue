@@ -17,68 +17,12 @@
     </v-tabs>
 
     <v-list subheader>
-      <slot
-        name="subheader"
-      ></slot>
 
-      <div v-if="this.$route.name === 'Search'">
-        <v-list-item
-          v-for="(track, index) in this.tracks"
-          :key="index"
-        >
-          <v-list-item-avatar class="ml-1 mr-3">
-            <v-img
-              alt="Track image"
-              :src="track.album.images[2].url"
-            >
-              <template v-slot:placeholder>
-                <v-row
-                  class="fill-height ma-0"
-                  align="center"
-                  justify="center"
-                >
-                  <v-progress-circular
-                    indeterminate
-                    color="white"
-                  ></v-progress-circular>
-                </v-row>
-              </template>
-            </v-img>
-          </v-list-item-avatar>
-
-          <v-list-item-content>
-            <v-list-item-title v-text="track.name"></v-list-item-title>
-            <v-list-item-subtitle v-text="`${track.artists[0].name} - ${track.album.name}`"></v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-icon class="mr-1">
-            <v-icon
-              v-if="added(track.id)"
-              @click="handleDeleteTrack(track)"
-              color="white"
-              :disabled="submitting"
-              id="delete-icon"
-            >
-              mdi-delete
-            </v-icon>
-            <v-icon
-              v-else
-              @click="handleAddTrack(track)"
-              color="white"
-              :disabled="submitting"
-              id="create-icon"
-            >
-              mdi-plus
-            </v-icon>
-          </v-list-item-icon>
-        </v-list-item>
-      </div>
-
-      <v-tabs-items
-        v-model="tab"
-        v-else-if="this.$route.name === 'MyLibrary'"
-      >
+      <v-tabs-items v-model="tab">
         <v-tab-item>
+          <slot
+            name="subheader"
+          ></slot>
           <v-list-item
             v-for="(track, index) in this.tracks"
             :key="index"
@@ -184,8 +128,8 @@ export default {
 
   data() {
     return {
-      tab: null,
-      items: ["ライブラリ", "おすすめ曲"]
+      items: ["ライブラリ", "おすすめ曲"],
+      tab: 0
     }
   },
 
@@ -218,6 +162,12 @@ export default {
           return myTrack.track_id == trackId
         })
       }
+    }
+  },
+
+  watch: {
+    tab: function() {
+      this.$emit('tab-change', this.tab)
     }
   },
 
