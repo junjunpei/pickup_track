@@ -33,6 +33,7 @@
           label="Search"
           :append-icon="this.search != '' ? 'mdi-close-thick' : ''"
           @click:append="clearSearch"
+          id="search-form"
         >
           <template v-slot:prepend-inner>
             <v-icon>mdi-magnify</v-icon>

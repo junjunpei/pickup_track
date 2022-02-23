@@ -14,12 +14,12 @@ RSpec.describe "CreateDeleteTracks", type: :system do
         first('#create-icon').click
         sleep 1
         expect(page).to have_content 'マイライブラリに追加しました'
-        expect(find('#tracks-list')).to have_selector '#delete-icon'
+        expect(find('#search-tracks-list')).to have_selector '#delete-icon'
         click_on 'マイライブラリ'
         expect(current_path).to eq '/mylibrary'
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
       end
     end
 
@@ -31,16 +31,16 @@ RSpec.describe "CreateDeleteTracks", type: :system do
         first('#create-icon').click
         sleep 1
         expect(page).to have_content 'マイライブラリに追加しました'
-        expect(find('#tracks-list')).to have_selector '#delete-icon'
+        expect(find('#search-tracks-list')).to have_selector '#delete-icon'
         first('#delete-icon').click
         sleep 1
         expect(page).to have_content 'マイライブラリから削除しました'
-        expect(find('#tracks-list')).to have_selector '#create-icon'
+        expect(find('#search-tracks-list')).not_to have_selector '#delete-icon'
         click_on 'マイライブラリ'
         expect(current_path).to eq '/mylibrary'
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_NAME']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_NAME']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
       end
     end
   end
@@ -51,16 +51,16 @@ RSpec.describe "CreateDeleteTracks", type: :system do
     context '表示されている曲を削除する' do
       it '正常に削除され、プラスアイコンに変わり、その曲が表示されていない' do
         visit "/mylibrary"
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
-        expect(find('#tracks-list')).to have_selector '#delete-icon'
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+        expect(find('#my-library-list')).to have_selector '#delete-icon'
         find('#delete-icon').click
         sleep 1
         expect(page).to have_content 'マイライブラリから削除しました'
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_NAME']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_NAME']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
       end
     end
 
@@ -70,27 +70,27 @@ RSpec.describe "CreateDeleteTracks", type: :system do
 
       it '検索された曲のみが表示されている' do
         visit "/mylibrary"
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME2']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME2']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME2']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME3']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME3']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME3']
-        expect(find('#tracks-list')).to have_selector '#delete-icon', count: 3
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME2']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME2']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME2']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME3']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME3']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME3']
+        expect(find('#my-library-list')).to have_selector '#delete-icon', count: 3
         fill_in 'Search', with: ENV['SEARCH_TRACK_NAME']
         sleep 1
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_NAME2']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME2']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME2']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_NAME3']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME3']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME3']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_NAME2']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME2']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME2']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_NAME3']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME3']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME3']
       end
     end
 
@@ -100,27 +100,27 @@ RSpec.describe "CreateDeleteTracks", type: :system do
 
       it '検索された曲のみが表示されている' do
         visit "/mylibrary"
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME2']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME2']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME2']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME3']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME3']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME3']
-        expect(find('#tracks-list')).to have_selector '#delete-icon', count: 3
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME2']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME2']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME2']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME3']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME3']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME3']
+        expect(find('#my-library-list')).to have_selector '#delete-icon', count: 3
         fill_in 'Search', with: ENV['SEARCH_TRACK_ARTIST_NAME2']
         sleep 1
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME2']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME2']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME2']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_NAME']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_NAME3']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME3']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME3']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME2']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME2']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME2']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_NAME']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_NAME3']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME3']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME3']
       end
     end
 
@@ -130,27 +130,50 @@ RSpec.describe "CreateDeleteTracks", type: :system do
 
       it '検索された曲のみが表示されている' do
         visit "/mylibrary"
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME2']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME2']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME2']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME3']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME3']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME3']
-        expect(find('#tracks-list')).to have_selector '#delete-icon', count: 3
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME2']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME2']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME2']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME3']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME3']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME3']
+        expect(find('#my-library-list')).to have_selector '#delete-icon', count: 3
         fill_in 'Search', with: ENV['SEARCH_TRACK_ALBUM_NAME3']
         sleep 1
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_NAME3']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME3']
-        expect(find('#tracks-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME3']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_NAME2']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME2']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME2']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_NAME']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
-        expect(find('#tracks-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_NAME3']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ARTIST_NAME3']
+        expect(find('#my-library-list')).to have_content ENV['SEARCH_TRACK_ALBUM_NAME3']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_NAME2']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME2']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME2']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_NAME']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ARTIST_NAME']
+        expect(find('#my-library-list')).not_to have_content ENV['SEARCH_TRACK_ALBUM_NAME']
+      end
+    end
+
+    context 'おすすめ曲タブを押すとおすすめ曲が表示され、検索フォームとピックアップボタンが非表示になり、楽曲の追加削除ができること' do
+      it '正常に追加と削除されること' do
+        visit '/mylibrary'
+        find('#recommend-tab').click
+        sleep 1
+        expect(page).not_to have_button 'ピックアップ'
+        expect(page).not_to have_selector '#search-form'
+        expect(page).not_to have_content '1曲'
+        first('#create-icon').click
+        sleep 2
+        expect(page).to have_content 'マイライブラリに追加しました'
+        find('#library-tab').click
+        expect(page).to have_content '2曲'
+        find('#recommend-tab').click
+        sleep 1
+        first('#delete-icon').click
+        sleep 2
+        expect(page).to have_content 'マイライブラリから削除しました'
+        find('#library-tab').click
+        expect(page).to have_content '1曲'
       end
     end
   end

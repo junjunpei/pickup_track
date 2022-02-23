@@ -1,19 +1,15 @@
 <template>
   <v-card
     class="mx-auto"
-    id="tracks-list"
+    id="my-library-list"
   >
     <v-tabs
       v-model="tab"
       color="green accent-3"
       grow
     >
-      <v-tab
-        v-for="item in items"
-        :key="item"
-      >
-        {{ item }}
-      </v-tab>
+      <v-tab id="library-tab">ライブラリ</v-tab>
+      <v-tab id="recommend-tab">おすすめ曲</v-tab>
     </v-tabs>
 
     <v-list subheader>
