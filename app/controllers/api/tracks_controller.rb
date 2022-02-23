@@ -75,7 +75,7 @@ class Api::TracksController < ApplicationController
   end
 
   def audio_features
-    uri = URI.parse(ENV['AUDIO_FEATURES_URL'] + '/' + @track.track_id)
+    uri = URI.parse("#{ENV['AUDIO_FEATURES_URL']}/#{@track.track_id}")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     header = { 'Authorization' => "Bearer #{@bearer_token}", 'Accept-Language' => 'ja' }
