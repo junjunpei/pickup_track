@@ -16,6 +16,7 @@
             マイライブラリ
           </h2>
           <PickupTrack
+            v-if="tab === 0"
             :track="pickupTrack"
             :tracks="searchedTracks"
             :loading="loading"
@@ -24,6 +25,7 @@
           />
         </div>
         <v-text-field
+          v-if="tab === 0"
           v-model="search"
           type="text"
           filled
@@ -31,15 +33,21 @@
           label="Search"
           :append-icon="this.search != '' ? 'mdi-close-thick' : ''"
           @click:append="clearSearch"
+          id="search-form"
         >
           <template v-slot:prepend-inner>
             <v-icon>mdi-magnify</v-icon>
           </template>
         </v-text-field>
-        <TracksListCard
+        <MyLibraryList
           :tracks="searchedTracks"
           :submitting="submitting"
+          :recommendTracks="recommendTracks"
+          :myLibrary="myLibrary"
           @delete-track="handleDeleteTrack"
+          @delete-recommend-track="handleDeleteRecommendTrack"
+          @add-track="handleAddTrack"
+          @tab-change="tabChange"
         >
           <template
             v-if="myLibrary.length === 0"
@@ -57,7 +65,7 @@
               {{ searchedTracks.length }}曲
             </v-subheader>
           </template>
-        </TracksListCard>
+        </MyLibraryList>
       </v-col>
     </v-row>
   </v-container>
@@ -65,7 +73,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex"
-import TracksListCard from "./components/TracksListCard"
+import MyLibraryList from "./components/MyLibraryList"
 import PickupTrack from "./components/PickupTrack"
 
 export default {
@@ -76,17 +84,29 @@ export default {
       search: '',
       loading: false,
       pickupTrack: '',
-      submitting: false
+      submitting: false,
+      tab: 0,
+      track: {
+        track_id: '',
+        artist_id: '',
+        name: '',
+        artist_name: '',
+        album_name: '',
+        image_url: '',
+        track_url: ''
+      }
     }
   },
 
   components: {
-    TracksListCard,
+    MyLibraryList,
     PickupTrack
   },
 
   computed: {
     ...mapGetters("myLibrary", ["myLibrary"]),
+
+    ...mapGetters("recommendTracks", ["recommendTracks"]),
 
     searchedTracks() {
       return this.myLibrary.filter(track => {
@@ -97,17 +117,65 @@ export default {
 
   created() {
     this.fetchTracks()
+
+    var unwatch = this.$watch("searchedTracks", function() {
+      this.handlePickupTrack()
+      unwatch()
+    })
+  },
+
+  watch: {
+    pickupTrack: function() {
+      this.fetchRecommendTracks(this.pickupTrack)
+    }
   },
 
   methods: {
     ...mapActions("myLibrary", [
       "fetchTracks",
-      "deleteTrack"
+      "deleteTrack",
+      "addTrack"
     ]),
 
     ...mapActions("historyTracks", [
       "addHistoryTrack"
     ]),
+
+    ...mapActions("recommendTracks", [
+      "fetchRecommendTracks"
+    ]),
+
+    async handleAddTrack(addTrack) {
+      this.track.track_id = addTrack.id
+      this.track.artist_id = addTrack.artists[0].id
+      this.track.name = addTrack.name
+      this.track.artist_name = addTrack.artists[0].name
+      this.track.album_name = addTrack.album.name
+      this.track.image_url = addTrack.album.images[0].url
+      this.track.track_url = addTrack.external_urls.spotify
+      this.submitting = true
+      try {
+        await this.addTrack(this.track)
+        this.submitting = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "マイライブラリに追加しました",
+            type: "blue lighten-1",
+            status: true
+          }
+        )
+      } catch(error) {
+        this.submitting = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "追加に失敗しました",
+            type: "error",
+            status: true
+          }
+        )
+        console.log(error)
+      }
+    },
 
     async handleAddHistory(addHistoryTrack) {
       this.loading = true
@@ -145,6 +213,38 @@ export default {
       }
     },
 
+    async handleDeleteRecommendTrack(deleteTrack) {
+      this.track.track_id = deleteTrack.id
+      this.track.artist_id = deleteTrack.artists[0].id
+      this.track.name = deleteTrack.name
+      this.track.artist_name = deleteTrack.artists[0].name
+      this.track.album_name = deleteTrack.album.name
+      this.track.image_url = deleteTrack.album.images[0].url
+      this.track.track_url = deleteTrack.external_urls.spotify
+      this.submitting = true
+      try {
+        await this.deleteTrack(this.track)
+        this.submitting = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "マイライブラリから削除しました",
+            type: "pink lighten-1",
+            status: true
+          }
+        )
+      } catch(error) {
+        this.submitting = false
+        this.$store.dispatch("flashMessages/showMessage",
+          {
+            message: "削除に失敗しました",
+            type: "error",
+            status: true
+          }
+        )
+        console.log(error)
+      }
+    },
+
     clearSearch() {
       this.search = ''
     },
@@ -153,6 +253,10 @@ export default {
       this.loading = true
       this.pickupTrack = this.searchedTracks[Math.floor(Math.random() * this.searchedTracks.length)]
       this.loading = false
+    },
+
+    tabChange(changeTab) {
+      this.tab = changeTab
     }
   }
 }
