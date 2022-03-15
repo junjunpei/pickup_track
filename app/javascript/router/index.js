@@ -105,9 +105,11 @@ const router = new VueRouter({
   }
 })
 
-Vue.use(VueGtag, {
-  config: { id: "G-CMJ10ZYXGQ" }
-}, router)
+if (process.env.NODE_ENV === "production") {
+  Vue.use(VueGtag, {
+    config: { id: "G-CMJ10ZYXGQ" }
+  }, router)
+}
 
 router.beforeEach((to, from, next) => {
   store.dispatch("users/fetchAuthUser")
